@@ -28,7 +28,7 @@
 						</div>
 
 						<!-- Card body START -->
-						<form class="card-body form-control-border p-3 p-sm-4" th:action="@{/car/traffic-car}" method="GET">
+						<form id="cardForm" class="card-body form-control-border p-3 p-sm-4" th:action="@{/car/traffic-car}" method="GET">
 							<!-- Tabs START -->
 							<div class="nav nav-pills mb-3" id="pills-tab" role="tablist">
 								<div class="form-check form-check-inline active" id="cab2-one-way-tab" data-bs-toggle="pill" data-bs-target="#cab2-one-way" role="tab" aria-controls="cab2-one-way" aria-selected="true">
@@ -41,6 +41,7 @@
 								</div>
 							</div>
 							<!-- Tabs END -->
+							<input type="hidden" id="page" name="page" value="1">
 
 							<!-- Tabs content START -->
 							<div class="tab-content my-4" id="pills-tabContent">
@@ -111,7 +112,7 @@
 										<div class="col-md-6">
 											<div class="form-fs-lg form-control-transparent">
 												<label class="form-label small">대여일</label>
-												<input type="text" class="form-control flatpickr" placeholder="날짜를 선택하세요">
+												<input type="text" id="day" name="day" class="form-control flatpickr" placeholder="날짜를 선택하세요">
 											</div>
 										</div>
 
@@ -133,7 +134,7 @@
 										<div class="col-md-6 position-relative">
 											<label class="form-label small">대여지점</label>
 											<div class="form-fs-lg form-control-transparent">
-												<select class="form-select js-choice" data-search-enabled="true">
+												<select  class="form-select js-choice" data-search-enabled="true">
 													<option value="">지역을 선택하세요</option>
 													<option>서울특별시</option>
 													<option>경기도</option>
@@ -379,7 +380,7 @@
 								<!--이전 페이지 -->
 								<li class="page-item mb-0">
 									<button class="page-link"
-										th:onclick="|movePage('/car/traffic-car?page=${pageInfo.prevPage}');|" tabindex="-1">
+										th:onclick="|movePage('${pageInfo.prevPage}');|" tabindex="-1">
 										<i class="fa-solid fa-angle-left"></i>
 									</button>
 								</li>
@@ -388,14 +389,14 @@
 								<th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
 									<th:block th:if="${status.current == pageInfo.currentPage}">
 										<li class="page-item mb-0">
-											<button class="page-link active" th:onclick="|movePage('/car/traffic-car?page=${status.current}');|" disabled>
+											<button class="page-link active" th:onclick="|movePage('${status.current}');|" disabled>
 											[[${status.current}]]
 											</button>
 										</li>
 									</th:block>
 									<th:block th:if="${status.current != pageInfo.currentPage}">
 										<li class="page-item mb-0">
-											<button class="page-link" th:onclick="|movePage('/car/traffic-car?page=${status.current}');|">
+											<button class="page-link" th:onclick="|movePage('${status.current}');|">
 											[[${status.current}]]
 											</button>
 										</li>
@@ -404,7 +405,7 @@
 								
 								<!--다음 페이지 -->
 								<li class="page-item mb-0">
-									<button class="page-link" th:onclick="|movePage('/car/traffic-car?page=${pageInfo.nextPage}');|">
+									<button class="page-link" th:onclick="|movePage('${pageInfo.nextPage}');|">
 										<i class="fa-solid fa-angle-right"></i>
 									</button>
 								</li>
@@ -437,16 +438,13 @@
 <!-- ThemeFunctions -->
 <script src="assets/js/functions.js"></script>
 
-	<!-- 페이지 -->
+	<!-- 검색필터유지하고 페이징 -->
 	<script type="text/javascript">
-	function movePage(pageUrl){
-		var searchType = 'rentNo';
-		var city = document.getElementById("city");
-		
-		if(city.selected == true){
-			pageUrl = pageUrl + 'inlineRadioOptions=option1&city=' + city.value +'&search_terms=&search_terms=&search_terms=&search_terms='; 
-		}
-		location.href = encodeURI(pageUrl);	
+	function movePage(pageNum){
+		var form = document.getElementById("cardForm");
+		var page = document.getElementById("page");
+		page.value = pageNum;
+		form.submit();
 	}
 	</script>
 

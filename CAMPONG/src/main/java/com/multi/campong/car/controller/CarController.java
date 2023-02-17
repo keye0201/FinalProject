@@ -60,11 +60,11 @@ public class CarController {
 		} catch (Exception e) {}
 
 		int carCount = service.getCarCount(searchMap);
-		PageInfo pageInfo = new PageInfo(page, 10, carCount, 3);
+		PageInfo pageInfo = new PageInfo(page, 10, carCount, 4);
 		List<Car> list = service.getCarList(pageInfo, searchMap);
 		
 		//업체 랜덤 이미지
-		int[] imgIdx = createRdImgIdx(3, 18);
+		int[] imgIdx = createRdImgIdx(4, 18);
 
 		model.addAttribute("list", list);
 		model.addAttribute("paramMap", paramMap);

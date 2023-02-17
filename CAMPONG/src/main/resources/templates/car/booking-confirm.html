@@ -36,20 +36,16 @@ Main content START -->
 							<div class="col-lg-5">
 								<ul class="list-group list-group-borderless">
 									<li class="list-group-item d-sm-flex justify-content-between align-items-center">
-										<span class="mb-0"><i class="bi bi-vr fa-fw me-2"></i>ID:</span>
+										<span class="mb-0"><i class="bi bi-vr fa-fw me-2"></i>예약자 ID:</span>
 										<span class="h6 fw-normal mb-0">캠핑맨</span>
 									</li>
 									<li class="list-group-item d-sm-flex justify-content-between align-items-center">
-										<span class="mb-0"><i class="bi bi-person fa-fw me-2"></i>예약자:</span>
+										<span class="mb-0"><i class="bi bi-person fa-fw me-2"></i>예약자 닉네임:</span>
 										<span class="h6 fw-normal mb-0">조인성</span>
 									</li>
 									<li class="list-group-item d-sm-flex justify-content-between align-items-center">
-										<span class="mb-0"><i class="bi bi-wallet2 fa-fw me-2"></i>결제수단:</span>
-										<span class="h6 fw-normal mb-0">samsung card</span>
-									</li>
-									<li class="list-group-item d-sm-flex justify-content-between align-items-center">
-										<span class="mb-0"><i class="bi bi-currency-dollar fa-fw me-2"></i>결제 가격:</span>
-										<span class="h6 fw-normal mb-0">72000 원</span>
+										<span class="mb-0"><i class="bi bi-telephone fa-fw me-2"></i>업체번호:</span>
+										<span class="h6  mb-0">[[${content.phoneNumber}]]</span>
 									</li>
 								</ul>
 							</div>
@@ -57,16 +53,16 @@ Main content START -->
 							<div class="col-lg-5">
 								<ul class="list-group list-group-borderless">
 									<li class="list-group-item d-sm-flex justify-content-between align-items-center">
-										<span class="mb-0"><i class="bi bi-calendar-check fa-fw me-2"></i>예약일자:</span>
+										<span class="mb-0"><i class="bi bi-calendar-check fa-fw me-2"></i>예약일:</span>
+										<span class="h6 fw-normal mb-0"><div id="current_date"></p></span>
+									</li>
+									<li class="list-group-item d-sm-flex justify-content-between align-items-center">
+										<span class="mb-0"><i class="bi bi-calendar-event fa-fw me-2"></i>대여일:</span>
 										<span class="h6 fw-normal mb-0">2023년 1월 27일</span>
 									</li>
 									<li class="list-group-item d-sm-flex justify-content-between align-items-center">
-										<span class="mb-0"><i class="bi bi-calendar-check fa-fw me-2"></i>출발일자:</span>
+										<span class="mb-0"><i class="bi bi-calendar-week fa-fw me-2"></i>반납일:</span>
 										<span class="h6 fw-normal mb-0">2023년 2월 22일</span>
-									</li>
-									<li class="list-group-item d-sm-flex justify-content-between align-items-center">
-										<span class="mb-0"><i class="bi bi-people fa-fw me-2"></i>동행자:</span>
-										<span class="h6 fw-normal mb-0">3</span>
 									</li>
 								</ul>
 							</div>
@@ -103,6 +99,15 @@ Main content START -->
 
 <!-- ThemeFunctions -->
 <script src="assets/js/functions.js"></script>
+
+<!-- 오늘날짜 -->
+<script>
+date = new Date();
+year = date.getFullYear();
+month = date.getMonth() + 1;
+day = date.getDate();
+document.getElementById("current_date").innerHTML = year + "년 " + month + "월 " + day + "일";
+</script>
 
 </body>
 </html>
