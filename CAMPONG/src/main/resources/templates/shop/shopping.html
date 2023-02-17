@@ -9,7 +9,11 @@
 
 <body>
 	<header th:replace="~{common/layout :: #header}"></header>
+	
+	<script th:inline="javascript">
+	
 
+	</script>
 	<main>
 		<!-- ======================문구 있는 헤더 -->
 		<section class="bih-s-1 position-relative"
@@ -355,11 +359,12 @@
 						<th:block th:each="shop : ${list}">
 							<!-- Card item START -->
 							<div class="col-md-6 col-xl-4">
+							
+							<form action="/shop/shopping.basket2" method="Post">
 								<div class="card shadow pb-0 h-100">
-
+								
 									<!-- 이미지 -->
-									<img th:src="@{${shop.image}}" class="rounded-2 h-100"
-										alt="Card image" style="object-fit: cover;">
+									<img th:src="@{${shop.image}}" class="rounded-2" alt="Card image" style="height:330px; overflow:hidden;">
 
 									<!-- Card body START -->
 									<div class="card-body px-3 pb-0">
@@ -384,13 +389,15 @@
 											<div class="mt-2 mt-sm-0">
 												<!-- Rating and basket -->
 												<div class="d-flex justify-content-between">
-													<a th:href="@{/shop/shopping-basket}" class="h6 z-index-2">
-													<i class="bi bi-bag-fill"></i></a>
+													<input type="hidden" name="mNo" th:value="${session.mvo.mNo}"/>
+													<input type="hidden" name="pno" th:value="${shop.pno}"/>
+													<input type="image" th:src="@{/assets/campongimg//shop-basketOn.png}" class= "h6 z-index-2" style="width:20px;" />										
 												</div>
 											</div>
 										</div>
 									</div>
 								</div>
+							</form>
 							</div>
 							
 							

@@ -15,7 +15,27 @@
 		<result property="category2" column="CATEGORY2" />
 		<result property="category3" column="CATEGORY3" />
 	</resultMap>
-
+	
+	<select id="basketCheckMnoPno" resultType="int">
+		SELECT COUNT(*) FROM BASKET WHERE USER_NO=#{mNo} and PNO=#{pno}
+	</select>
+	<select id="basketInsert">
+		INSERT INTO BASKET(USER_NO,PNO) VALUES (#{mNo},#{pno})
+	</select>
+	<select id="getShoppingBasket"  resultMap="shoppingListResultMap">
+		SELECT S.*
+		FROM SHOP S
+		LEFT OUTER JOIN BASKET B ON B.PNO = S.PNO WHERE USER_NO=#{mNo};
+	</select>
+	
+	<delete id="basketDelete">
+		DELETE FROM BASKET WHERE USER_NO=#{mNo} AND PNO=#{pno};
+	</delete>
+	<delete id="allBasketDelete" >
+		DELETE FROM BASKET WHERE USER_NO=#{mNo};
+	</delete>
+	
+	
 	<select id="selectShoppingList" resultMap="shoppingListResultMap" parameterType="map">
 		SELECT DISTINCT PNO, PRODUCTID, TITLE, LINK, IMAGE, LPRICE, HPRICE, BRAND, CATEGORY2, CATEGORY3
 		FROM SHOP

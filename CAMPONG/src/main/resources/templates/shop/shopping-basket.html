@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<title>Booking - Multipurpose Online Booking Theme</title>
+
+	<!-- Meta Tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="Webestica.com">
+	<meta name="description" content="Booking - Multipurpose Online Booking Theme">
+
+	<!-- Dark mode -->
+	<script type="text/javascript">
+		var theme = localStorage.getItem('data-theme');
+		var root = document.documentElement;
+		if (theme === 'dark' && theme !== undefined) {
+			root.classList.add('dark-mode');
+		} else {
+			root.classList.remove('dark-mode');
+		}
+		function selectAll(selectAll) {
+			const checkboxes
+				= document.getElementsByName('checkboxs');
+
+			checkboxes.forEach((checkbox) => {
+				checkbox.checked = selectAll.checked;
+			})
+		}
+	</script>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="assets/images/favicon.ico">
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet"
+		href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
+
+	<!-- Plugins CSS -->
+
+	<!-- Theme CSS -->
+	
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/font-awesome/css/all.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/aos/aos.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/flatpickr/css/flatpickr.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/choices/css/choices.min.css}">
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/total-style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/shopping-basket.css}">
+
+	<!-- SUIT 폰트 추가-->
+	<link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<script th:inline="javascript">
+		function openShopping(data){
+			var popup = window.open(data,'팝업','width=1000px,height=800px,scrollbars=yes');
+		}
+		$(".selectDelete").click(function(){
+			var confirm = confrim("정말 삭제하시겠습니까?");
+			
+			if(confirm){
+				var checkArr = new Array();
+				
+				$("input[class='checkboxs']:checked").each(function(){
+					checkArr.push($(this).attr("data-cartNum"));
+				});
+			}
+		});
+	</script>
+	
+	<header th:replace="~{common/layout :: #header}"></header>
+
+	<!-- **************** MAIN CONTENT START **************** -->
+	<main>
+
+		<!-- =======================
+Content START -->
+		<section class="pt-3">
+			<div class="container mt-3 pt-8">
+				<div class="row">
+
+					<!-- 사이드바 -->
+					<div class="col-lg-4 col-xl-3">
+						<!-- Responsive offcanvas body START -->
+						<div class="offcanvas-lg offcanvas-end" tabindex="-1" id="offcanvasSidebar">
+							<!-- Offcanvas header -->
+							<div class="offcanvas-header justify-content-end pb-2">
+								<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+									data-bs-target="#offcanvasSidebar" aria-label="Close"></button>
+							</div>
+
+							<!-- Offcanvas body -->
+							<div class="offcanvas-body p-3 p-lg-0">
+								<div class="card bg-light w-100 shadow-sm">
+
+									<!-- Card body START -->
+									<div class="card-body p-3">
+										<!-- Avatar and content -->
+										<div class="text-center mb-3">
+											<!-- Avatar -->
+											<div class="avatar avatar-xl mb-2">
+												<img class="avatar-img rounded-circle border border-2 border-white"
+													src="assets/images/account/01.jpg">
+											</div>
+											<h6 class="mb-0 form-label">전도연</h6>
+											<a href="#" class="text-reset text-primary-hover small">hello@gmail.com</a>
+											<hr>
+										</div>
+
+										<!-- Sidebar menu item START -->
+										<ul class="nav nav-pills-primary-soft flex-column">
+											<li class="nav-item">
+												<a class="nav-link submenu active" th:href="@{/myprofile(mNo=${session.mvo.mNo})}"><i
+														class="bi bi-person fa-fw me-2"></i>회원정보</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link submenu" th:href="@{/shop/shopping.basket(mNo=${session.mvo.mNo})}"><i
+														class="bi bi-cart"></i>&nbsp&nbsp&nbsp장바구니</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link submenu" href="camping-bookmark.html"><i
+														class="bi bi-bookmark"></i>&nbsp&nbsp&nbsp캠핑북마크</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link submenu" href="account-traffic.html"><i
+														class="fa-solid fa-car"></i>&nbsp&nbsp&nbsp교통예약</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link submenu" th:href="@{/moim.my(mNo=${session.mvo.mNo})}"><i
+														class="bi bi-chat-left-dots"></i>&nbsp&nbsp&nbsp내 모임</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link text-danger bg-danger-soft-hover"
+													href="index.html"><i
+														class="fas fa-sign-out-alt fa-fw me-2"></i>로그아웃</a>
+											</li>
+										</ul>
+										<!-- Sidebar menu item END -->
+									</div>
+									<!-- Card body END -->
+								</div>
+							</div>
+						</div>
+						<!-- Responsive offcanvas body END -->
+					</div>
+					<!-- 사이드바 END -->
+
+					<!-- Main content START -->
+					<div class="col-lg-8 col-xl-9 ps-xl-5 mb-5">
+
+						<!-- Offcanvas menu button -->
+						<div class="d-grid mb-0 d-lg-none w-100">
+							<button class="btn btn-primary mb-4" type="button" data-bs-toggle="offcanvas"
+								data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+								<i class="fas fa-sliders-h"></i> Menu
+							</button>
+						</div>
+
+						<!-- Wishlist START -->
+						<div class="card border bg-transparent shadow-sm">
+							<!-- Card header -->
+							<div class="card-header bg-transparent border-bottom">
+								<h4 class="card-header-title">장바구니</h4>
+							</div>
+
+							<!-- Card body START -->
+							<div class="row card-body vstack">
+								<!-- Select and button -->
+								<form class="d-flex justify-content-between">
+									<div class="col-6 col-xl-2 pt-4">
+										<input class="check-all" type="checkbox" name="allClick"
+											onclick="selectAll(this)" />
+										<p class="alll mb-0 fw-bold" th:text="${session.mvo.mNo}">All</p>
+									</div>
+									<!-- Button -->
+									<a th:href="@{/shop/deleteAllBasket(mNo=${session.mvo.mNo})}" class="btn btn-danger-soft me-3"><i class="fas fa-trash pe-2"></i>
+										전체삭제</a>
+								</form>
+								<!--장바구니 아이템시작-->
+								<div class="border-top border-bottom my-3" >
+									<!-- 장바구니아이템 1 -->
+									<!-- 장바구니아이템 1 -->
+									<div class="container border-bottom" th:each="basket : ${basket}">
+										<div class="row">
+											<div class="col-md-3">
+												<!-- 상품 체크 -->
+												<div class="check-item 1 pe-2">
+													<input type="checkbox" name="checkboxs" />
+												</div>
+												<!-- 상품 체크 끝-->
+												<!-- 상품이미지 -->
+												<div class="item-image py-2" style="height:150px;">
+													<img th:src="@{${basket.image}}" style="max-height:140px;">
+												</div>
+												<!--상품이미지 끝-->
+											</div>
+											<!-- 상품내용 -->
+											<div class="col-md-6 ">
+												<div class="my-3">
+													<h3 class="subtitle fw-bold" th:text="@{${basket.title}}" style="font-size:20px;">코멧 아웃도어 캠핑 폴딩 카트 + 수납 가방세트</h3>
+												</div>
+											</div>
+											<div class="item-total col-md-3 border-bottom">
+												<h5 class="total-price mt-4" th:text="@{${basket.lprice}}+원">12,800원</h5>
+												<a th:href="${basket.link}" target='_blank'><button class="order">주문하기</button></a>
+												<a th:href="@{/shop/deleteBasket(pno=${basket.pno},mNo=${session.mvo.mNo})}"><button class="delete" id="selectDelete">삭제</button></a>
+											</div>
+										</div>
+									</div>
+									<!-- 장바구니아이템 1 끝 -->
+								
+									
+								</div>
+								<!--장바구니 아이템끝-->
+								<!--주문하기-->
+								<div class="jumun mt-4">
+									<!-- <a th:href="@{/shop/shopping}"><button class="go-shopping" >쇼핑 계속하기</button></a> -->
+									<button class="go-shopping">쇼핑 계속하기</button>
+								</div>
+								<!--주문하기-->
+
+							</div>
+							<!-- 장바구니 아이템끝 -->
+						</div>
+					</div>
+		</section>
+		<!-- =======================
+Content END -->
+
+	</main>
+	<!-- **************** MAIN CONTENT END **************** -->
+
+	<!-- =======================Footer START -->
+<footer class="bg-dark py-5">
+	<div class="container">
+	<div class="row mx-auto">
+	<div class="col-md-10 col-xl-6 mx-auto text-center">
+	<!-- Logo -->
+	<img class="mx-auto h-60px mb-3" src="assets/images/logo_cam.png" alt="logo">
+	<!-- 팀원 -->
+	<ul class="nav justify-content-between text-primary-hover mt-3 mt-md-0">
+	<li class="nav-item"><a class="nav-link p-2 text-white" href="#">이동건</a></li>
+	<li class="nav-item"><a class="nav-link p-2 text-white" href="#">김재혁</a></li>
+	<li class="nav-item"><a class="nav-link p-2 text-white" href="#">박윤희</a></li>
+	<li class="nav-item"><a class="nav-link p-2 text-white" href="#">백인화</a></li>
+	<li class="nav-item"><a class="nav-link p-2 text-white" href="#">이상진</a></li>
+	<li class="nav-item"><a class="nav-link p-2 text-white" href="#">이유광</a></li>
+	</ul>
+	<div class="text-muted text-primary-hover mt-0"> Copyrights ©2023. Multicampus Fullstack Team2 CAMPONG.<br>All rights reserved. </div>
+	</div>
+</footer>
+<!-- =======================Footer END -->
+
+	<!-- Back to top -->
+	<div class="back-top"></div>
+
+	<!-- Bootstrap JS -->
+	<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Vendors -->
+	<script src="assets/vendor/aos/aos.js"></script>
+	<script src="assets/vendor/flatpickr/js/flatpickr.min.js"></script>
+	<script src="assets/vendor/choices/js/choices.min.js"></script>
+
+	<!-- ThemeFunctions -->
+	<script src="assets/js/functions.js"></script>
+
+</body>
+
+</html>

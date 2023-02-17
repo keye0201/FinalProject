@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -86,9 +87,32 @@ public class ShoppingController {
 		return "shop/shopping";
 	}
 
-	@GetMapping("/shopping-basket")
-	public String shopping(Model model, @RequestParam Map<String, String> paramMap) {
-
+	@GetMapping("/shopping.basket")
+	public String shopping(int mNo,Model model) {
+			List<Shopping> basket = service.getShoppingBasket(mNo);
+			model.addAttribute("basket", basket);
 		return "shop/shopping-basket";
+	}
+	@PostMapping("/shopping.basket2")
+	public String shoppingBasketInsert(@RequestParam("mNo")int mNo,@RequestParam("pno")int pno) {
+				int result = service.basketCheck(mNo, pno);
+				System.out.println(result);
+				if(result==0) {
+					service.insertBasket(mNo,pno);
+				}
+		return "redirect:/shop/shopping.basket?mNo="+mNo;
+	}
+	@GetMapping("/deleteBasket")
+	public String deleteBasket(int mNo,int pno) {
+		System.out.println(mNo);
+		System.out.println(pno);
+		service.basketDelete(mNo,pno);
+		return "redirect:/shop/shopping.basket?mNo="+mNo;
+	}
+	@GetMapping("/deleteAllBasket")
+	public String deleteAllBasket(int mNo) {
+		System.out.println(mNo);
+		service.basketAllDelete(mNo);
+		return "redirect:/shop/shopping.basket?mNo="+mNo;
 	}
 }
