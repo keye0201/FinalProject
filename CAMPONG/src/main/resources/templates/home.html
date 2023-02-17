@@ -362,7 +362,7 @@
 								<div class="col-lg-2 d-grid">
 									<!-- Search -->
 									<a class="btn btn-lg btn-primary mb-0" th:href="@{#}"
-										style="background-color: var(- -cp-green); border: 0;">검색</a>
+										style="background-color: var(--cp-green); border: 0;">검색</a>
 								</div>
 							</form>
 							<!-- Form END -->
@@ -382,7 +382,7 @@
 				<div class="row mb-4">
 					<div class="col-12 text-center">
 						<h3>
-							지역별 추천 <span style="color: var(- -cp-green);">캠핑장</span>
+							지역별 추천 <span style="color: var(--cp-green);">캠핑장</span>
 						</h3>
 						<div style="text-align: right;">
 							<a th:href="@{/camping/camping-main}" style="color: darkgrey;">더보기</a>
@@ -463,7 +463,7 @@
 				<div class="row mb-4">
 					<div class="col-12 text-center">
 						<h3>
-							지역별 추천 <span style="color: var(- -cp-green);">백패킹</span>
+							지역별 추천 <span style="color: var(--cp-green);">백패킹</span>
 						</h3>
 						<div style="text-align: right;">
 							<a th:href="@{/bagpacking/bagpacking-main}"
@@ -560,7 +560,7 @@
 			<div class="row mb-4">
 				<div class="col-12 text-center">
 					<h3 class="mb-0">
-						<span style="color: var(- -cp-green);">쇼핑</span>하기
+						<span style="color: var(--cp-green);">쇼핑</span>하기
 					</h3>
 				</div>
 			</div>
@@ -580,12 +580,12 @@
 								<div class="bih-d-5 col-6 col-sm-4 col-lg-3">
 									<div class="card bg-transparent text-center p-1 h-100">
 										<!-- Image -->
-										<img th:src="@{/assets/images/index/등산복.webp}"
+										<img th:src="@{/assets/images/index/화로.jpg}"
 											class="rounded-circle" alt="">
 
 										<div class="card-body p-0 pt-3">
 											<h5 class="card-title">
-												<a th:href="@{/shop/shopping}" class="stretched-link">의류</a>
+												<a th:href="@{http://localhost/shop/shopping?searchValue=%ED%99%94%EB%A1%9C}" class="stretched-link">화로</a>
 											</h5>
 										</div>
 									</div>
@@ -600,7 +600,7 @@
 
 										<div class="card-body p-0 pt-3">
 											<h5 class="card-title">
-												<a th:href="@{/shop/shopping}" class="stretched-link">캠핑푸드</a>
+												<a th:href="@{/recipe/recipe}" class="stretched-link">캠핑푸드</a>
 											</h5>
 										</div>
 									</div>
@@ -615,7 +615,7 @@
 
 										<div class="card-body p-0 pt-3">
 											<h5 class="card-title">
-												<a th:href="@{/shop/shopping}" class="stretched-link">백팩</a>
+												<a th:href="@{http://localhost/shop/shopping?searchValue=%EA%B0%80%EB%B0%A9}" class="stretched-link">가방</a>
 											</h5>
 										</div>
 									</div>
@@ -625,12 +625,12 @@
 								<div class="bih-d-5 col-6 col-sm-4 col-lg-3">
 									<div class="card bg-transparent text-center p-1 h-100">
 										<!-- Image -->
-										<img th:src="@{/assets/images/index/등산화.png}"
+										<img th:src="@{/assets/images/index/랜턴.jpg}"
 											class="rounded-circle" alt="">
 
 										<div class="card-body p-0 pt-3">
 											<h5 class="card-title">
-												<a th:href="@{/shop/shopping}" class="stretched-link">등산화</a>
+												<a th:href="@{http://localhost/shop/shopping?searchValue=&Item=랜턴}" class="stretched-link">랜턴</a>
 											</h5>
 										</div>
 									</div>
@@ -645,7 +645,7 @@
 
 										<div class="card-body p-0 pt-3">
 											<h5 class="card-title">
-												<a th:href="@{/shop/shopping}" class="stretched-link">텐트</a>
+												<a th:href="@{http://localhost/shop/shopping?searchValue=&Item=%ED%85%90%ED%8A%B8}" class="stretched-link">텐트</a>
 											</h5>
 										</div>
 									</div>
@@ -660,7 +660,7 @@
 
 										<div class="card-body p-0 pt-3">
 											<h5 class="card-title">
-												<a th:href="@{/shop/shopping}" class="stretched-link">캠핑용품</a>
+												<a th:href="@{http://localhost/shop/shopping?searchValue=&Item=의자}" class="stretched-link">캠핑의자</a>
 											</h5>
 										</div>
 									</div>
@@ -727,7 +727,7 @@
 											</figure>
 										</div>
 										<h6 class="mb-0">
-											<a th:href="@{/meeting/moim}" class="stretched-link">모임</a>
+											<a th:href="@{/moim}" class="stretched-link">모임</a>
 										</h6>
 									</div>
 								</div>
@@ -761,7 +761,7 @@
 						<h3>즐거운 캠핑을 위한 가이드</h3>
 						<h5>게시판, 모임, 레시피를 확인하세요!</h5>
 						<a th:href="@{/board/notice_list}"
-							class="bih-b-1 btn btn-sm btn-primary mb-0">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp더보기&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+							class="bih-b-1 btn btn-sm btn-primary mb-0 px-5">더보기</a>
 					</div>
 				</div>
 			</div>
@@ -776,26 +776,6 @@
 						<h3 class="mb-0">
 							이번달<br>가장 핫한 행사<br>visit🔥
 						</h3>
-						<div
-							class="d-sm-flex justify-content-sm-between align-items-center mt-4">
-							<!-- Avatar group -->
-							<ul class="avatar-group mb-sm-0">
-								<li class="avatar"><img class="avatar-img rounded-circle"
-									th:src="@{/assets/images/index/01.jpg}" alt="avatar"></li>
-								<li class="avatar"><img class="avatar-img rounded-circle"
-									th:src="@{/assets/images/index/02.jpg}" alt="avatar"></li>
-								<li class="avatar"><img class="avatar-img rounded-circle"
-									th:src="@{/assets/images/index/03.jpg}" alt="avatar"></li>
-								<li class="avatar"><img class="avatar-img rounded-circle"
-									th:src="@{/assets/images/index/04.jpg}" alt="avatar"></li>
-								<li class="avatar">
-									<div class="avatar-img rounded-circle bg-dark">
-										<span
-											class="text-white position-absolute top-50 start-50 translate-middle small">16+</span>
-									</div>
-								</li>
-							</ul>
-						</div>
 						<!-- Button -->
 						<a th:href="@{/event/event}"
 							class="btn btn-lg btn-primary-soft mb-0 mt-4">행사 보러가기 <i
@@ -806,13 +786,13 @@
 					<table class="bih-d-1">
 						<tr>
 							<td><img class="bih-i-1"
-								th:src="@{/assets/images/index/포스터02.png}"></td>
+								th:src="@{/assets/images/index/poster1.jpg}"></td>
 							<td><img class="bih-i-1"
-								th:src="@{/assets/images/index/포스터02.png}"></td>
+								th:src="@{/assets/images/index/poster2.jpg}"></td>
 							<td><img class="bih-i-1"
-								th:src="@{/assets/images/index/포스터02.png}"></td>
+								th:src="@{/assets/images/index/poster3.jpg}"></td>
 							<td><img class="bih-i-1"
-								th:src="@{/assets/images/index/포스터02.png}"></td>
+								th:src="@{/assets/images/index/poster4.jpg}"></td>
 						</tr>
 					</table>
 				</div>
@@ -828,7 +808,7 @@
 						<h3>지금 캠핑장으로 떠나고 싶다면</h3>
 						<h5>렌트카, 열차, 고속버스를 예약하세요!</h5>
 						<a th:href="@{/traffic/traffic-bus}"
-							class="bih-b-1 btn btn-sm btn-primary mb-0">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp더보기&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a>
+							class="bih-b-1 btn btn-sm btn-primary mb-0 px-5">더보기</a>
 					</div>
 					<!-- 블록 -->
 					<div class="col-lg-10 bih-w-1">
