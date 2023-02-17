@@ -328,15 +328,15 @@
 						<div
 							class="bg-blur bg-white bg-opacity-10 border border-light border-opacity-25 rounded-3 p-3 mt-8">
 							<!-- Form START -->
-							<form class="row g-3 justify-content-center align-items-center">
+							<form id="searchForm" class="row g-3 justify-content-center align-items-center">
 								<div class="bih-d-7 col-lg-4">
 									<!-- Choices -->
 									<div class="form-mix-icon-input form-size-lg">
-										<select class="form-select js-choice">
-											<option value="">캠핑장</option>
-											<option>백패킹</option>
-											<option>쇼핑</option>
-											<option>자유게시판</option>
+										<select id="searchCat" class="form-select js-choice">
+											<option value="camping">캠핑장</option>
+											<option value="bagpacking">백패킹</option>
+											<option value="shopping">쇼핑</option>
+											<option value="board">자유게시판</option>
 										</select>
 										<!-- Icons -->
 										<span
@@ -348,21 +348,19 @@
 									<!-- Input -->
 									<div class="form-input-dropdown position-relative">
 										<input class="form-control form-control-lg me-1 ps-5"
+											id="searchValue" name="searchValue"
 											type="text" data-bs-toggle="dropdown"
-											placeholder="검색어를 입력하세요">
+											placeholder="검색어를 입력하세요" th:value="${param.searchValue}">
 										<!-- Icon -->
 										<span
 											class="position-absolute top-50 start-0 translate-middle ps-5"><i
 											class="bi bi-search fs-5"></i></span>
 									</div>
 								</div>
-
-
-
 								<div class="col-lg-2 d-grid">
 									<!-- Search -->
-									<a class="btn btn-lg btn-primary mb-0" th:href="@{#}"
-										style="background-color: var(--cp-green); border: 0;">검색</a>
+									<button id="searchBtn" class="btn btn-lg btn-primary mb-0"
+										style="background-color: var(--cp-green); border: 0;">검색</button>
 								</div>
 							</form>
 							<!-- Form END -->
@@ -916,6 +914,31 @@
 					$('#info-box').css('left',
 							e.pageX - ($('#info-box').width()) / 2 - 10);
 				}).mouseover();
+		
+// 		$(document).ready(function() {
+			var search = document.getElementById("searchBtn");
+			search.addEventListener("click", function () {
+				var searchForm = document.getElementById("searchForm");
+				var searchCat = document.getElementById("searchCat");
+				var searchVal = document.getElementById("searchValue");
+				
+				if(searchCat.value === 'camping') {
+					searchForm.action = "/camping/camping-main?searchValue="+searchVal.value;
+				}
+				if(searchCat.value === 'bagpacking') {
+					searchForm.action = "/bagpacking/mountain-list?searchValue="+searchVal.value;
+				}
+				if(searchCat.value === 'shopping') {
+					searchForm.action = "/shop/shopping?searchValue="+searchVal.value;
+				}
+				if(searchCat.value === 'board') {
+					searchForm.action = "board/board-list?searchValue="+searchVal.value;
+				}
+				 
+				searchForm.mothod = "GET";
+				searchForm.submit();
+			});
+// 		}
 	</script>
 
 	<footer th:replace="~{common/layout :: #footer}"></footer>
