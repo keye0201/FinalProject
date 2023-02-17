@@ -20,4 +20,5 @@ public interface CampingMapper {
 	void updateBookmarkCount(Camping camping);
 	int bookmarkCamp(Map<String, String> map);
 	int unBookmarkCamp(Map<String, String> map);
+	List<Camping> selectBookmarkList(int mNo);
 }

@@ -276,4 +276,29 @@ public class CampingController {
 		}
 		
 	}
+	
+	 @GetMapping("/camping-bookmark")
+	 public String myBookmark(Model model, @SessionAttribute(name = "mvo", required = false) Member loginMember) {
+		 List<Camping> list = service.getBookmarkList(loginMember.getMNo());
+		 
+		 model.addAttribute("list", list);
+		 
+		 return "camping/camping-bookmark";
+	 }
+	 
+	 @GetMapping("/deleteBookmark")
+	 public String deleteBookmark(Model model, @SessionAttribute(name = "mvo", required = false) Member loginMember,
+			 int contentId) {
+		 
+		 int result = service.unBookmarkCamp(loginMember.getMNo(), contentId);
+		 
+		 if (result > 0) {
+				model.addAttribute("msg", "찜이 해제되었습니다.");
+			} else {
+				model.addAttribute("msg", "찜 해제에 실패하였습니다.");
+			}
+		 
+		model.addAttribute("location", "/camping/camping-bookmark");
+		return "/common/msg";
+	 }
 }
