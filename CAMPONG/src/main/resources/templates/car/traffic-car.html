@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:replace="~{common/layout :: head}"></th:block>
+<link rel="stylesheet" type="text/css" th:href="@{/assets/css/traffic-car.css}">
+</head>
+
+<body>
+	<header th:replace="~{common/layout :: #header}"></header>
+
+<main>
+<!--검색-->
+<section class="pt-0 pt-lg-5 pt-8">
+	<div class="container" style="margin-top:100px;">
+		<div class="row">
+
+			<div class="col-lg-10 ms-auto position-relative">
+				<img th:src="@{/assets/images/traffic/자동차.jpg}" class="rounded-3" alt="">
+
+				<!-- Search START -->
+				<div class="col-11 col-sm-10 col-lg-8 col-xl-6 position-lg-middle ms-lg-8 ms-xl-7">
+					<div class="card shadow pb-0 mt-n7 mt-sm-n8 mt-lg-0">
+
+						<!-- Card header -->
+						<div class="card-header border-bottom p-3 p-sm-4">
+							<h5 class="card-title mb-0">렌트카 조회하기</h5>
+						</div>
+
+						<!-- Card body START -->
+						<form class="card-body form-control-border p-3 p-sm-4" th:action="@{/car/traffic-car}" method="GET">
+							<!-- Tabs START -->
+							<div class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+								<div class="form-check form-check-inline active" id="cab2-one-way-tab" data-bs-toggle="pill" data-bs-target="#cab2-one-way" role="tab" aria-controls="cab2-one-way" aria-selected="true">
+									<input class="form-check-input" type="radio" name="inlineRadioOptions" id="cabRadio1" value="option1" checked>
+									<label class="form-check-label" for="cabRadio1">단기 대여</label>
+								</div>
+								<div class="form-check form-check-inline" id="cab2-round-way-tab" data-bs-toggle="pill" data-bs-target="#cab2-round-way" role="tab" aria-controls="cab2-round-way" aria-selected="false">
+									<input class="form-check-input" type="radio" name="inlineRadioOptions" id="cabRadio2" value="option2">
+									<label class="form-check-label" for="cabRadio2">장기 대여</label>
+								</div>
+							</div>
+							<!-- Tabs END -->
+
+							<!-- Tabs content START -->
+							<div class="tab-content my-4" id="pills-tabContent">
+								<!-- One way START -->
+								<div class="tab-pane fade show active" id="cab2-one-way" role="tabpanel" aria-labelledby="cab2-one-way-tab">
+									<div class="row g-2 g-md-4">
+										
+										<!-- Pickup -->
+										<div class="col-md-6 position-relative">
+											<div class="form-fs-lg form-control-transparent">
+												<label class="form-label small">대여지점</label>
+												<select class="form-select js-choice" id="city" name="city" data-search-enabled="true">
+													<option value=" " th:selected="${#strings.equals(param.city, ' ')}">지역을 선택하세요</option>
+													<option value="서울특별시" th:selected="${#strings.equals(param.city, '서울특별시')}">서울특별시</option>
+													<option value="경기도" th:selected="${#strings.equals(param.city, '경기도')}">경기도</option>
+													<option value="인천광역시" th:selected="${#strings.equals(param.city, '인천광역시')}">인천광역시</option>
+													<option value="강원도" th:selected="${#strings.equals(param.city, '강원도')}">강원도</option>
+													<option value="충청남도" th:selected="${#strings.equals(param.city, '충청남도')}">충청남도</option>
+													<option value="대전광역시" th:selected="${#strings.equals(param.city, '대전광역시')}">대전광역시</option>
+													<option value="충청북도" th:selected="${#strings.equals(param.city, '충청북도')}">충청북도</option>
+													<option value="세종" th:selected="${#strings.equals(param.city, '세종')}">세종</option>
+													<option value="부산광역시" th:selected="${#strings.equals(param.city, '부산광역시')}">부산광역시</option>
+													<option value="울산" th:selected="${#strings.equals(param.city, '울산')}">울산</option>
+													<option value="대구광역시" th:selected="${#strings.equals(param.city, '대구광역시')}">대구광역시</option>
+													<option value="경상북도" th:selected="${#strings.equals(param.city, '경상북도')}">경상북도</option>
+													<option value="경상남도" th:selected="${#strings.equals(param.city, '경상남도')}">경상남도</option>
+													<option value="전라남도" th:selected="${#strings.equals(param.city, '전라남도')}">전라남도</option>
+													<option value="광주광역시" th:selected="${#strings.equals(param.city, '광주광역시')}">광주광역시</option>
+													<option value="전라북도" th:selected="${#strings.equals(param.city, '전라북도')}">전라북도</option>
+													<option value="제주특별자치도" th:selected="${#strings.equals(param.city, '제주특별자치도')}">제주특별자치도</option>
+												</select>
+											</div>
+
+											<!-- Auto fill button -->
+											<div class="btn-flip-icon z-index-9 mt-2 mt-md-1">
+												<button class="btn btn-dark shadow btn-round mb-0"><i class="fa-solid fa-right-left"></i></button>
+											</div>
+										</div>
+
+										<!-- Drop -->
+										<div class="col-md-6 text-md-end">
+											<div class="form-fs-lg form-control-transparent">
+												<label class="form-label small ms-3 ms-md-0 me-md-3">반납지점</label>
+												<select class="form-select js-choice" data-search-enabled="true">
+													<option value="">지역을 선택하세요</option>
+													<option>서울특별시</option>
+													<option>경기도</option>
+													<option>인천광역시</option>
+													<option>강원도</option>
+													<option>충청남도</option>
+													<option>대전광역시</option>
+													<option>충청북도</option>
+													<option>세종</option>
+													<option>부산광역시</option>
+													<option>울산</option>
+													<option>대구광역시</option>
+													<option>경상북도</option>
+													<option>경상남도</option>
+													<option>전라남도</option>
+													<option>광주광역시</option>
+													<option>전라북도</option>
+													<option>제주특별자치도</option>
+												</select>
+											</div>	
+										</div>
+
+										<!-- Date -->
+										<div class="col-md-6">
+											<div class="form-fs-lg form-control-transparent">
+												<label class="form-label small">대여일</label>
+												<input type="text" class="form-control flatpickr" placeholder="날짜를 선택하세요">
+											</div>
+										</div>
+
+										<!-- Time -->
+										<div class="col-md-6 text-md-end">
+											<div class="form-fs-lg form-control-transparent">
+												<label class="form-label small ms-3 ms-md-0 me-md-3">대여시간</label>
+												<input type="text" class="form-control flatpickr text-md-end" data-enableTime="true" data-noCalendar="true" placeholder="시간을 선택하세요">
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- One way END -->
+
+								<!-- Round trip START -->
+								<div class="tab-pane fade" id="cab2-round-way" role="tabpanel" aria-labelledby="cab2-round-way-tab">
+									<div class="row g-2 g-md-4">
+										<!-- Pickup -->
+										<div class="col-md-6 position-relative">
+											<label class="form-label small">대여지점</label>
+											<div class="form-fs-lg form-control-transparent">
+												<select class="form-select js-choice" data-search-enabled="true">
+													<option value="">지역을 선택하세요</option>
+													<option>서울특별시</option>
+													<option>경기도</option>
+													<option>인천광역시</option>
+													<option>강원도</option>
+													<option>충청남도</option>
+													<option>대전광역시</option>
+													<option>충청북도</option>
+													<option>세종</option>
+													<option>부산광역시</option>
+													<option>울산</option>
+													<option>대구광역시</option>
+													<option>경상북도</option>
+													<option>경상남도</option>
+													<option>전라남도</option>
+													<option>광주광역시</option>
+													<option>전라북도</option>
+													<option>제주특별자치도</option>
+												</select>
+											</div>	
+
+											<!-- Auto fill button -->
+											<div class="btn-flip-icon z-index-9 mt-2 mt-md-1">
+												<button class="btn btn-dark shadow btn-round mb-0"><i class="fa-solid fa-right-left"></i></button>
+											</div>
+										</div>
+
+										<!-- Drop -->
+										<div class="col-sm-6 text-sm-end">
+											<label class="form-label small ms-3 ms-md-0 me-md-3">반납지점</label>
+											<div class="form-fs-lg form-control-transparent">
+												<select class="form-select js-choice" data-search-enabled="true">
+													<option value="">지역을 선택하세요</option>
+													<option>서울특별시</option>
+													<option>경기도</option>
+													<option>인천광역시</option>
+													<option>강원도</option>
+													<option>충청남도</option>
+													<option>대전광역시</option>
+													<option>충청북도</option>
+													<option>세종</option>
+													<option>부산광역시</option>
+													<option>울산</option>
+													<option>대구광역시</option>
+													<option>경상북도</option>
+													<option>경상남도</option>
+													<option>전라남도</option>
+													<option>광주광역시</option>
+													<option>전라북도</option>
+													<option>제주특별자치도</option>
+												</select>
+											</div>	
+										</div>
+
+										<!-- Date -->
+										<div class="col-sm-6">
+											<div class="form-fs-lg form-control-transparent">
+												<label class="form-label small">대여일</label>
+												<input type="text" class="form-control flatpickr" placeholder="날짜를 선택하세요">
+											</div>
+										</div>
+
+										<!-- Time -->
+										<div class="col-sm-6 text-sm-end">
+											<div class="form-fs-lg form-control-transparent">
+												<label class="form-label small ms-3 ms-md-0 me-md-3">대여시간</label>
+												<input type="text" class="form-control flatpickr text-sm-end" data-enableTime="true" data-noCalendar="true" placeholder="시간을 선택하세요">
+											</div>
+										</div>
+
+										<!-- Date -->
+										<div class="col-sm-6">
+											<div class="form-fs-lg form-control-transparent">
+												<label class="form-label small">반납일</label>
+												<input type="text" class="form-control flatpickr" placeholder="날짜를 선택하세요">
+											</div>
+										</div>
+
+										<!-- Time -->
+										<div class="col-sm-6 text-sm-end">
+											<div class="form-fs-lg form-control-transparent">
+												<label class="form-label small ms-3 ms-md-0 me-md-3">반납시간</label>
+												<input type="text" class="form-control flatpickr text-sm-end" data-enableTime="true" data-noCalendar="true" placeholder="시간을 선택하세요">
+											</div>
+										</div>
+									</div> <!-- Row END -->
+								</div>
+								<!-- Round trip END -->
+							</div>
+							<!-- Tabs content END -->
+
+							<!-- Button -->
+							<div class="d-grid">
+								<button class="btn btn-apply mb-0" type="submit">검색하기</button>
+							</div>
+						</form>
+						<!-- Card-body END -->
+					</div>
+				</div>
+				<!-- Search END -->
+			</div>
+		</div> <!-- Row END -->
+	</div>
+</section>
+
+<!--안내배너-->
+<section class="pt-0 bih-t-1 ">
+	<div class="container position-relative">
+
+		<!-- Title and button START -->
+		<div class="row">
+			<div class="col-12">
+				<div class="d-sm-flex justify-content-sm-between align-items-center">
+					<!-- Title -->
+					<div class="mb-3 mb-sm-0">
+						<h1 class="fs-3">렌트카 목록</h1>
+					</div>
+				</div>	
+			</div>
+		</div>
+
+		<!-- Notice board START -->
+		<div class="bg-primary bg-opacity-10 rounded-3 overflow-hidden mt-4 p-4">
+			<div class="row g-4 align-items-center">
+				<!-- Image -->
+				<div class="col-6 col-md-3 text-center order-1">
+					<img th:src="@{/assets/images/traffic/11.svg}" class="mb-n5" alt="">
+				</div>
+
+				<!-- Content -->
+				<div class="col-md-6 order-md-2">
+					<!-- Title -->
+					<h4>코로나 방역수칙 준수</h4>
+					<!-- Content -->
+					<p class="mb-2">더욱 안전하게 즐기는 여행! 안전은 모두가 함께 지켜야 합니다.
+						캠퐁과 제휴업체는 코로나 감염 방지를 위해 클리닝 서비스를 제공하고 있습니다. </p>
+					<!-- Button -->
+					<a href="#" class="btn btn-sm btn-primary mb-0">&nbsp&nbsp&nbsp확인하기&nbsp&nbsp&nbsp</a>
+				</div>
+
+				<!-- Image -->
+				<div class="col-6 col-md-3 text-center order-3">
+					<img th:src="@{/assets/images/traffic/10.svg}" class="mb-n5" alt="">
+				</div>
+			</div>
+		</div>
+		<!-- Notice board END -->
+
+	</div>
+</section>
+
+<!--리스트-->
+<section class="pt-0">
+	<div class="container" data-sticky-container>
+		<div class="row">
+
+			<!-- Main content START -->
+			<div class="bih-d-1 col-xl-8 col-xxl-9">
+				<div class="vstack gap-4">
+				
+					<th:block th:if="${list == null}">
+						<div>
+							<h6>조회된 글이 없습니다.</h6>
+						</div>
+					</th:block>
+					<th:block th:if="${list != null}">
+						<th:block th:each="content, status : ${list}">
+
+					<!-- 렌트카 1 -->
+					<div class="card border p-4">
+						<!-- Card body START -->
+						<div class="card-body p-0">
+							<div class="row g-2 g-sm-4 mb-4">
+								<!-- Card image -->
+								<div class="col-md-4 col-xl-3 bih-i-8">
+										<img class="rounded-3 bih-i-9" th:src="@{|/assets/images/traffic/car/${imgIdx[status.index]}.jpg|}" alt="">
+								</div>
+
+								<!-- 렌트카업체 정보 -->
+								<div class="col-sm-6 col-md-4 col-xl-6">
+									<h4 class="card-title mb-2"><a class="text-black">[[${content.entrpsNm}]]</a></h4>
+									<!-- 주소 -->
+									<ul class="nav nav-divider h6 fw-normal mb-2">
+										<li class="nav-item"><i class="bi bi-geo-alt"></i> [[${content.rdnmadr}]]</li>
+									</ul> 
+									
+									<!-- 전화번호 -->
+									<ul class="list-inline mb-0">
+										<li class="list-inline-item h6 fw-normal me-1 mb-0"><i class="bi bi-telephone"></i>&nbsp&nbsp[[${content.phoneNumber}]]</li>
+									</ul>
+								</div>
+
+								<!-- Button -->
+								<div class="col-sm-6 col-md-4 col-xl-3 text-sm-end">
+									<a th:href="@{|/car/booking-confirm?rentNo=${content.rentNo}|}" class="btn btn-primary mb-0">&nbsp&nbsp&nbsp예약하기&nbsp&nbsp&nbsp</a>
+								</div>
+							</div> <!-- Row END -->
+						</div>
+						<!-- Card body END -->
+
+						<!-- Card footer START -->
+						<div class="card-footer border-top p-0 pt-3">
+							<div class="row">
+								<!-- List -->
+								<div class="col-md-6">
+									<ul class="list-group list-group-borderless mb-0">
+										<li class="list-group-item d-flex pb-0 mb-0">
+											<span class="h6 fw-bold mb-0"><i class="bi bi-check-circle me-2"></i>우수 제휴업체 선정</span>
+										</li>
+										<li class="list-group-item d-flex pb-0 mb-0">
+											<span class="h6 fw-bold mb-0"><i class="bi bi-check-circle me-2"></i>위생 우수 업체</span>
+										</li>
+									</ul>
+								</div>
+
+								<!-- Info -->
+								<div class="col-md-6">
+									<ul class="list-group list-group-borderless mb-0">
+										<li class="list-group-item d-flex h6 fw-light text-success pb-0 mb-0">
+											예약시 제휴 할인 10% 
+										</li>
+										<li class="list-group-item d-flex h6 fw-light text-success pb-0 mb-0">
+											코로나 클리닝 방역 서비스
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- card footer END -->
+					</div>
+				</div>
+				
+			</div>
+			<!-- Main content END -->
+
+		</div> <!-- Row END -->
+		
+		<!-- 페이징 -->
+				<div class="row" style="margin-top:50px; margin-bottom:50px;">
+					<div class="col-12">
+						<nav class="mt-4 d-flex justify-content-center" aria-label="navigation">
+							<ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+								<!--이전 페이지 -->
+								<li class="page-item mb-0">
+									<button class="page-link"
+										th:onclick="|movePage('/car/traffic-car?page=${pageInfo.prevPage}');|" tabindex="-1">
+										<i class="fa-solid fa-angle-left"></i>
+									</button>
+								</li>
+											
+								<!-- 10개 페이지 -->
+								<th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+									<th:block th:if="${status.current == pageInfo.currentPage}">
+										<li class="page-item mb-0">
+											<button class="page-link active" th:onclick="|movePage('/car/traffic-car?page=${status.current}');|" disabled>
+											[[${status.current}]]
+											</button>
+										</li>
+									</th:block>
+									<th:block th:if="${status.current != pageInfo.currentPage}">
+										<li class="page-item mb-0">
+											<button class="page-link" th:onclick="|movePage('/car/traffic-car?page=${status.current}');|">
+											[[${status.current}]]
+											</button>
+										</li>
+									</th:block>
+								</th:block>
+								
+								<!--다음 페이지 -->
+								<li class="page-item mb-0">
+									<button class="page-link" th:onclick="|movePage('/car/traffic-car?page=${pageInfo.nextPage}');|">
+										<i class="fa-solid fa-angle-right"></i>
+									</button>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<!-- Pagination END-->
+
+	</div>
+</section>
+
+
+
+</main>
+
+<!-- =======================Footer START -->
+<footer th:replace="~{common/layout :: #footer}"></footer>
+
+<!-- Back to top -->
+<div class="back-top"></div>
+
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Vendors -->
+<script src="assets/vendor/choices/js/choices.min.js"></script>
+<script src="assets/vendor/flatpickr/js/flatpickr.min.js"></script>
+
+<!-- ThemeFunctions -->
+<script src="assets/js/functions.js"></script>
+
+	<!-- 페이지 -->
+	<script type="text/javascript">
+	function movePage(pageUrl){
+		var searchType = 'rentNo';
+		var city = document.getElementById("city");
+		
+		if(city.selected == true){
+			pageUrl = pageUrl + 'inlineRadioOptions=option1&city=' + city.value +'&search_terms=&search_terms=&search_terms=&search_terms='; 
+		}
+		location.href = encodeURI(pageUrl);	
+	}
+	</script>
+
+</body>
+</html>

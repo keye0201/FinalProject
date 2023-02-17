@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+
+<head>
+	<style>
+		tr {
+			height: 62px;
+			color: #333333;
+		}
+		th {
+			text-align: center;
+			font-size: 1rem;
+		}
+		.board_main_image {
+			margin: auto;
+    	display: block;
+			height: 450px;
+		}
+		.badge-2 {
+			--bs-badge-padding-x: 0.9em;
+			--bs-badge-padding-y: 0.55em;
+			--bs-badge-font-size: 0.95em;
+			--bs-badge-font-weight: 400;
+			--bs-badge-color: #fff;
+			--bs-badge-border-radius: 0.375rem;
+			display: inline-block;
+			padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);
+			font-size: var(--bs-badge-font-size);
+			font-weight: var(--bs-badge-font-weight);
+			line-height: 1;
+			color: var(--bs-badge-color);
+			text-align: center;
+			white-space: nowrap;
+			vertical-align: baseline;
+			border-radius: var(--bs-badge-border-radius);
+		}
+		.border-top-1 {
+			border-top: 2px var(--bs-border-style) var(--bs-black) !important;
+		}
+		.main_title {
+			text-align: center;
+			margin: auto;
+    	display: block;
+			width: 350px;
+		}
+		.badge-1 {
+			--bs-badge-padding-x: 0.45em;
+			--bs-badge-padding-y: 0.35em;
+			--bs-badge-font-size: 0.9em;
+			--bs-badge-font-weight: 400;
+			--bs-badge-color: #fff;
+			--bs-badge-border-radius: 0.375rem;
+			display: inline-block;
+			padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);
+			font-size: var(--bs-badge-font-size);
+			font-weight: var(--bs-badge-font-weight);
+			line-height: 1;
+			color: var(--bs-badge-color);
+			text-align: center;
+			white-space: nowrap;
+			vertical-align: baseline;
+			border-radius: var(--bs-badge-border-radius);
+		}
+	</style>
+</head>
+
+<body>
+<header th:replace="~{common/layout :: #header}"></header>
+
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+<section class="py-0 pt-8">
+	<div class="container">
+		<!-- Title -->
+		<div class="row g-4">
+			<!-- Image -->
+			<div class="col-12">
+				<img th:src="@{/assets/images/noitce/notice.jpg}" class="rounded-3 board_main_image" alt="">
+			</div>
+			<!-- Title and content -->
+			<div class="mx-auto position-relative mt-sm-n7">
+				<div class="bg-mode shadow rounded-3 p-4 main_title">
+					<!-- Title -->
+					<h1 class="fs-3 ">공지사항</h1>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- =======================
+Main banner START -->
+
+<section class="pt-4 pt-md-5">
+	<form action="/board/notice-write" method="post" enctype="multipart/form-data">
+		<div class="container">
+			<div class="board_list border-top-1" id="addFile">
+				<div class="board_head border-bottom">
+					<div class="row mt-2 mb-2">
+						<span class="col-1 ms-5 me-2"></span>
+						<input class="mt-2 mb-2 border-0 border-bottom col-9 fw-bold" type="text" name="title" placeholder="제목을 입력하세요">
+					</div>
+				</div>
+				<div class="bg-light pt-3 ps-4 pb-3">
+					<div class="row">
+					<span class="ms-1 col-1 fw-bold text-black">첨부파일</span>
+					<input class="ms-4 col-9" type="file" name="upfile" accept="image/*">
+					</div>
+				</div>
+			</div>
+			<div class="border-top">
+				<div class="row">
+					<span class="col-1 me-1"></span>
+					<textarea class="mt-4 ms-6 col-9" name="content" id="" cols="30" rows="10" style="resize: none;" placeholder="내용을 입력하세요"></textarea>
+				</div>
+				<div class="d-flex justify-content-end">
+					<button type="submit" class="badge-2 btn btn-primary border-0 mt-4 mb-4 me-8">작성완료<i class="bi fa-fw bi-arrow-right ms-2"></i></button>
+				</div>
+			</div>
+	
+			<div class="d-flex justify-content-end">
+				<button th:onclick="|location.href='@{/board/notice-list}'|" class="badge-2 text-bg-secondary modify-btn border-0 mt-4 mb-4">목록</button>
+			</div>
+		</div>
+	</form>
+</section>
+<!-- =======================
+Main banner START -->
+
+
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+
+
+<!-- Back to top -->
+<div class="back-top"></div>
+
+<footer th:replace="~{common/layout :: #footer}"></footer>
+
+</body>
+</html>

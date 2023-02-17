@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>캠퐁</title>
+
+	<!-- Meta Tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="Webestica.com">
+	<meta name="description" content="Booking - Multipurpose Online Booking Theme">
+	
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="assets/images/favicon.ico">
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
+
+	<!-- SUIT 폰트 추가-->
+	<link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
+
+	<!-- Plugins CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/all.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap-icons/bootstrap-icons.css">
+
+	<!-- Theme CSS -->
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/total-style.css">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script th:inline="javascript">
+			$(document).ready(function(){
+				var msgType =[[${msgType}]];
+				if(msgType != null){
+					$("#myMessage").modal("show");
+				}
+			});		
+	</script>
+</head>
+
+<body>
+
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+	
+<!-- =======================
+Main Content START -->
+<section class="vh-xxl-100">
+	<div class="container h-100 d-flex px-0 px-sm-4">
+		<div class="row justify-content-center align-items-center m-auto">
+			<div class="col-12">
+				<div class="bg-mode shadow rounded-3 overflow-hidden">
+					<div class="row g-0">
+						<!-- Vector Image -->
+						<div class="col-lg-6 d-flex align-items-center order-2 order-lg-1">
+							<div class="p-3 p-lg-5">
+								<img src="assets/campongimg/sign-incamp2.png" alt="">
+							</div>
+							<!-- Divider -->
+							<div class="vr opacity-1 d-none d-lg-block"></div>
+						</div>
+		
+						<!-- Information -->
+						<div class="col-lg-6 order-1">
+							<div class="p-4 p-sm-7">
+								<!-- Logo -->
+								<a href="/">
+									<img class="h-50px mb-3" src="assets/images/campong.png" alt="logo">
+								</a>
+								<!-- Title -->
+								<h1 class="mb-2 h3">환영합니다</h1>
+								<p class="mb-0">아이디가 없나요?<a href="/sign.up"> 아이디 생성하기 </a></p>
+		
+								<!-- Form START -->
+								<form class="mt-4 text-start" action="/memLogin.do" method="post">
+									<!-- Email -->
+									<div class="mb-3">
+										<label class="form-label sign-title">아이디</label>
+										<input type="text" name="id" id="id" class="form-control">
+									</div>
+									<!-- Password -->
+									<div class="mb-3 position-relative">
+										<label class="form-label sign-title">비밀번호</label>
+										<input class="form-control fakepassword" type="password" id="psw-input" name="password">
+										<span class="position-absolute top-50 end-0 translate-middle-y p-0 mt-3">
+											<i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2 pe-3"></i>
+										</span>
+									</div>
+									<!-- Remember me -->
+									<div class="mb-3 d-sm-flex justify-content-between">
+										<div>
+											<input type="checkbox" class="form-check-input" id="rememberCheck">
+											<label class="form-check-label" for="rememberCheck">기억하기</label>
+										</div>
+										<a href="forgot-password.html">비밀번호 찾기</a>
+									</div>
+									<!-- Button -->
+									<div><button type="submit" class="btn btn-primary w-100 mb-0">로그인</button></div>
+		
+									<!-- Divider -->
+									<div class="position-relative my-4">
+										<hr>
+										<p class="small bg-mode position-absolute top-50 start-50 translate-middle px-2">간편로그인</p>
+									</div>
+		
+									<!-- Google and facebook button -->
+									<div class="vstack gap-3">
+										<a href="#" class="btn btn-light mb-0"><i class="fab fa-fw fa-google text-google-icon me-2"></i>구글 로그인</a>
+										<a href="#" class="btn btn-light mb-0"><img class="hi" src="assets/campongimg/btnW_아이콘사각.png">네이버 로그인</a>
+										
+									</div>
+									<!-- 실패 메시지 -->
+									<div class="modal" id="myMessage">
+									  <div class="modal-dialog">
+									    <div class="modal-content">
+									      <!-- Modal Header -->
+									      <div class="modal-header">
+									        <h4 class="modal-title">메세지 확인</h4>
+									        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+									      </div>
+									      <!-- Modal body -->
+									      <div class="modal-body">
+									      아이디 또는 비밀번호 오류 입니다.
+									      </div>
+									      <!-- Modal footer -->
+									      <div class="modal-footer">
+									        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+									      </div>
+									
+									    </div>
+									  </div>
+									</div>
+									<!-- 실패 메시지 끝-->
+									
+									
+									
+									<!-- Copyright -->
+									<p class="mb-0 mt-3 text-center">©2023 Campong Final Project</p>
+								</form>
+								<!-- Form END -->
+							</div>		
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- =======================
+Main Content END -->
+
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+
+<!-- Back to top -->
+<div class="back-top"></div>
+
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- ThemeFunctions -->
+<script src="assets/js/functions.js"></script>
+
+</body>
+</html>

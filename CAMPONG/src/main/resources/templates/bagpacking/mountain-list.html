@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="~{common/layout :: head}"></th:block>
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/bagpacking.css}">
+</head>
+
+<body>
+	<header th:replace="~{common/layout :: #header}"></header>
+	
+	<!-- **************** MAIN CONTENT START **************** -->
+	<main>
+		<!-- =======================Main Banner START -->
+		<section class="pt-8">
+			<div class="container">
+				<!-- Background image -->
+				<div class="p-3 p-sm-5 rounded-3"
+					style="background-image: url(/assets/images/bagpacking/bagpacking.png); background-position: center center; background-repeat: no-repeat; background-size: cover;">
+				<!-- Banner title -->
+				<div class="row">
+					<div class="col-md-8 mx-auto my-5">
+						<h1 class="text-center text-white">백패킹</h1>
+						<ul class="nav nav-divider h5 text-white mb-0 justify-content-center">
+							<li class="nav-item">산</li>
+						</ul>
+					</div>
+				</div>
+				</div>
+
+				<!-- Search START -->
+				<div class="row mt-n4 mt-sm-n7">
+					<div class="col-11 mx-auto">
+
+						<!-- Booking from START -->
+						<div class="form-control-bg-light bg-mode border p-4 rounded-3">
+							<div class="row g-4">
+
+
+								<div class="col-lg-12">
+									<div class="tab-content mt-0" id="pills-tabContent">
+										<!-- One way tab START -->
+										<div class="tab-pane fade show active" id="cab-one-way" role="tabpanel"
+											aria-labelledby="cab-one-way-tab">
+											<form th:action="@{/bagpacking/mountain-list}" method="get" class="row g-4 align-items-center">
+												<div class="col-xl-10">
+													<div class="row g-4">
+														<!-- Pickup -->
+														<div class="col-md-6 col-xl-6">
+															<div class="form-size-lg">
+																<select class="form-select-custom me-4" id="sido" name="sido">
+																	<option value="">시/도 선택</option>
+																</select>
+																<select class="form-select-custom" id="gugun" name="gugun"></select>
+															</div>
+														</div>
+														<div class="col-md-6 col-xl-6">
+															<div class="form-size-lg">
+																<input class="form-control me-1 ps-2"
+																	type="text" data-bs-toggle="dropdown" placeholder="키워드" id="searchValue" name="searchValue" th:value="${param.searchValue}">
+															</div>
+														</div>
+													</div>
+												</div>
+
+												<div class="col-xl-2 d-grid mt-xl-auto">
+													<button type="submit" class="btn btn-primary-custom mb-0">검색</button>
+												</div>
+											</form>
+										</div>
+										<!-- One way tab END -->
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Booking from END -->
+					</div>
+				</div>
+				<!-- Search END -->
+			</div>
+		</section>
+		<!-- =======================Main Banner END -->
+
+		<!-- =======================Tour grid START -->
+		<section class="pt-0">
+			<div class="container">
+
+				<!-- Filter and content START -->
+				<div class="row g-4 align-items-center justify-content-between mb-4">
+					<!-- Content -->
+					<div class="col-12 col-xl-8">
+						<th:block th:if="${list == null}">
+							<h5 class="mb-0">총 데이터 수 0개</h5>
+						</th:block>
+						<th:block th:if="${list != null}">
+							<h5 class="mb-0">총 데이터 수 [[${bagpackingCount}]]개</h5>
+						</th:block>
+					</div>
+
+					<!-- Select option -->
+					<div class="col-xl-2">
+						<form class="form-control-bg-light">
+							<select class="form-select js-choice">
+								<option value="sortReadCount">조회순</option>
+								<option value="sortName">이름순</option>
+							</select>
+						</form>
+					</div>
+				</div>
+				<!-- Filter and content END -->
+
+				<div class="row g-4">
+					<th:block th:if="${list == null}">
+						<div>
+							<h6>조회된 글이 없습니다.</h6>
+						</div>
+					</th:block>
+					<th:block th:if="${list != null}">
+					<th:block th:each="content : ${list}">
+					<!-- Card item START -->
+					<div class="col-md-6 col-xl-4" >
+						<div class="card shadow-sm card-hover-shadow pb-0 h-100">
+							<!-- Overlay item -->
+							<div class="position-relative">
+								<!-- Image -->
+								<th:block th:if="${content.firstimage != ''}">
+									<img th:src="@{${content.firstimage}}" class="card-img-top" alt="Card image" style="height: 280px;">
+								</th:block>
+								<th:block th:if="${content.firstimage == ''}">
+									<img th:src="@{/assets/images/bagpacking/mountain.jpg}" class="card-img-top" alt="Card image" style="height: 280px;">
+								</th:block>
+								<!-- Overlay -->
+								<div class="card-img-overlay d-flex flex-column p-4 z-index-1">
+									<!-- Card overlay top -->
+									<div>
+										<span class="badge text-bg-dark">산</span>
+									</div>
+								</div>
+							</div>
+
+							<!-- Card body START -->
+							<div class="card-body px-3 hstack justify-content-between">
+								<!-- Title -->
+								<h5 class="card-title text-truncate mb-0 w-75"><a th:href="|/bagpacking/bagpacking-detail?contentId=${content.contentId}|"
+										class="stretched-link">[[${content.title}]]</a></h5>
+								<!-- Button -->
+								<div class="mt-2 mt-sm-0">
+									<a th:href="|/bagpacking/bagpacking-detail?contentId=${content.contentId}|" class="btn btn-sm btn-primary-custom mb-0">상세보기</a>
+								</div>
+							</div>
+							<!-- Card body END -->
+						</div>
+					</div>
+					</th:block>
+					</th:block>
+					<!-- Card item END -->
+				</div> <!-- Row END -->
+				
+				<!-- Pagination Start-->
+				<div class="row">
+					<div class="col-12">
+						<nav class="mt-4 d-flex justify-content-center" aria-label="navigation">
+							<ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+								<!--이전 페이지 -->
+								<li class="page-item mb-0">
+									<button class="page-link"
+										th:onclick="|movePage('/bagpacking/mountain-list?page=${pageInfo.prevPage}');|" tabindex="-1">
+										<i class="fa-solid fa-angle-left"></i>
+									</button>
+								</li>
+											
+								<!-- 10개 페이지 -->
+								<th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+									<th:block th:if="${status.current == pageInfo.currentPage}">
+										<li class="page-item mb-0">
+											<button class="page-link active" th:onclick="|movePage('/bagpacking/mountain-list?page=${status.current}');|" disabled>
+											[[${status.current}]]
+											</button>
+										</li>
+									</th:block>
+									<th:block th:if="${status.current != pageInfo.currentPage}">
+										<li class="page-item mb-0">
+											<button class="page-link" th:onclick="|movePage('/bagpacking/mountain-list?page=${status.current}');|">
+											[[${status.current}]]
+											</button>
+										</li>
+									</th:block>
+								</th:block>
+								
+								<!--다음 페이지 -->
+								<li class="page-item mb-0">
+									<button class="page-link" th:onclick="|movePage('/bagpacking/mountain-list?page=${pageInfo.nextPage}');|">
+										<i class="fa-solid fa-angle-right"></i>
+									</button>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<!-- Pagination END-->
+			</div>
+		</section>
+		<!-- =======================Tour grid END -->
+	</main>
+	<!-- **************** MAIN CONTENT END **************** -->
+
+	<!-- Back to top -->
+	<div class="back-top"></div>
+
+	<footer th:replace="~{common/layout :: #footer}"></footer>
+	
+	<!-- 도시 시군구 관련 -->
+	<script th:src="@{https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js}"></script>
+	<script th:src="@{/assets/js/location.js}"></script>
+	
+	<script th:src="@{/assets/vendor/nouislider/nouislider.min.js}"></script>
+	
+	<script type="text/javascript">
+	function movePage(pageUrl){
+		var searchValue = document.getElementById("searchValue"); // 갤럭시
+		var searchTypes = document.getElementsByName("searchType"); // title
+		var sido = document.getElementById("sido");
+		var gugun = document.getElementById("gugun");
+		var searchType = 'title';
+		
+		if(sido.selectd == true){
+			pageUrl = pageUrl + '&sido=' + sido.value; 
+		}
+		if(gugun.selectd == true){
+			pageUrl = pageUrl + '&gugun=' + gugun.value; 
+		}
+		if(searchValue.value.length > 0){
+			pageUrl = pageUrl + '&searchValue=' + searchValue.value; 
+		} 
+		
+		location.href = encodeURI(pageUrl);	
+	}
+	</script>
+	
+</body>
+</html>

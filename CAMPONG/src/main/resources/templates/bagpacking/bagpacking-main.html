@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+
+<body>
+	<header th:replace="~{common/layout :: #header}"></header>
+
+	<!-- **************** MAIN CONTENT START **************** -->
+	<main>
+		<section class="pt-8 pb-0">
+			<div class="container">
+				<div class="row mb-4">
+					<div class="col-8 text-center">
+						<h1>"백패킹"</h1>
+						<p class="h4 mt-8">1박 이상의 야영생활에 필요한 장비를 갖추고</p>
+						<p class="h4">떠나는 등짐 여행</p>
+						<p class="h4 mt-8">초보자가 갖춰야 될 필수 장비: </p>
+						<p class="h4">배낭, 텐트, 침낭, 바닥매트, 랜턴, 보조배터리</p>
+						<p class="h4">백패킹 매너:  머문 자리의 흔적을 남기지 않기</p>
+					</div>
+					<div class="col-4">
+						<img th:src="@{/assets/images/bagpacking/bagpacking-main.jpg}" alt="">
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<!-- =======================Special offer START -->
+		<section class="pb-0 mt-4">
+			<div class="container">
+				<!-- Title -->
+				<div class="row mb-4">
+					<div class="col-12 text-center">
+						<h2 class="mb-0">요즘 핫한 백패킹 명소</h2>
+					</div>
+				</div>
+		
+				<!-- Slider START -->
+				<div class="tiny-slider arrow-round arrow-blur arrow-hover">
+					<div class="tiny-slider-inner mb-8" data-autoplay="true" data-arrow="true" data-edge="2" data-dots="false" data-items-xl="3" data-items-lg="3" data-items-md="2" data-items-sm="1">
+						<th:block th:if="${bestList != null}">
+						<th:block th:each="content : ${bestList}">
+							<!-- Offer card START -->
+							<div>
+								<div class="card">
+								<th:block th:if="${content.firstimage != ''}">
+									<img th:src="@{${content.firstimage}}" class="card-img" alt="" style="height: 270px;">
+								</th:block>
+								<th:block th:if="${content.firstimage == ''}">
+									<img th:src="@{/assets/images/bagpacking/mountain.jpg}" class="card-img" alt="" style="height: 270px;">
+								</th:block>
+									<!-- Card body -->
+									<div class="position-absolute top-100 start-50 translate-middle w-100">
+										<div class="card-body text-center bg-mode shadow rounded mx-4 p-3">
+											<h6 class="card-title mb-1"><a th:href="|/bagpacking/bagpacking-detail?contentId=${content.contentId}|">[[${content.title}]]</a></h6>
+											<small>Valid through Dec 2022</small>
+											<div class="mt-2"><a th:href="|/bagpacking/bagpacking-detail?contentId=${content.contentId}|" class="btn btn-sm btn-dark mb-0">상세보기</a></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Offer card END -->
+						</th:block>
+						</th:block>
+						<th:block th:if="${bestList == null}">
+							<!-- Offer card START -->
+							<div>
+								<div class="card">
+									<img th:src="@{/assets/images/bagpacking/recomend1.jpg}" class="card-img" alt="">
+									<!-- Card body -->
+									<div class="position-absolute top-100 start-50 translate-middle w-100">
+										<div class="card-body text-center bg-mode shadow rounded mx-4 p-3">
+											<h6 class="card-title mb-1"><a th:href="@{#}">미래사 편백나무숲</a></h6>
+											<small>Valid through Dec 2022</small>
+											<div class="mt-2"><a th:href="@{#}" class="btn btn-sm btn-dark mb-0">상세보기</a></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Offer card END -->
+			
+							<!-- Offer card START -->
+							<div>
+								<div class="card">
+									<img th:src="@{/assets/images/bagpacking/recomend2.jpg}" class="card-img" alt="">
+									<!-- Card body -->
+									<div class="position-absolute top-100 start-50 translate-middle w-100">
+										<div class="card-body text-center bg-mode shadow rounded mx-4 p-3">
+											<h6 class="card-title mb-1"><a th:href="@{#}">흑산도</a></h6>
+											<small>Valid through Feb 2023</small>
+											<div class="mt-2"><a th:href="@{#}" class="btn btn-sm btn-dark mb-0">상세보기</a></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Offer card END -->
+			
+							<!-- Offer card START -->
+							<div>
+								<div class="card">
+									<img th:src="@{/assets/images/bagpacking/recomend3.jpg}" class="card-img" alt="">
+									<!-- Card body -->
+									<div class="position-absolute top-100 start-50 translate-middle w-100">
+										<div class="card-body text-center bg-mode shadow rounded mx-4 p-3">
+											<h6 class="card-title mb-1"><a th:href="@{#}">선운산</a></h6>
+											<small>Valid through Feb 2023</small>
+											<div class="mt-2"><a th:href="@{#}" class="btn btn-sm btn-dark mb-0">상세보기</a></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Offer card END -->
+			
+							<!-- Offer card START -->
+							<div>
+								<div class="card">
+									<img th:src="@{/assets/images/bagpacking/recomend4.jpg}" class="card-img" alt="">
+									<!-- Card body -->
+									<div class="position-absolute top-100 start-50 translate-middle w-100">
+										<div class="card-body text-center bg-mode shadow rounded mx-4 p-3">
+											<h6 class="card-title mb-1"><a th:href="@{#}">수락도</a></h6>
+											<small>Valid through Jan 2021</small>
+											<div class="mt-2"><a th:href="@{#}" class="btn btn-sm btn-dark mb-0">상세보기</a></div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Offer card END -->
+						</th:block>
+					</div>	
+				</div>
+				<!-- Slider END -->
+			</div>
+		</section>
+		<!-- =======================Special offer END -->
+		
+		<!-- =======================Bagpacking START -->
+		<section class="pt-0 pt-sm-5">
+			<div class="container">
+				<!-- Blog grid -->
+				<div class="row g-4">
+					<!-- Blog item START -->
+					<div class="col-md-4 col-lg-4">
+						<div class="card bg-transparent">
+							<h4 class="text-center mb-4">트래킹 명소 보러가기</h4>
+							<!-- Image -->
+							<div class="position-relative">
+								<a th:href="@{/bagpacking/mountain-list}" class="stretched-link">
+									<img th:src="@{/assets/images/bagpacking/tracking.jpg}" class="card-img" alt="" />
+									<!-- Badge -->
+									<div class="card-img-overlay p-3">
+										<p class="badge text-bg-dark mb-2">산</p>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<!-- Blog item END -->
+		
+					<!-- Blog item START -->
+					<div class="col-md-4 col-lg-4">
+						<div class="card bg-transparent">
+							<h4 class="text-center mb-4">섬 명소 보러가기</h4>
+							<!-- Image -->
+							<div class="position-relative">
+								<a th:href="@{/bagpacking/island-list}" class="stretched-link">
+									<img th:src="@{/assets/images/bagpacking/island.jpg}" class="card-img" alt="" />
+									<!-- Badge -->
+									<div class="card-img-overlay p-3">
+										<p class="badge text-bg-dark mb-2">섬</p>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<!-- Blog item END -->
+					
+					<!-- Blog item START -->
+					<div class="col-md-4 col-lg-4">
+						<div class="card h-100 bg-transparent">
+							<h4 class="text-center mb-4">낚시 명소 보러가기</h4>
+							<!-- Image -->
+							<div class="position-relative">
+								<a th:href="@{/bagpacking/fishing-list}" class="stretched-link">
+									<img th:src="@{/assets/images/bagpacking/fishing.jpg}" class="card-img" alt="" />
+									<!-- Badge -->
+									<div class="card-img-overlay p-3">
+										<p class="badge text-bg-dark mb-2">바다</p>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+					<!-- Blog item END -->
+				</div>
+			</div>
+		</section>
+		<!-- =======================Bagpacking END -->
+		
+		<section class="pt-0 pt-sm-5">
+			<div class="container">
+				<h1 class="text-danger text-center mb-4">조난시 대처법</h1>
+				<div class="row g-4">
+					<div class="col-6">
+						<img th:src="@{/assets/images/bagpacking/helicopter.jpg}" alt="">
+					</div>
+					<div class="col-6 text-center">
+						
+						<p class="h5 mt-6">지쳤거나 날이 어두워졌거나 악천후 등으로 등산을 계속하기 어려운 상황이라면 섣불리 움직이지 않는다.</p>
+						<p class="h5">스마트폰, 무전기, 랜턴 불, 연기 등 모든 방법을 동원해 구조요청을 한다. </p>
+		
+						<p class="h5 mt-6">구조대가 올 때까지 체온과 체력을 유지하는 게 가장 중요하다.</p>
+						<p class="h5">산행 전 가족이나 지인에게 산행 일정을 알려두면 조난당했을 때 구조에 결정적 도움이 된다. </p>
+					</div>
+				</div>
+			</div>
+		</section>
+		
+		<!-- Back to top -->
+		<div class="back-top"></div>
+	</main>
+	
+	<footer th:replace="~{common/layout :: #footer}"></footer>
+	
+	<script th:src="@{/assets/vendor/purecounterjs/dist/purecounter_vanilla.js}"></script>
+	<script th:src="@{/assets/vendor/jarallax/jarallax.min.js}"></script>
+	<script th:src="@{/assets/vendor/jarallax/jarallax-video.min.js}"></script>
+
+</body>
+</html>

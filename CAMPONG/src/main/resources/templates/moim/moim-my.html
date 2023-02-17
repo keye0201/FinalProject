@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<th:block th:replace="~{common/layout :: head}"></th:block>
+
+	<link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/aos/aos.css}">
+	<link rel="stylesheet" th:href="@{/assets/css/account-camping.css}">
+	<link rel="stylesheet" th:href="@{/assets/css/moim-my.css}">
+</head>
+
+<body>
+	<header th:replace="~{common/layout :: #header}"></header>
+	<main>
+		<section>
+			<div class="container mt-8 mb-8">
+				<div class="row">
+
+					<!-- Sidebar START -->
+					<div class="col-lg-4 col-xl-3">
+						<!-- Responsive offcanvas body START -->
+						<div class="offcanvas-lg offcanvas-end" tabindex="-1" id="offcanvasSidebar">
+							<!-- Offcanvas header -->
+							<div class="offcanvas-header justify-content-end pb-2">
+								<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+									data-bs-target="#offcanvasSidebar" aria-label="Close"></button>
+							</div>
+
+							<!-- Offcanvas body -->
+							<div class="offcanvas-body p-3 p-lg-0">
+								<div class="card bg-light w-100">
+
+									<!-- Card body START -->
+									<div class="card-body p-3">
+										<!-- Avatar and content -->
+										<div class="text-center mb-3">
+											<!-- Avatar -->
+											<div class="avatar avatar-xl mb-2">
+												<img class="avatar-img rounded-circle border border-2 border-white"
+													src="assets/images/account/01.jpg" alt="">
+											</div>
+											<h6 class="mb-0" th:text="${session.mvo.nickName}"></h6>
+											<hr>
+										</div>
+
+										<!-- Sidebar menu item START -->
+										<ul class="nav nav-pills-primary-soft flex-column">
+											<li class="nav-item">
+												<a class="nav-link" th:href="@{/myprofile(mNo=${session.mvo.mNo})}"><i
+														class="bi bi-person fa-fw me-2"></i>회원정보</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" href="shopping-basket.html"><i
+														class="bi bi-cart"></i>&nbsp&nbsp&nbsp장바구니</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" href="account-camping.html"><i
+														class="bi bi-bookmark"></i>&nbsp&nbsp&nbsp캠핑북마크</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link" href="account-traffic.html"><i
+														class="fa-solid fa-car"></i>&nbsp&nbsp&nbsp교통예약</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link  active" th:href="@{/moim.my(mNo=${session.mvo.mNo})}"><i
+														class="bi bi-chat-left-dots"></i>&nbsp&nbsp&nbsp내 모임</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link text-danger bg-danger-soft-hover"
+													href="index.html"><i
+														class="fas fa-sign-out-alt fa-fw me-2"></i>로그아웃</a>
+											</li>
+										</ul>
+										<!-- Sidebar menu item END -->
+									</div>
+									<!-- Card body END -->
+								</div>
+							</div>
+						</div>
+						<!-- Responsive offcanvas body END -->
+					</div>
+					<!-- Sidebar END -->
+
+					<!-- Main content START -->
+					<div class="col-lg-8 col-xl-9">
+
+						<!-- Offcanvas menu button -->
+						<div class="d-grid mb-0 d-lg-none w-100">
+							<button class="btn btn-primary mb-4" type="button" data-bs-toggle="offcanvas"
+								data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
+								<i class="fas fa-sliders-h"></i> Menu
+							</button>
+						</div>
+
+						<!-- Wishlist START -->
+						<div class="moimbox card border bg-transparent">
+							<!-- Card header -->
+							<div class="card-header bg-transparent border-bottom">
+								<h4 class="card-header-title">내모임</h4>
+							</div>
+
+
+							<!-- =======================Content START -->
+							<section class="pt-0">
+								<div class="container vstack gap-4">
+
+									<!-- Booking table START -->
+									<div class="row">
+										<div class="col-3">
+										</div>
+										<div class="col-12">
+											<div class="card">
+												<!-- Card body START -->
+												<div class="card-body">
+													<!-- Hotel room list START -->
+													<div class="table-responsive border-0">
+														<table class="table align-middle p-4 mb-0 table-hover table-shrink">
+															<!-- Table head -->
+															<thead class="table-light">
+																<tr>
+																	<th scope="col" class="border-0 ps-8 rounded-start" style="width: 40%;">모임명</th>
+																	<th scope="col" class="border-0 ps-5" style="width: 15%;">날짜</th>
+																	<th scope="col" class="border-0 ps-5" style="width: 12%;">명수</th>
+																	<th scope="col" class="border-0 ps-5" style="width: 18%;">비용</th>
+																	<th scope="col" class="action border-0 rounded-end pe-3" style="width: 15%; padding-left:0px;">자세히보기</th>
+																</tr>
+															</thead>
+
+															<!-- Table body START -->
+															<tbody class="border-top-0">
+																<!-- Table item -->
+																<tr  th:each="myMoim : ${myMoim}" th:if="${myMoim != ''}">
+																	<td>
+																		<h6 class="mb-0 text-center"><a href="#" th:text="${myMoim.title}" th:if="${myMoim.title !=null}">가평캠핑</a></h6>
+																	</td>
+																	<td class="text-center" th:text="${myMoim.endDate}"> 2023-02-04 </td>
+																	<td>
+																		<h6 class="mb-0 ms-4 fw-light text-center"  th:text="${myMoim.apes}" th:if="${myMoim.apes !=null}">10명</h6>
+																	</td>
+																	<td>
+																		<h6 class="mb-0 fw-light text-center"  th:text="${myMoim.expense}" th:if="${myMoim.expense !=null}">200000</h6>
+																	</td>
+																	<td> <a href="#"
+																			class="btn btn-sm btn-primary-soft mb-0" th:href="@{/moim.detail(meetNo=${myMoim.meetNo},mNo=${session.mvo.mNo})}">자세히보기</a>
+																	</td>
+																</tr>
+																
+															<!-- Table body END -->
+														</table>
+													</div>
+													<!-- Hotel room list END -->
+												</div>
+												<!-- Card body END -->
+											</div>
+										</div>
+									</div>
+									<!-- Booking table END -->
+								</div>
+								<!-- =======================Content END -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</main>
+
+	<!-- Back to top -->
+	<div class="back-top"></div>
+
+	<footer th:replace="~{common/layout :: #footer}"></footer>
+
+	<!-- Vendors -->
+	<script th:src="@{/assets/vendor/aos/aos.js}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.multi.campong.bagpacking.model.mapper.BagpackingMapper">
+
+	<resultMap type="Bagpacking" id="bagpackingListResultMap">
+		<id property="contentId" column="CONTENTID"/>
+		<result property="title" column="TITLE"/>
+		<result property="cat3" column="CAT3"/>
+		<result property="firstimage" column="FIRSTIMAGE"/>
+		<result property="mapx" column="MAPX"/>
+		<result property="mapy" column="MAPY"/>
+		<result property="addr1" column="ADDR1"/>
+		<result property="addr2" column="ADDR2"/>
+		<result property="readCount" column="READCOUNT"/>
+	</resultMap>
+	
+	<resultMap type="BagpackingReply" id="bagpackingReplyResultMap">
+		<id property="rNo" column="REPLY_NO"/>
+		<result property="contentId" column="CONTENTID"/>
+		<result property="mNo" column="USER_NO"/>
+		<result property="content" column="CONTENT"/>
+		<result property="status" column="STATUS"/>
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="nickName" column="NICKNAME"/>
+	</resultMap>
+	
+	<resultMap type="Bagpacking" id="bagpackingDetailResultMap" extends="bagpackingListResultMap">
+		<collection property="replyList" javaType="arrayList" columnPrefix="R_" 
+												resultMap="bagpackingReplyResultMap"/>
+	</resultMap>
+	
+	<resultMap type="Fishing" id="fishingListResultMap">
+		<id property="fishingNo" column="FISHING_NO"/>
+		<result property="fishingNm" column="FISHING_NM"/>
+		<result property="addr" column="ADDR"/>
+		<result property="latitude" column="LATITUDE"/>
+		<result property="longitude" column="LONGITUDE"/>
+		<result property="usecharge" column="USECHARGE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="species" column="SPECIES"/>
+	</resultMap>
+	
+	<resultMap type="FishingReply" id="fishingReplyResultMap">
+		<id property="rNo" column="REPLY_NO"/>
+		<result property="fishingNo" column="FISHING_NO"/>
+		<result property="mNo" column="USER_NO"/>
+		<result property="content" column="CONTENT"/>
+		<result property="status" column="STATUS"/>
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="nickName" column="NICKNAME"/>
+	</resultMap>
+	
+	<resultMap type="Fishing" id="fishingDetailResultMap" extends="fishingListResultMap">
+		<collection property="replyList" javaType="arrayList" columnPrefix="R_" 
+												resultMap="fishingReplyResultMap"/>
+	</resultMap>
+	
+	<select id="selectBagpackingBestList" resultMap="bagpackingListResultMap" parameterType="map">
+		(SELECT
+			DISTINCT CONTENTID, TITLE, CAT3, FIRSTIMAGE, MAPX, MAPY, ADDR1, ADDR2, READCOUNT
+		FROM MOUNTAINISLAND
+		WHERE CAT3 = 'A01010400'
+		ORDER BY FIRSTIMAGE='' ASC, READCOUNT DESC limit 3)
+		UNION
+		(SELECT
+			DISTINCT CONTENTID, TITLE, CAT3, FIRSTIMAGE, MAPX, MAPY, ADDR1, ADDR2, READCOUNT
+		FROM MOUNTAINISLAND
+		WHERE CAT3 = 'A01011300'
+		ORDER BY FIRSTIMAGE='' ASC, READCOUNT DESC limit 3)
+	</select>
+	
+	<select id="selectBagpackingList" resultMap="bagpackingListResultMap" parameterType="map">
+		SELECT
+			DISTINCT CONTENTID, TITLE, CAT3, FIRSTIMAGE, MAPX, MAPY, ADDR1, ADDR2, READCOUNT
+		FROM MOUNTAINISLAND
+		WHERE CAT3 = 'A01010400' 
+		<if test="title != null">
+			AND TITLE LIKE '%${title}%' 
+		</if>
+		<if test="sido != null">
+			AND ADDR1 LIKE '%${sido}%' 
+		</if>
+		<if test="gugun != null">
+			AND ADDR1 LIKE '%${gugun}%' 
+		</if>
+		<if test="sortReadCount != null">
+			ORDER BY FIRSTIMAGE='' ASC, READCOUNT DESC LIMIT ${limit} OFFSET ${offset}
+		</if>
+		<if test="sortReadCount == null">
+			ORDER BY FIRSTIMAGE='' ASC, READCOUNT DESC LIMIT ${limit} OFFSET ${offset}
+		</if>
+		<if test="sortName != null">
+			ORDER BY FIRSTIMAGE='' ASC, TITLE DESC LIMIT ${limit} OFFSET ${offset}
+		</if>
+	</select>
+	
+	<select id="selectBagpackingCount" resultType="int" parameterType="map">
+		SELECT
+			COUNT(DISTINCT CONTENTID)
+		FROM MOUNTAINISLAND
+		WHERE CAT3 = 'A01010400' 
+		<if test="title != null">
+			AND TITLE LIKE '%${title}%' 
+		</if>
+		<if test="sido != null">
+			AND ADDR1 LIKE '%${sido}%' 
+		</if>
+		<if test="gugun != null">
+			AND ADDR1 LIKE '%${gugun}%' 
+		</if>
+	</select>
+	
+	<select id="selectBagpackingByNo" resultMap="bagpackingDetailResultMap" parameterType="int">
+		SELECT  
+			B.CONTENTID, B.TITLE, B.CAT3, B.FIRSTIMAGE, B.MAPX, B.MAPY, B.ADDR1, B.ADDR2, B.READCOUNT,
+			R.REPLY_NO AS R_REPLY_NO, 
+		    R.CONTENTID AS R_CONTENTID,
+		    R.CONTENT AS R_CONTENT, 
+		    M.NICKNAME AS R_NICKNAME, 
+		    R.CREATE_DATE AS R_CREATE_DATE
+		FROM MOUNTAINISLAND B
+		LEFT OUTER JOIN MOUNTAINISLAND_REPLY R ON (B.CONTENTID = R.CONTENTID)
+		LEFT OUTER JOIN MEMBER M ON (R.USER_NO = M.USER_NO)
+		WHERE B.CONTENTID = #{contentId}
+	</select>
+	
+	<insert id="insertBagpackingReply" parameterType="BagpackingReply">
+		INSERT INTO MOUNTAINISLAND_REPLY(
+				REPLY_NO, CONTENTID, USER_NO, 
+				CONTENT, STATUS, CREATE_DATE) 
+			VALUES(
+				0, #{contentId}, #{mNo}, 
+				#{content}, DEFAULT, DEFAULT
+			)
+	</insert>
+	
+	<delete id="deleteBagpackingReply" parameterType="int">
+		DELETE FROM MOUNTAINISLAND_REPLY WHERE REPLY_NO=#{rNo}
+	</delete>
+	
+	<select id="selectIslandList" resultMap="bagpackingListResultMap" parameterType="map">
+		SELECT
+			DISTINCT CONTENTID, TITLE, CAT3, FIRSTIMAGE, MAPX, MAPY, ADDR1, ADDR2, READCOUNT
+		FROM MOUNTAINISLAND
+		WHERE CAT3 = 'A01011300' 
+		<if test="title != null">
+			AND TITLE LIKE '%${title}%' 
+		</if>
+		<if test="sido != null">
+			AND ADDR1 LIKE '%${sido}%' 
+		</if>
+		<if test="gugun != null">
+			AND ADDR1 LIKE '%${gugun}%' 
+		</if>
+		<if test="sortReadCount != null">
+			ORDER BY FIRSTIMAGE='' ASC, READCOUNT DESC LIMIT ${limit} OFFSET ${offset}
+		</if>
+		<if test="sortReadCount == null">
+			ORDER BY FIRSTIMAGE='' ASC, READCOUNT DESC LIMIT ${limit} OFFSET ${offset}
+		</if>
+		<if test="sortName != null">
+			ORDER BY FIRSTIMAGE='' ASC, TITLE DESC LIMIT ${limit} OFFSET ${offset}
+		</if>
+	</select>
+	
+	<select id="selectIslandCount" resultType="int" parameterType="map">
+		SELECT
+			COUNT(DISTINCT CONTENTID)
+		FROM MOUNTAINISLAND
+		WHERE CAT3 = 'A01011300' 
+		<if test="title != null">
+			AND TITLE LIKE '%${title}%' 
+		</if>
+		<if test="sido != null">
+			AND ADDR1 LIKE '%${sido}%' 
+		</if>
+		<if test="gugun != null">
+			AND ADDR1 LIKE '%${gugun}%' 
+		</if>
+	</select>
+	
+	<select id="selectFishingList" resultMap="fishingListResultMap" parameterType="map">
+		SELECT
+			DISTINCT FISHING_NO, FISHING_NM, ADDR, LATITUDE, LONGITUDE, USECHARGE, PHONE, SPECIES
+		FROM FISHING
+		WHERE 1 = 1
+		<if test="fishingNm != null">
+			AND FISHING_NM LIKE '%${fishingNm}%' 
+		</if>
+		<if test="sido != null">
+			AND ADDR LIKE '%${sido}%' 
+		</if>
+		<if test="gugun != null">
+			AND ADDR LIKE '%${gugun}%' 
+		</if>
+		ORDER BY PHONE='' ASC, LATITUDE='' ASC, LONGITUDE='' ASC LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	<select id="selectFishingCount" resultType="int" parameterType="map">
+		SELECT
+			COUNT(DISTINCT FISHING_NO)
+		FROM FISHING
+		WHERE 1 = 1
+		<if test="fishingNm != null">
+			AND FISHING_NM LIKE '%${fishingNm}%' 
+		</if>
+		<if test="sido != null">
+			AND ADDR LIKE '%${sido}%' 
+		</if>
+		<if test="gugun != null">
+			AND ADDR LIKE '%${gugun}%' 
+		</if>
+	</select>
+	
+	<select id="selectFishingByNo" resultMap="fishingDetailResultMap" parameterType="int">
+		SELECT
+			F.FISHING_NO, F.FISHING_NM, F.ADDR, F.LATITUDE, F.LONGITUDE, F.USECHARGE, F.PHONE, F.SPECIES,
+			R.REPLY_NO AS R_REPLY_NO,
+		    R.FISHING_NO AS R_FISHING_NO,
+		    R.CONTENT AS R_CONTENT,
+		    M.NICKNAME AS R_NICKNAME,
+		    R.CREATE_DATE AS R_CREATE_DATE
+		FROM FISHING F
+		LEFT OUTER JOIN FISHING_REPLY R ON (F.FISHING_NO = R.FISHING_NO)
+		LEFT OUTER JOIN MEMBER M ON (R.USER_NO = M.USER_NO)
+		WHERE F.FISHING_NO = #{fishingNo}
+	</select>
+	
+	<insert id="insertFishingReply" parameterType="FishingReply">
+		INSERT INTO FISHING_REPLY(
+				REPLY_NO, FISHING_NO, USER_NO, 
+				CONTENT, STATUS, CREATE_DATE) 
+			VALUES(
+				0, #{fishingNo}, #{mNo}, 
+				#{content}, DEFAULT, DEFAULT
+			)
+	</insert>
+	
+	
+	<!--메인에서 쓰는것  -->
+		<select id="selectByBackpacking" resultMap="bagpackingListResultMap" parameterType="String">
+			SELECT * FROM MOUNTAINISLAND WHERE ADDR1 LIKE '%서울%' AND LENGTH(FIRSTIMAGE)>4  ORDER BY RAND() LIMIT 4;
+		</select> 
+		<select id="selectByBackpacking2" resultMap="bagpackingListResultMap" parameterType="String">
+			SELECT * FROM MOUNTAINISLAND WHERE ADDR1 LIKE '%${idCheck}%' AND LENGTH(FIRSTIMAGE)>4  ORDER BY RAND() LIMIT 4;
+		</select> 
+		
+	<!-- 메인에서 쓰는것끝 -->
+	
+	<delete id="deleteFishingReply" parameterType="int">
+		DELETE FROM FISHING_REPLY WHERE REPLY_NO=#{rNo}
+	</delete>
+	
+<!-- 	<update id="updateReadCount" parameterType="map"> -->
+<!-- 		UPDATE MOUNTAINISLAND SET READCOUNT=#{readCount} WHERE CONTENTID = #{contentId} -->
+<!-- 	</update> -->
+</mapper>

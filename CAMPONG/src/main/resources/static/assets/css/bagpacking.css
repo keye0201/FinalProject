@@ -1,0 +1,70 @@
+.btn-primary-custom {
+    --bs-btn-color: #fff;
+    --bs-btn-bg: #019267;
+    --bs-btn-border-color: #019267;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: #4539b8;
+    --bs-btn-hover-border-color: #4136ae;
+    --bs-btn-focus-shadow-rgb: 107, 95, 223;
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #4136ae;
+    --bs-btn-active-border-color: #3d32a3;
+    --bs-btn-active-shadow: none;
+    --bs-btn-disabled-color: #fff;
+    --bs-btn-disabled-bg: #5143d9;
+    --bs-btn-disabled-border-color: #5143d9;
+  }
+
+  .pagination-primary-soft .page-item.page-item.active .page-link {
+    color: #fff;
+    background-color: var(--cp-green);
+  }
+
+  .form-select-custom {
+    display: inline-block;
+    width: 45%;
+    padding: 0.5rem 2.25rem 0.5rem 1rem;
+    -moz-padding-start: calc(1rem - 3px);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-gray-900);
+    background-color: #f5f5f6;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23747579' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #f5f5f6;
+    border-radius: 0.5rem;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    -webkit-appearance: none;
+       -moz-appearance: none;
+            appearance: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .form-select-custom {
+      -webkit-transition: none;
+      transition: none;
+    }
+  }
+  .form-select-custom:focus {
+    border-color: rgba(var(--bs-primary-rgb), 0.7);
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 0 rgba(var(--bs-primary), 0.25);
+            box-shadow: 0 0 0 0 rgba(var(--bs-primary), 0.25);
+  }
+  .form-select-custom[multiple], .form-select-custom[size]:not([size="1"]) {
+    padding-right: 1rem;
+    background-image: none;
+  }
+  .form-select-custom:disabled {
+    background-color: #e9ecef;
+    border-color: #ced4da;
+  }
+  .form-select-custom:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 var(--bs-gray-900);
+  }

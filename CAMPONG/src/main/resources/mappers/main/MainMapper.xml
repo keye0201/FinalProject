@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.campong.main.model.mapper.MainMapper">
+
+
+<resultMap type="Camping" id="campingResultMap">
+		<id property="contentId" column="CONTENTID"/>
+		<result property="facltNm" column="FACLTNM"/>
+		<result property="donm" column="DONM"/>
+		<result property= "firstImageURL" column= "FIRSTIMAGEURL"/>
+</resultMap>
+
+<select id="selectByDONM" resultType="Camping" parameterType="String">
+	SELECT * FROM CAMPING_CONTENTS WHERE DONM LIKE CONCAT('%',"서울",'%')  AND LENGTH(FIRSTIMAGEURL)>4 ORDER BY RAND() LIMIT 4;
+</select>
+
+<select id="selectByDONM2" resultType="Camping" parameterType="String">
+	SELECT * FROM CAMPING_CONTENTS WHERE DONM LIKE '%${idCheck}%' AND LENGTH(FIRSTIMAGEURL)>4  ORDER BY RAND() LIMIT 4;
+</select> 
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

@@ -1,0 +1,46 @@
+/*상단*/
+/*포스터*/
+.bih-i-1{
+  margin: auto;
+  display: block;
+  width: 700px;
+  padding-top: 100px;
+  padding-bottom: 50px;
+}
+/*제목div*/
+.bih-d-1{
+  margin: auto;
+  display: block;
+  width: 1000px;
+}
+/*잔디*/
+.bih-i-2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bih-i-3{
+  z-index: -1;
+  position:absolute;
+  display: block;
+  width: 1400px;
+  margin-top: -450px;
+}
+
+/*중간*/
+.bih-s-1{
+  margin-top: -180px;
+}
+.bih-f-1{
+  font-size: 22px;
+  list-style: none;
+  padding-left: 0px;
+  color: black;
+}
+.bih-f-1 > li{
+  margin-top: 10px;
+} 
+/*유사행사*/
+.bih-s-2{
+  margin-top: -70px;
+}

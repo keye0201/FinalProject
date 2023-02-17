@@ -1,0 +1,45 @@
+.login {
+    padding-right:250px;
+}
+.p-4 {
+    width:800px;
+}
+.email-two {
+    display: inline-block;
+    width: 300px;
+    height: 42px;
+    border-radius:0.5rem;
+    border: 1px solid var(--bs-gray-300);
+}
+.email_select {
+    display:inline-block;
+    width:300px;
+    height:42px;
+    border-radius: 0.5rem;
+    border: 1px solid var(--bs-gray-300);
+    appearance:none
+}
+.select-email {
+    margin-left:65px;
+}
+.birth {
+    display: block;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-gray-900);
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: 1px solid var(--bs-gray-300);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.5rem;
+}
+.hi {
+    width: 23px;
+    height: 23px;
+    margin-right:10px;
+}

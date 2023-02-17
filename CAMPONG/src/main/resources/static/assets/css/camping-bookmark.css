@@ -1,0 +1,80 @@
+
+.order {
+    border-color:white;
+    background-color:rgb(86, 182, 86);
+    color:white;
+    border-radius:3px;
+}
+.jumun {
+    text-align: center;
+    width: 600px;
+    margin:auto;
+}
+.go-shopping {
+    width:200px;
+    height:50px;
+    background-color:white;
+    border:1px solid gray;
+}
+.go-order {
+    width:200px;
+    height:50px;
+    color:white;
+    background-color:#03c75a;
+    border: 1px solid gray;
+}
+.item {
+    padding-left : 0px;
+    padding-right:0px;
+    border:1px solid rgb(235, 223, 223);
+    width:254px;
+}
+.item-image {
+    width:253px;
+}
+.alll {
+    color:black;
+    display: inline-flex;
+    font-size: 1.2rem;
+    padding-left: 0.3rem;
+}
+.delete {
+    font-size:15px;
+    margin-top:5px;
+    height:25px;
+    background-color:red;
+    color:white;
+    border: 1px solid rgb(192, 140, 140);
+    margin-bottom:5px;
+}
+.check-all {
+    margin-left:3px;
+}
+.item-box{
+    display:inline-block;
+}
+.goWatch {
+    text-align:center;
+    display:inline-block;
+    color:#8160c7;
+    margin: 0.5rem 0;
+}
+
+.btnGo {
+    margin-left: 5.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color:#9D7EE0;
+    padding: 5px 10px;
+    background-color: rgba(157, 126, 224, 0.1);
+    border-radius: 10px;
+}
+
+.btnGo:hover {
+    color:#8160c7;
+    background-color: rgba(157, 126, 224, 0.3);
+}
+
+.remove {
+    margin-right :25px;
+}

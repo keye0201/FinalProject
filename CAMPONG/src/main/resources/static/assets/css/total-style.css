@@ -1,0 +1,227 @@
+
+:root {
+  --bs-campong-green: #019267;
+  --bs-campong-violet: #9D7EE0;
+  --bs-campong-grhover: #006647;
+  --bs-campong-vlhover: #8160c7;
+  --bs-campong-green-rgb: 1, 146, 103;
+  --bs-campong-violet-rgb: 157, 126, 224;
+  --bs-campong-font: 'SUIT Variable', sans-serif;
+}
+
+/* 폰트  */
+* {
+  font-family: 'SUIT Variable', sans-serif;
+}
+
+h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
+  font-family: var(--bs-campong-font);
+}
+
+a {
+  color: var(--bs-campong-violet) ;
+  text-decoration: none;
+}
+a:hover {
+  color: var(--bs-campong-vlhover);
+}
+
+.form-label {
+    color: #000;
+    font-weight: 800;
+    font-size: 1.4rem;
+}
+
+.subtitle {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* 색만 변경한 서브타이틀 */
+.changesub {
+  color: var(--bs-campong-green) !important;
+  font-size: 1.4rem;
+}
+
+.submenu:hover,
+.submenu:focus,
+.submenu:disabled {
+    color: var(--bs-campong-grhover) !important;
+    background-color: rgba(0, 102, 71, 0.1) !important;
+}
+
+.nav-pills-primary-soft .nav-link.active, .nav-pills-primary-soft .nav-link:hover {
+  color: var(--bs-campong-grhover);
+  background-color: rgba(var(--bs-campong-green-rgb), 0.1);
+}
+
+/* 중간 타이틀 */
+.stretched-link:hover {
+  color: var(--bs-campong-green) !important;
+}
+
+.card-title:hover {
+  color: var(--bs-campong-grhover);
+}
+
+/* 버튼 */
+.btn-primary {
+  --bs-btn-bg: #9D7EE0;
+  --bs-btn-border-color: #9D7EE0;
+  --bs-btn-hover-bg: #8160c7;
+  --bs-btn-hover-border-color: #8160c7;
+  --bs-btn-active-bg: #8160c7;
+  --bs-btn-active-border-color: #8160c7;
+  --bs-btn-disabled-bg: #9D7EE0;
+  --bs-btn-disabled-border-color: #9D7EE0;
+}
+
+.search-btn {
+  --bs-btn-bg: #019267;
+  --bs-btn-border-color: #019267;
+  --bs-btn-hover-bg: #006647;
+  --bs-btn-hover-border-color: #006647;
+  --bs-btn-active-bg: #006647;
+  --bs-btn-active-border-color: #006647;
+  --bs-btn-disabled-bg: #019267;
+  --bs-btn-disabled-border-color: #019267;
+}
+
+
+/* index 행사보러가기 */
+.btn-primary-soft {
+  color: #8160c7;
+  background-color: rgba(var(--bs-campong-violet-rgb), 0.1);
+}
+
+.btn-primary-soft:active,
+.btn-primary-soft:hover,
+.btn-primary-soft:focus {
+  color: #fff;
+  background-color: #8160c7;
+  border-color: #8160c7;
+}
+
+.btn-apply {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--bs-campong-green);
+  --bs-btn-border-color: var(--bs-campong-green);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #00714f;
+  --bs-btn-hover-border-color: #00714f;
+  --bs-btn-focus-shadow-rgb: 48, 47, 54;
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #00714f;
+  --bs-btn-active-border-color: #00714f;
+  --bs-btn-active-shadow: none;
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: var(--bs-campong-green);
+  --bs-btn-disabled-border-color: var(--bs-campong-green);
+}
+
+/* 가입 & 로그인 */
+.hi {
+  width: 23px;
+  height: 23px;
+  margin-right:10px;
+}
+
+.sign-title {
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* 게시판 버튼 */
+.modify-btn {
+color: #fff;
+background-color: #019267 !important;
+}
+
+
+/* 페이징 */
+.page-link:hover {
+  background-color: var(--bs-campong-green) !important;
+  border-color: var(--bs-campong-green) !important;
+}
+
+.page-link:focus {
+  color: var(--bs-campong-green) !important;
+  background-color: var(--bs-campong-green) !important;
+}
+
+.page-link.active,
+.active>.page-link {
+  background-color: var(--bs-campong-green) !important;
+  border-color: var(--bs-campong-green) !important;
+}
+
+
+/* 올라가기 버튼 */
+.back-top {
+  background-color: var(--bs-campong-green);
+}
+
+.back-top:hover {
+  background: var(--bs-campong-grhover);
+  color: #fff;
+}
+
+.header-transparent {
+    background-color: rgba(0, 0, 0, 0.5);
+    background-size: cover;
+}
+
+
+/* 헤더 css */
+/* 사진 없는 헤더 */
+.header-nophoto {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.header-photo {
+  padding-top: 14rem;
+  padding-bottom: 14rem;
+}
+
+.container .nav-item .nav-item #nickname {
+    color: black;
+    font-family: var(--bs-body-font-family);
+}
+
+.navbar-collapse .navbar-nav .nav-item #listingMenu {
+    color: white;
+    font-weight: bold;
+}
+
+.nav .nav .nav-item .nav-item #nickname {
+    color: black;
+}
+
+.nav-item {
+    font-size: 20px;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+    color: var(--bs-campong-grhover);
+    background-color: rgba(0, 102, 71, 0.1);
+}
+/* 헤더 css 끝 */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

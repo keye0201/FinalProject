@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.campong.member.model.mapper.MemberMapper">
+
+	<resultMap type="com.multi.campong.member.model.vo.Member" id="memberMap">
+		<id 	property="mNo" 		column="USER_NO" />
+		<result property="id" 		column="ID" />
+		<result property="password" column="PASSWORD" />
+		<result property="birthYear" column="BIRTHYEAR" />
+		<result property="role" 	column="ROLE" />
+		<result property="nickName" 	column="NICKNAME" />
+		<result property="phone" 	column="PHONE" />
+		<result property="email1" 	column="EMAIL1" />
+		<result property="email2" 	column="EMAIL2" />
+		<result property="address" 	column="ADDRESS" />
+		<result property="status" 	column="STATUS" />
+		<result property="kakaoToken" 	column="KAKAOTOKEN" />
+		<result property="enrollDate" column="ENROLL_DATE" />
+		<result property="modifyDate" column="MODIFY_DATE" />
+	</resultMap>
+
+
+	<select id="registerCheck" resultMap="memberMap">
+		select * from MEMBER where ID=#{id}
+	</select>
+	
+		<select id="registerCheckName" resultMap="memberMap">
+		select * from MEMBER where NICKNAME=#{nickName}
+	</select>
+	
+	<!-- <insert id="register" parameterType="com.multi.campong.member.vo.Member">
+		insert into
+		(ID,PASSWORD,BIRTHYEAR,NICKNAME,PHONE,EMAIL1,EMAIL2,ADDRESS) values
+		(#{id},#{password},#{birthYear},#{name},#{phone},#{email1},#{email2},#{address})
+	</insert> -->
+		<insert id="register" parameterType="com.multi.campong.member.model.vo.Member">
+		INSERT INTO MEMBER(
+			USER_NO, ID, PASSWORD, 	
+			BIRTHYEAR, NICKNAME, PHONE,ROLE,
+			EMAIL1, EMAIL2,ADDRESS,KAKAOTOKEN,	
+			STATUS, ENROLL_DATE, MODIFY_DATE
+		) VALUES (
+			 0, #{id}, #{password},
+			 #{birthYear}, #{nickName}, #{phone},
+			 DEFAULT,
+			 #{email1},#{email2}, #{address},DEFAULT,
+			 DEFAULT, DEFAULT, DEFAULT)
+		</insert>
+		<select id="login" parameterType="com.multi.campong.member.model.vo.Member" resultMap="memberMap">
+		select * from MEMBER where ID=#{id} and PASSWORD=#{password}
+		</select>
+	
+		<select id="selectMemberByMno" resultMap="memberMap">
+		select * from member where USER_NO =#{mNo}
+		</select>
+		
+		
+	 
+		 <delete id="deleteMember" parameterType="int">
+		 	DELETE FROM MEMBER WHERE USER_NO =#{mNo}
+		 </delete>
+
+
+
+
+
+
+
+
+
+</mapper>

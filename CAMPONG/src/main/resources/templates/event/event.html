@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:replace="~{common/layout :: head}"></th:block>
+</head>
+
+<body>
+	<header th:replace="~{common/layout :: #header}"></header>
+
+	<!-- **************** MAIN CONTENT START **************** -->
+	<main>
+		<!-- =======================Main banner START -->
+		<section class="position-relative py-4 pt-8">
+			<!-- Background dark overlay -->
+			<div class="container z-index-9 position-relative">
+				<div class="row py-sm-5">
+					<!-- Title -->
+					<div class="col-xl-8 m-auto text-center">
+						<h1>이번 캠핑 더 즐겁고 싶다면<br>
+							<span class="position-relative z-index-9">행사 둘러보기
+								<!-- SVG START -->
+								<span class="position-absolute top-50 start-50 translate-middle z-index-n1 d-none d-sm-block">
+									<svg class="fill-info" width="356.55px" height="79.36px" viewBox="0 0 356.55 79.36">
+										<path d="M0,56.76c13.15-11.68,37.75-14.87,47.45-15.62c20.85-1.62,41.75,1.22,62.2,5.16c43.41,8.37,85.85,20.68,129.83,26.22 c21.05,2.65,42.12,3.47,62.96-1.21c18.31-4.11,38.98-12.97,47.7-30.8C360.39,19.59,342.4,5,322.82,2.25 c-18.69-2.62-37.64,3.81-53.23,13.85c-2.82,1.82-5.87,4.32-8.53,5.85c12.91-10.62,28.31-18.89,45.01-21.3 c17.11-2.48,43.7,1.69,49.46,21.27c5.65,19.17-13.23,36.76-28.31,44.63c-18.02,9.41-39.47,13-59.65,12.81 c-44.06-0.42-88.81-11.18-131.38-21.67C97.79,48.21,42.36,30.73,0,56.76z"/>
+									</svg>
+								</span>
+							<!-- SVG END -->
+							</span>
+						</h1>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="pt-4 pt-sm-5" style="margin-top:-70px;">
+			<!-- Image -->
+			<div class="container-fluid overflow-hidden">
+				<div class="row g-4 g-lg-3 justify-content-lg-between">
+					<div class="col-6 col-sm-4 position-relative ms-lg-n5">
+						<!-- Images -->
+						<div class="row g-xl-7 align-items-center">
+							<div class="col-6 d-none d-md-block">
+								<a data-glightbox data-gallery="gallery"
+									th:href="@{https://m.cjone.com/cjmweb/upfile/2021/06/22/m_subscribe01_sns20210614.jpg}">
+									<div
+										class="card card-element-hover card-overlay-hover overflow-hidden">
+										<!-- Image -->
+										<img
+											src="https://m.cjone.com/cjmweb/upfile/2021/06/22/m_subscribe01_sns20210614.jpg"
+											class="rounded-3" alt="">
+										<!-- Full screen button -->
+										<div class="hover-element w-100 h-100">
+											<i
+												class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-md-6 mt-lg-8">
+								<!-- Image item -->
+								<a data-glightbox data-gallery="gallery"
+									th:href="@{https://www.ht.co.kr:442/event/202010_IceCamping/img/event_main_01.png}">
+									<div
+										class="card card-element-hover card-overlay-hover overflow-hidden mb-4 mb-xl-7">
+										<!-- Image -->
+										<img
+											src="https://www.ht.co.kr:442/event/202010_IceCamping/img/event_main_01.png"
+											class="rounded-3" alt="">
+										<!-- Full screen button -->
+										<div class="hover-element w-100 h-100">
+											<i
+												class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
+										</div>
+									</div>
+								</a>
+
+								<!-- Image item -->
+								<a data-glightbox data-gallery="gallery"
+									th:href="@{/assets/images/event/camping1.jpg}">
+									<div
+										class="card card-element-hover card-overlay-hover overflow-hidden">
+										<!-- Image -->
+										<img
+											th:src="@{/assets/images/event/camping1.jpg}"
+											class="rounded-3" alt="">
+										<!-- Full screen button -->
+										<div class="hover-element w-100 h-100">
+											<i
+												class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+
+					<!-- Image -->
+					<div
+						class="col-sm-4 position-relative order-2 order-sm-1 z-index-9">
+						<!-- Image item -->
+						<a data-glightbox data-gallery="gallery"
+							th:href="@{https://365campingcity.com/rankup_module/rankup_board/attach/board2/14936965550475.jpg}">
+							<div
+								class="card card-element-hover card-overlay-hover overflow-hidden">
+								<!-- Image -->
+								<img
+									src="https://365campingcity.com/rankup_module/rankup_board/attach/board2/14936965550475.jpg"
+									class="rounded-3" alt="">
+								<!-- Full screen button -->
+								<div class="hover-element w-100 h-100">
+									<i
+										class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
+								</div>
+							</div>
+						</a>
+					</div>
+
+					<div class="col-6 col-sm-4 position-relative me-lg-n5 order-1">
+
+						<div class="row g-xl-7 position-relative">
+							<div class="col-md-6 mt-lg-8">
+								<!-- Image item -->
+								<a data-glightbox data-gallery="gallery"
+									th:href="@{https://cdn.newsfs.com/news/photo/201606/11705_9222_4149.jpg}">
+									<div
+										class="card card-element-hover card-overlay-hover overflow-hidden mb-4 mb-xl-7">
+										<!-- Image -->
+										<img
+											src="https://cdn.newsfs.com/news/photo/201606/11705_9222_4149.jpg"
+											class="rounded-3" alt="">
+										<!-- Full screen button -->
+										<div class="hover-element w-100 h-100">
+											<i
+												class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
+										</div>
+									</div>
+								</a>
+
+								<!-- Image item -->
+								<a data-glightbox data-gallery="gallery"
+									th:href="@{https://image.newdaily.co.kr/site/data/img/2018/10/05/2018100500009_0.jpg}">
+									<div
+										class="card card-element-hover card-overlay-hover overflow-hidden">
+										<!-- Image -->
+										<img
+											src="https://image.newdaily.co.kr/site/data/img/2018/10/05/2018100500009_0.jpg"
+											class="rounded-3" alt="">
+										<!-- Full screen button -->
+										<div class="hover-element w-100 h-100">
+											<i
+												class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
+										</div>
+									</div>
+								</a>
+							</div>
+							<div class="col-6 d-none d-md-block">
+								<!-- Image item -->
+								<a data-glightbox data-gallery="gallery"
+									th:href="@{https://maro.imhc.or.kr/other/editor_dn.php?w=qsWXOi%2FPCSh5LEZDB6oc%2Bw%3D%3D&s=3l6p%2BS4%2F0Hbn1U1TXUD9toDm4C2FnTenKXS%2BY7DXPpE%3D}">
+									<div
+										class="card card-element-hover card-overlay-hover overflow-hidden mb-4 mb-xl-7">
+										<!-- Image -->
+										<img
+											src="https://maro.imhc.or.kr/other/editor_dn.php?w=qsWXOi%2FPCSh5LEZDB6oc%2Bw%3D%3D&s=3l6p%2BS4%2F0Hbn1U1TXUD9toDm4C2FnTenKXS%2BY7DXPpE%3D"
+											class="rounded-3" alt="">
+										<!-- Full screen button -->
+										<div class="hover-element w-100 h-100">
+											<i
+												class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
+										</div>
+									</div>
+								</a>
+
+								<!-- Image item -->
+								<a data-glightbox data-gallery="gallery"
+									th:href="@{https://t1.daumcdn.net/cfile/tistory/22313E375922D3622C}">
+									<div
+										class="card card-element-hover card-overlay-hover overflow-hidden">
+										<!-- Image -->
+										<img
+											src="https://t1.daumcdn.net/cfile/tistory/22313E375922D3622C"
+											class="rounded-3" alt="">
+										<!-- Full screen button -->
+										<div class="hover-element w-100 h-100">
+											<i
+												class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+					</div>
+
+				</div>
+				<!-- Row END -->
+			</div>
+		</section>
+		<!-- =======================Main banner END -->
+
+		<section class="mt-0 p-0">
+			<div class="container">
+				<!-- Search START -->
+				<div class="col-xl-7 mx-auto">
+					<div
+						class="bg-blur bg-white bg-opacity-10 border border-light border-opacity-25 rounded-3 p-4 mb-4">
+						<!-- Form START -->
+						<form th:action="@{/event/event}" method="GET" class="row g-3 justify-content-center align-items-center">
+							<div class="col-lg-10">
+								<!-- Input -->
+								<div class="form-input-dropdown position-relative">
+									<input class="form-control form-control-lg me-1 ps-5"
+										type="text" placeholder="행사를 검색하세요" id="searchValue" name="searchValue" th:value="${param.searchValue}">
+									<!-- Icon -->
+									<span class="position-absolute top-50 start-0 translate-middle ps-5"><i class="bi bi-search fs-5"></i></span>
+								</div>
+							</div>
+
+							<div class="col-lg-2 d-grid">
+								<!-- Search -->
+								<button type="submit" class="btn btn-lg btn-primary mb-0">검색</button>
+							</div>
+						</form>
+						<!-- Form END -->
+					</div>
+				</div>
+				<!-- Search END -->
+			</div>
+		</section>
+		<!-- =======================
+Main Banner END -->
+
+		<!-- =======================
+Tour grid START -->
+		<section class="pt-0">
+			<div class="container">
+				<div class="row g-4">
+					<th:block th:if="${list == null}">
+						<div>
+							<h6>조회된 글이 없습니다.</h6>
+						</div>
+					</th:block>
+					<th:block th:if="${list != null}">
+					<th:block th:each="content : ${list}">
+					<!-- Card item START 1 -->
+					<div class="col-md-6 col-xl-4">
+						<div class="card card-hover-shadow pb-0 h-100">
+							<!-- Overlay item -->
+							<div class="position-relative" style="overflow:hidden;margin:0 auto; width:380px; height:550px;">
+								<!-- Image -->
+								<th:block th:if="${content.firstimage != ''}">
+									<img th:src="@{${content.firstimage}}" class="card-img-top event-list" style="object-fit: cover; width:100%; height:100%;" alt="Card image">
+								</th:block>
+								<th:block th:if="${content.firstimage == ''}">
+									<img th:src="@{/assets/images/event/준비중.jpg}" class="card-img-top event-list" style="object-fit: cover; width:100%; height:100%;" alt="Card image">
+								</th:block>
+								<!-- Overlay -->
+								<div class="card-img-overlay d-flex flex-column p-4 z-index-1"></div>
+							</div>
+
+							<!-- Card body START -->
+							<div class="card-body px-3">
+								<!-- Title -->
+								<h5 class="card-title mb-0">
+									<a th:href="@{|/event/event-detail?id=${content.contentId}|}" class="stretched-link">[[${content.title}]]</a>
+								</h5>
+								<th:block th:if="${content.addr1 != ''}">
+									<span class="small"><i class="fa fa-map-marker-alt me-2"></i>[[${content.addr1}]]</span><br />
+								</th:block>
+								<th:block th:if="${content.addr1 == ''}">
+									<span class="small"><i class="fa fa-map-marker-alt me-2"></i>주소가 제공되지 않습니다</span><br />
+								</th:block>
+								<span class="small"><i class="far fa-calendar-alt me-2"></i>[[${content.eventstartDate}]] ~ [[${content.eventendDate}]]</span>
+
+							</div>
+							<!-- Card body END -->
+
+							<!-- Card footer START-->
+							<div class="card-footer pt-0">
+								<!-- Price and Button -->
+								<div
+									class="d-sm-flex justify-content-end align-items-center flex-wrap">
+									<!-- Button -->
+									<div class="mt-2 mt-sm-0">
+										<a href="#" class="btn btn-sm btn-primary mb-0">자세히보기</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!-- Card item END -->
+
+
+				</div>
+				<!-- Row END -->
+
+				<!-- 페이징 -->
+				<div class="row" style="margin-top:50px; margin-bottom:50px;">
+					<div class="col-12">
+						<nav class="mt-4 d-flex justify-content-center" aria-label="navigation">
+							<ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+								<!--이전 페이지 -->
+								<li class="page-item mb-0">
+									<button class="page-link"
+										th:onclick="|movePage('/event/event?page=${pageInfo.prevPage}');|" tabindex="-1">
+										<i class="fa-solid fa-angle-left"></i>
+									</button>
+								</li>
+											
+								<!-- 10개 페이지 -->
+								<th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+									<th:block th:if="${status.current == pageInfo.currentPage}">
+										<li class="page-item mb-0">
+											<button class="page-link active" th:onclick="|movePage('/event/event?page=${status.current}');|" disabled>
+											[[${status.current}]]
+											</button>
+										</li>
+									</th:block>
+									<th:block th:if="${status.current != pageInfo.currentPage}">
+										<li class="page-item mb-0">
+											<button class="page-link" th:onclick="|movePage('/event/event?page=${status.current}');|">
+											[[${status.current}]]
+											</button>
+										</li>
+									</th:block>
+								</th:block>
+								
+								<!--다음 페이지 -->
+								<li class="page-item mb-0">
+									<button class="page-link" th:onclick="|movePage('/event/event?page=${pageInfo.nextPage}');|">
+										<i class="fa-solid fa-angle-right"></i>
+									</button>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+				<!-- Pagination END-->
+			</div>
+		</section>
+
+
+	</main>
+	<!-- **************** MAIN CONTENT END **************** -->
+
+	<!-- =======================Footer START -->
+	<footer th:replace="~{common/layout :: #footer}"></footer>
+
+	<!-- Back to top -->
+	<div class="back-top"></div>
+
+
+	<!-- Bootstrap JS -->
+	<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Vendors -->
+	<script src="assets/vendor/glightbox/js/glightbox.js"></script>
+	<script src="assets/vendor/flatpickr/js/flatpickr.min.js"></script>
+	<script src="assets/vendor/choices/js/choices.min.js"></script>
+	<script src="assets/vendor/nouislider/nouislider.min.js"></script>
+
+	<!-- ThemeFunctions -->
+	<script src="assets/js/functions.js"></script>
+
+	<!-- 페이지 -->
+	<script type="text/javascript">
+	function movePage(pageUrl){
+		var searchValue = document.getElementById("searchValue"); // 갤럭시
+		var searchTypes = document.getElementsByName("searchType"); // title
+		//var sido = document.getElementById("sido");
+		//var gugun = document.getElementById("gugun");
+		var searchType = 'title';
+		
+		pageUrl = pageUrl + '&searchValue=' + searchValue.value; 
+		
+		location.href = encodeURI(pageUrl);	
+	}
+	</script>
+	
+	
+
+</body>
+</html>

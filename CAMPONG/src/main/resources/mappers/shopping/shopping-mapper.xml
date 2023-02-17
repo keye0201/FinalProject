@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.multi.campong.shop.model.mapper.ShoppingMapper">
+
+	<resultMap type="Shopping" id="shoppingListResultMap">
+		<id property="pno" column="PNO" />
+		<!-- <id property="productId" column="PRODUCTID"/> -->
+		<result property="productId" column="PRODUCTID" />
+		<result property="title" column="TITLE" />
+		<result property="link" column="LINK" />
+		<result property="image" column="IMAGE" />
+		<result property="lprice" column="LPRICE" />
+		<result property="hprice" column="HPRICE" />
+		<result property="brand" column="BRAND" />
+		<result property="category2" column="CATEGORY2" />
+		<result property="category3" column="CATEGORY3" />
+	</resultMap>
+
+	<select id="selectShoppingList" resultMap="shoppingListResultMap" parameterType="map">
+		SELECT DISTINCT PNO, PRODUCTID, TITLE, LINK, IMAGE, LPRICE, HPRICE, BRAND, CATEGORY2, CATEGORY3
+		FROM SHOP
+		WHERE CATEGORY2 = '캠핑'
+		<if test="title != null">
+			AND TITLE LIKE '%${title}%'
+		</if>
+		<if test="hPrice != null">
+			AND LPRICE <![CDATA[<=]]> ${hPrice}
+		</if>
+		<if test="lPrice != null">
+			AND LPRICE <![CDATA[>=]]> ${lPrice}
+		</if>
+		
+		<if test="Item != null">
+			AND (
+			<foreach collection="Item" item="item" separator="or">
+				CATEGORY3 LIKE '%${item}%'
+			</foreach>
+			)
+		</if>
+		<choose>
+		<when test="Brand != null">
+		AND (
+			<foreach collection="Brand" item="brand" separator="or">
+				BRAND LIKE '%${brand}%'
+			</foreach>
+			)
+		</when>
+		<when test="OtherBrand != null">
+		AND (
+			<foreach collection="OtherBrand" item="brand" separator="or">
+					BRAND NOT LIKE '%코베아%'
+				AND	BRAND NOT LIKE '%엘바운드%'
+				AND BRAND NOT LIKE '%로티캠프%'
+				AND BRAND NOT LIKE '%크레모아%'
+				AND BRAND NOT LIKE '%브리즈문%'
+				AND BRAND NOT LIKE '%씨투써밋%'
+				AND BRAND NOT LIKE '%네이처하이크%'
+				AND BRAND NOT LIKE '%캥거%'
+				AND BRAND NOT LIKE '%카나모%'
+				AND BRAND NOT LIKE '%헬리녹스%'
+				AND BRAND NOT LIKE '%루아즈%'
+			</foreach>
+			)
+		</when>
+		</choose>
+		ORDER BY PNO ASC LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	<select id="selectShoppingCount" resultType="int" parameterType="map">
+		SELECT COUNT(DISTINCT PNO)
+		FROM SHOP
+		WHERE CATEGORY2 = '캠핑'
+		<if test="title != null">
+			AND TITLE LIKE '%${title}%'
+		</if>
+		<if test="hPrice != null">
+			AND LPRICE <![CDATA[<=]]> ${hPrice}
+		</if>
+		<if test="lPrice != null">
+			AND LPRICE <![CDATA[>=]]> ${lPrice}
+		</if>
+		
+		<if test="Item != null">
+			AND (
+			<foreach collection="Item" item="item" separator="or">
+				CATEGORY3 LIKE '%${item}%'
+			</foreach>
+			)
+		</if>
+		<choose>
+		<when test="Brand != null">
+		AND (
+			<foreach collection="Brand" item="brand" separator="or">
+				BRAND LIKE '%${brand}%'
+			</foreach>
+			)
+		</when>
+		<when test="OtherBrand != null">
+		AND (
+			<foreach collection="OtherBrand" item="brand" separator="or">
+					BRAND NOT LIKE '%코베아%'
+				AND	BRAND NOT LIKE '%엘바운드%'
+				AND BRAND NOT LIKE '%로티캠프%'
+				AND BRAND NOT LIKE '%크레모아%'
+				AND BRAND NOT LIKE '%브리즈문%'
+				AND BRAND NOT LIKE '%씨투써밋%'
+				AND BRAND NOT LIKE '%네이처하이크%'
+				AND BRAND NOT LIKE '%캥거%'
+				AND BRAND NOT LIKE '%카나모%'
+				AND BRAND NOT LIKE '%헬리녹스%'
+				AND BRAND NOT LIKE '%루아즈%'
+			</foreach>
+			)
+		</when>
+		</choose>
+	</select>
+
+</mapper>

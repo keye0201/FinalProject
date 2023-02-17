@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<th:block th:replace="~{common/layout :: head}"></th:block>
+
+	<!-- Favicon -->
+	<link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
+
+	<!-- CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/splide-master/dist/css/splide.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/moim.css}">
+
+	<!--구글 폰트-->
+	<link th:href="@{https://fonts.googleapis.com/icon?family=Material+Icons}"rel="stylesheet">
+	<link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0}" />
+
+	<script th:inline="javascript">
+		function checkNumber(event) {
+		  if(event.key === '.'  || event.key === '-'  || event.key >= 0 && event.key <= 9) {
+		    return true;
+		  }
+		  
+		  return false;
+		}
+		function checkNumber2(event) {
+			  if(event.key === '.'  || event.key === '-'  || event.key >= 0 && event.key <= 9) {
+			    return true;
+			  }
+			  
+			  return false;
+			}
+	</script>
+
+</head>
+
+<body>
+<header th:replace="~{common/layout :: #header}"></header>
+
+
+	<!-- **************** MAIN CONTENT START **************** -->
+	<main>
+
+
+		<!-- -->
+		
+		<section class="pt-2 pt-lg-2 mb-0 mt-5">
+		
+		<form th:action="@{moim.modify2(meetNo=${m.meetNo})}" method="post">
+			<div class="container position-relative">
+				<div class="row mt-4">
+				
+					<div class="col-12 mt-3 border-bottom">
+						<h3 class="d-inline-block" style="color: #9D7EE0;">캠핑모집</h3><h3 class="d-inline-block ps-3"> 등록</h3>
+					</div>
+					<!--연락처 시작-->
+					<div class="col-1 mt-3 border-bottom fw-bold text-black text-center">
+						<p>작성자</p>
+					</div>
+					<div class="col-11 mt-3 border-bottom">
+						<input class="contact" name="nickName" type="text" th:value="${session.mvo.nickName}" readonly/>
+					</div>
+					<!--연락처 끝-->
+					<!--제목 시작-->
+					<div class="col-1 mt-3 border-bottom fw-bold text-black text-center">
+						<p>제목</p>
+					</div>
+					<div class="tema col-11 mt-3 border-bottom">
+						<input class="party-title" type="text" name="title" th:value="${m.title}" minlength='5' maxlength='13' style="width:210px" placeholder="5자이상 13자이하로 입력해주세요."/>
+					</div > 
+					<!--제목 끝-->
+					<!--모집인원 시작-->
+					<div class="col-1 mt-3 border-bottom fw-bold text-black text-center">
+						<p>모집인원</p>
+					</div>
+					<div class="col-11 mt-3 border-bottom">
+						<input class="contact" type="text" th:value="${m.apes}+'명'" readonly/>
+					</div>
+					<!--모집인원 끝-->
+					<!--모집나이 시작-->
+					<div class="col-1 mt-3 border-bottom fw-bold text-black text-center">
+						<p>모집나이</p>
+					</div>
+					<div class="col-11 mt-3 border-bottom">
+						<select class="select" name="ageRange">
+							<option>10대</option>
+							<option value="20대">20대</option>
+							<option value="30대">30대</option>
+							<option value="40대">40대</option>
+							<option value="50대">50대</option>
+							<option value="60대">60대</option>
+							<option value="70대">70대</option>
+							<option value="나이무관">나이무관</option>
+						</select>
+					</div>
+					<!--모집나이 끝-->
+					<!--모집나이 시작-->
+					<div class="col-1 mt-3 border-bottom fw-bold text-black text-center">
+						<p>모집나이</p>
+					</div>
+					<div class="col-11 mt-3 border-bottom">
+						<select class="select" name="gender" th:value="남자모임">
+							<option value="남녀무관">남녀무관</option>
+							<option value="남자모임">남자모임</option>
+							<option value="여자모임">여자모임</option>
+						</select>
+					</div>
+					<!--모집나이 끝-->
+					<!--연락처 시작-->
+					<div class="col-1 mt-3 border-bottom fw-bold text-black text-center">
+						<p>연락처</p>
+					</div>
+					<div class="col-11 mt-3 border-bottom">
+						<input class="contact" type="text" placeholder="010********" name="phone" th:value="${m.phone}" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+					</div>
+					<!--연락처 끝-->
+					<!--모집 기간 시작 -->
+					<div class="col-1 mt-3 border-bottom fw-bold text-black text-center">
+						<p>모집 기간</p>
+					</div>
+					<div class="col-11 mt-3 border-bottom">
+						<input class="contact" type="date" id="currentDate" placeholder="2023년1월30일" name="endDate" min="2023-01-01" max="2023-12-31" value="2023-01-01" />
+						<span>까지</span>
+					</div>
+					<!--모집 기간 끝-->
+					<!--예상 경비 시작 -->
+					<div class="col-1 mt-3 border-bottom fw-bold text-black text-center">
+						<p>예상 경비</p>
+					</div>
+					<div class="col-11 mt-3 border-bottom">
+						<input class="contact" th:value="${m.expense}" minlength='5' type="text" placeholder="20000" name="expense" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
+						<span>원</span>
+					</div>
+					<!--예상 금액 끝-->
+					<!--공지 사항 입력 시작 -->
+					<div class="col-1 mt-3 fw-bold text-black text-center">
+						<p>세부 내용</p>
+					</div>
+					<div class="col-11 my-4">
+						<textarea class="sebu mb-2" th:text="${m.introduction}" rows="10" cols="110" name="introduction"></textarea>
+						<div>* 개인간 거래 행위는 불법으로 간주합니다<br>
+						* 작성된 정보는 캠퐁에 수집되며 진행 중인 모임에 문제가 발생한 경우에 해결을 위해 활용 될 수 있습니다.</div>
+						<div class="precautions">* 허위 정보를 작성시 제한 또는 정지 조치를 받을 수 있습니다.</div>
+						
+					<input type="hidden" name="mNo" th:value="${session.mvo.mNo}" />
+					</div>
+					
+				
+				</div>
+				<div class="registration my-2 text-center">
+					<a th:href="@{/moim(mNo=${session.mvo.mNo})}" type="button" class="goList me-3">목록</a>
+					<input type="submit" class="goSubmit" value="등록"/>
+				</div>
+			</div>
+			
+		</form>
+
+		</section>
+
+	</main>
+	<!-- **************** MAIN CONTENT END **************** -->
+
+	<!-- Back to top -->
+	<div class="back-top"></div>
+
+	<footer th:replace="~{common/layout :: #footer}"></footer>
+
+	<!-- Vendors -->
+	<script th:src="@{/assets/vendor/splide-master/dist/js/splide.min.js}"></script>
+
+</body>
+
+</html>

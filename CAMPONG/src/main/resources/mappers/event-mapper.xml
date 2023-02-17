@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.multi.campong.event.model.mapper.EventMapper">
+
+	<resultMap type="Event" id="EventResultMap">
+		<id property="contentId" column="CONTENTID"/>
+		<result property="contenttypeId" column="CONTENTTYPEID"/>
+		<result property="title" column="TITLE"/>
+		<result property="eventstartDate" column="EVENTSTARTDATE"/>
+		<result property="eventendDate" column="EVENTENDDATE"/>
+		<result property="areacode" column="AREACODE"/>
+		<result property="mapx" column="MAPX"/>
+		<result property="mapy" column="MAPY"/>
+		<result property="firstimage" column="FIRSTIMAGE"/>
+		<result property="firstimage2" column="FIRSTIMAGE2"/>
+		<result property="addr1" column="ADDR1"/>
+	</resultMap>
+	
+	
+	<select id="selectEventCount" resultType="int" parameterType="map">
+		SELECT COUNT(*) FROM FESTIVAL_CONTENTS 
+		WHERE 1=1
+		<if test="searchValue != null">
+			AND TITLE LIKE '%${searchValue}%' 
+		</if>		
+	</select>
+
+	<select id="selectEventList" resultMap="EventResultMap" parameterType="map">
+		SELECT 
+			CONTENTID, CONTENTTYPEID, TITLE, EVENTSTARTDATE, EVENTENDDATE, FIRSTIMAGE, FIRSTIMAGE2, MAPX, MAPY, ADDR1
+		FROM FESTIVAL_CONTENTS 
+		WHERE 1=1
+		<if test="searchValue != null">
+		AND TITLE LIKE '%${searchValue}%' 
+		</if>		
+		ORDER BY CONTENTID DESC LIMIT ${limit} OFFSET ${offset}
+	</select>
+
+	<select id="selectEventByNo" resultType="Event" parameterType="int">
+		SELECT * FROM FESTIVAL_CONTENTS 
+		WHERE CONTENTID = #{contentId}
+	</select>
+
+	
+	<select id="selectRandomEventList" resultMap="EventResultMap">
+		SELECT CONTENTID, FIRSTIMAGE
+        FROM FESTIVAL_CONTENTS
+        ORDER BY RAND() LIMIT 8;
+	</select>
+	
+</mapper>

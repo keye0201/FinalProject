@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+
+<head th:fragment="head">
+	<meta charset="UTF-8">
+	<title>CAMPONG</title>
+	
+	<!-- Meta Tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="author" content="Webestica.com">
+	<meta name="description" content="Booking - Multipurpose Online Booking Theme">
+
+	<!-- Google Font -->
+	<link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+	<link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+	<link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap}">
+	
+	<!-- SUIT 폰트 추가-->
+	<link rel="stylesheet" th:href="@{https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css}">
+
+	<!-- 메인페이지 지도 관련 -->
+	<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js}"></script>
+	<script>document.addEventListener('contextmenu', event => event.preventDefault());</script>
+	
+	<!-- Plugins CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/font-awesome/css/all.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/tiny-slider/tiny-slider.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/choices/css/choices.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/flatpickr/css/flatpickr.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/glightbox/css/glightbox.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/nouislider/nouislider.css}">
+	<!-- Theme CSS -->
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/header.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/total-style.css}">
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}">
+	
+</head>
+
+<body>
+	<!-- Header START -->
+	<header class="header-transparent" id="header">
+		<!-- Logo Nav START -->
+		<nav class="navbar navbar-dark navbar-expand-xl" style="height: 70px;">
+			<div class="container">
+				<!-- Logo START -->
+				<a class="navbar-brand" th:href="@{/}">
+					<img class="navbar-brand-item" th:src="@{/assets/images/logo_cam.png}" alt="logo" style="height: 55px;">
+				</a>
+				<!-- Logo END -->
+	
+	      		<!-- Responsive navbar toggler -->
+				<button class="navbar-toggler ms-auto me-3 p-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-animation">
+						<span></span>
+						<span></span>
+						<span></span>
+					</span>
+				</button>
+	
+				<!-- Main navbar START -->
+				<nav class="navbar-collapse collapse nav-item d-flex justify-content-between" id="navbarCollapse">
+					<ul class="navbar-nav navbar-nav-scroll mx-auto align-items-center ">
+	
+						<!-- Nav item Listing -->
+						<li class="nav-item"> <a class="nav-link" id="listingMenu"  th:href="@{/camping/camping-main}">캠핑</a> </li>
+						<!-- Nav item Listing -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" th:href="@{/bagpacking/bagpacking-main}" id="listingMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">백패킹</a>
+							<ul class="dropdown-menu" aria-labelledby="listingMenu">
+								
+								<li> <a class="dropdown-item" th:href="@{/bagpacking/bagpacking-main}">메인</a></li>
+								<li> <a class="dropdown-item" th:href="@{/bagpacking/mountain-list}">산</a></li>
+								<li> <a class="dropdown-item" th:href="@{/bagpacking/island-list}">섬</a></li>
+								<li> <a class="dropdown-item" th:href="@{/bagpacking/fishing-list}">낚시</a></li>
+							</ul>
+						</li>
+						<li class="nav-item"> <a class="nav-link" id="listingMenu"  th:href="@{/shop/shopping}">쇼핑</a> </li>
+						<!-- Nav item Listing -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" th:href="@{/traffic/traffic-bus}" id="listingMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">교통</a>
+							<ul class="dropdown-menu" aria-labelledby="listingMenu">
+								<li> <a class="dropdown-item" th:href="@{/car/traffic-car}">렌트카</a></li>
+								<li> <a class="dropdown-item" th:href="@{/traffic/traffic-bus}">고속버스</a></li>
+								<li> <a class="dropdown-item" th:href="@{/traffic/traffic-train}">열차</a></li>
+							</ul>
+						</li>
+						<!-- Nav item Link -->
+						<li class="nav-item"> <a class="nav-link" id="listingMenu"  th:href="@{/event/event}">행사</a> </li>
+						<!-- Nav item Listing -->
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" th:href="@{/board/list}" id="listingMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">커뮤니티</a>
+							<ul class="dropdown-menu" aria-labelledby="listingMenu">
+								<li> <a class="dropdown-item" th:href="@{/board/notice-list}">공지사항</a></li>
+								<li> <a class="dropdown-item" th:href="@{/board/board-list}">게시판</a></li>
+								<li> <a class="dropdown-item" th:if="${session.mvo !=null}" th:href="@{/moim(mNo =${session.mvo.mNo})}">캠핑모임</a></li>
+								<li> <a class="dropdown-item" th:href="@{/recipe/recipe}">캠핑꿀팁</a></li>
+							</ul>
+						</li>
+					</ul>
+					<!-- 헤더 가운데 끝-->
+					<!-- 헤더 오른쪽 -->
+					<!--로그인전-->
+					 <div class=""  th:if="${session.mvo ==null}">
+					<ul class="navbar-nav navbar-nav-scroll mx-auto" style="float:right">
+						<li class="nav-item"> <a class="nav-link" id="listingMenu"  th:href="@{/sign.in}">로그인</a> </li>
+					</ul>
+					</div>
+					 <div class="" th:if="${session.mvo !=null}">
+						<ul class="navbar-nav navbar-nav-scroll mx-auto" style="float:right">
+							<li class="nav-item"> <a class="nav-link" id="listingMenu"  th:href="@{/myprofile(mNo=${session.mvo.mNo})}">내정보</a> </li>
+						</ul>
+						
+					</div>
+					<div class="" th:if="${session.mvo !=null}">
+						
+						<ul class="navbar-nav navbar-nav-scroll mx-auto" style="float:right">
+							<li class="nav-item"> <a class="nav-link" id="listingMenu"  th:href="@{/logout.do}">로그아웃</a> </li>
+						</ul>
+					</div>
+				</nav>
+			
+				<!--
+				<ul class="nav flex-row align-items-center list-unstyled ms-xl-auto">
+					<li class="nav-item dropdown">
+						<li class="nav-item"> <a class="nav-link" th:href="@{/member/account-profile}" id="nickname" style="color:aliceblue">xx님</a> </li>
+						<li class="nav-item"> <a class="nav-link" th:href="@{/logout}" id="nickname" style="color:aliceblue">로그아웃</a> </li>
+					</li>
+				</ul>
+				-->
+	
+			</div>
+		</nav>
+		<!-- Logo Nav END -->
+	</header>
+		
+	<footer id="footer" class="bg-dark py-4">
+		<div class="container">
+			<div class="row mx-auto">
+				<div class="col-md-10 col-xl-6 mx-auto text-center">
+					<!-- Logo -->
+					<img class="mx-auto h-60px mb-3" th:src="@{/assets/images/logo_cam.png}" alt="logo">
+					<!-- 팀원 -->
+					<ul class="nav justify-content-between text-primary-hover mt-3 mt-md-0">
+					<li class="nav-item"><a class="nav-link p-2 text-white" href="#">이동건</a></li>
+					<li class="nav-item"><a class="nav-link p-2 text-white" href="#">김재혁</a></li>
+					<li class="nav-item"><a class="nav-link p-2 text-white" href="#">박윤희</a></li>
+					<li class="nav-item"><a class="nav-link p-2 text-white" href="#">백인화</a></li>
+					<li class="nav-item"><a class="nav-link p-2 text-white" href="#">이상진</a></li>
+					<li class="nav-item"><a class="nav-link p-2 text-white" href="#">이유광</a></li>
+					</ul>
+					<div class="text-muted text-primary-hover mt-0"> Copyrights ©2023. Multicampus Fullstack Team2 CAMPONG.<br>All rights reserved. </div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Bootstrap JS -->
+		<script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
+	
+		<!-- Vendors -->
+		<script th:src="@{/assets/vendor/choices/js/choices.min.js}"></script>
+		<script th:src="@{/assets/vendor/tiny-slider/tiny-slider.js}"></script>
+		<script th:src="@{/assets/vendor/flatpickr/js/flatpickr.min.js}"></script>
+		<script th:src="@{/assets/vendor/glightbox/js/glightbox.js}"></script>
+		<script th:src="@{/assets/vendor/nouislider/nouislider.min.js}"></script>
+		<!-- ThemeFunctions -->
+		<script th:src="@{/assets/js/functions.js}"></script>
+	</footer>
+</body>
+</html>

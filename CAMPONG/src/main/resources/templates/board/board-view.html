@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head" th:replace="~{common/layout :: head}"></head>
+
+<head>
+	<style>
+		.board_main_image {
+		margin: auto;
+    	display: block;
+		}
+		.border-top-1 {
+			border-top: 2px var(--bs-border-style) var(--bs-black) !important;
+		}
+		.main_title {
+			text-align: center;
+			margin: auto;
+    	display: block;
+			width: 350px;
+		}
+		.badge-1 {
+			--bs-badge-padding-x: 0.45em;
+			--bs-badge-padding-y: 0.35em;
+			--bs-badge-font-size: 0.9em;
+			--bs-badge-font-weight: 400;
+			--bs-badge-color: #fff;
+			--bs-badge-border-radius: 0.375rem;
+			display: inline-block;
+			padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);
+			font-size: var(--bs-badge-font-size);
+			font-weight: var(--bs-badge-font-weight);
+			line-height: 1;
+			color: var(--bs-badge-color);
+			text-align: center;
+			white-space: nowrap;
+			vertical-align: baseline;
+			border-radius: var(--bs-badge-border-radius);
+		}
+		.badge-2 {
+			--bs-badge-padding-x: 0.9em;
+			--bs-badge-padding-y: 0.55em;
+			--bs-badge-font-size: 0.95em;
+			--bs-badge-font-weight: 400;
+			--bs-badge-color: #fff;
+			--bs-badge-border-radius: 0.375rem;
+			display: inline-block;
+			padding: var(--bs-badge-padding-y) var(--bs-badge-padding-x);
+			font-size: var(--bs-badge-font-size);
+			font-weight: var(--bs-badge-font-weight);
+			line-height: 1;
+			color: var(--bs-badge-color);
+			text-align: center;
+			white-space: nowrap;
+			vertical-align: baseline;
+			border-radius: var(--bs-badge-border-radius);
+		}
+		.board_head {
+			width: 1170px;
+		}
+		.title {
+			display: inline-block;
+		}
+		.info {
+			float: right;
+		}
+		.data {
+			float: left;
+			vertical-align: auto;
+			line-height: 86.19px;
+		}
+		ul {
+			list-style: none;
+		}
+		a:hover {
+			text-decoration: underline;
+    	color: #424242;
+		}
+		a {
+			color: #333333;
+		}
+		div {
+			color: #333333;
+		}
+		.reply_avatar {
+			width: 48px;
+			height: 48px;
+		}
+		.reply {
+			margin: auto;
+    	display: block;
+		}
+		.reply_button{
+			margin-left: 10%;
+		}
+		.trash {
+			background-color: transparent;
+			border: none;
+			width: 25px;
+			height: 25px;
+			padding: 0px;
+			margin: 0px;
+		}
+		.fa-x {
+			color: red;
+		}
+		.cut{
+			 overflow: hidden;
+			 text-overflow: ellipsis;
+			 white-space: nowrap;
+			 width:710px;
+		}
+	</style>
+</head>
+
+<body>
+<header th:replace="~{common/layout :: #header}"></header>
+
+<!-- **************** MAIN CONTENT START **************** -->
+<main>
+<section class="py-0 pt-8">
+	<div class="container">
+		<!-- Title -->
+		<div class="row g-4">
+			<!-- Image -->
+			<div class="col-12">
+				<img th:src="@{/assets/images/board/board.png}" class="rounded-3 board_main_image" alt="">
+			</div>
+			<!-- Title and content -->
+			<div class="mx-auto position-relative mt-sm-n7">
+				<div class="bg-mode shadow rounded-3 p-4 main_title">
+					<!-- Title -->
+					<h1 class="fs-3 ">자유게시판</h1>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- =======================
+Main banner START -->
+
+<section class="pt-4 pt-md-5">
+	<div class="container">
+		<div class="board_list border-top-1 border-bottom">
+			<div class="board_head">
+				<h4 class="title pt-4 m-0 pb-4 ps-4 cut">[[${board.title}]]</h4>
+				<ul class="info m-0 ps-1">
+					<li class="data pe-3 fw-bold">[[${board.nickName}]]</li>
+					<li class="data pe-3">[[${#dates.format(board.createDate)}]]</li>
+					<li class="data pe-4">조회수 [[${board.readCount}]]</li>
+				</ul>
+			</div>
+			
+			<!-- 첨부파일 -->
+			<th:block th:if="${board.originalFileName != null}">
+			<div class="border-top bg-light pt-3 ps-4">
+				<div class="row">
+					<span class="col-1 fw-bold">첨부파일</span>
+					<ul class="col">
+						
+						<li><i class="bi bi-file-earmark"></i>
+							<a th:href="|javascript:fileDownload('${board.originalFileName}','${board.renameFileName}')|">
+							[[${board.originalFileName}]]				
+							</a>
+						</li>
+							<script>
+							function fileDownload(oriname, rename) {
+							const url = "/board/fileDown";
+							
+							let oName = encodeURIComponent(oriname);
+							let rName = encodeURIComponent(rename);
+							
+							location.assign(url + "?oriname=" + oName + "&rename=" + rName);
+							}
+							</script>	
+						
+						
+						<!-- <li><i class="bi bi-file-earmark"></i><a href="#"> 1 : 첫번째파일</a></li>
+						<li><i class="bi bi-file-earmark"></i><a href="#"> 2 : 두번째파일</a></li>
+						<li><i class="bi bi-file-earmark"></i><a href="#"> 3 : 세번째파일</a></li> -->
+					</ul>
+				</div>
+			</div>
+			</th:block>
+			
+		</div>
+		<div class="content ps-4 pt-3 border-bottom pb-3">
+			[[${board.content}]]
+			
+			<th:block th:if="${session.mvo != null && 
+					(session.mvo.mNo == board.uNo || session.mvo.role == 'ROLE_ADMIN')}">
+				<div class="d-flex justify-content-end">
+					<button type="button" id="btnUpdate" class="badge-2 modify-btn border-0 mt-4 mb-4 me-3">수정</button>
+					<button type="button" id="btnDelete" class="badge-2 text-bg-danger border-0 mt-4 mb-4">삭제</button>
+				</div>
+			</th:block>
+			
+			
+		</div>
+		<div class="content ps-4 pt-3 border-bottom pb-3">
+			<span class="ps-2 fw-bold">댓글</span>
+		</div>
+		
+		<th:block th:if="${replyList == null}">
+			<tr>
+				<td colspan="3" style="text-align: center;">등록된 리플이 없습니다.</td>
+			</tr>
+		</th:block>
+		
+		<th:block th:if="${replyList != null}">
+			<th:block th:each="reply : ${replyList}">
+				<div class="content pt-3 border-bottom pb-3">
+				<div class="row ms-4">
+					<img class="col-1 reply_avatar rounded-circle shadow p-0" th:src="@{/assets/images/avatar/01.jpg}" alt="avatar">
+					<span class="col-8 fw-bold ms-3">[[${reply.nickName}]]</span>
+					<span class="col-2 ms-5" style="font-size:0.85rem;">[[${#dates.format(reply.createDate)}]]</span>
+					<th:block th:if="${session.mvo != null && 
+							(session.mvo.mNo == reply.uNo || session.mvo.role == 'ROLE_ADMIN')}">
+						<button class="col-1 fa-regular fa-x fa-lg trash" th:onclick="|deleteReply(${reply.rNo},${board.bNo});|"></button>
+					</th:block>
+					
+					<span class="ms-7 col-8">[[${reply.content}]]</span>
+				</div>
+				</div>	
+			</th:block>
+		</th:block>
+		
+		<th:block th:if="${session.mvo != null}">
+			<div class="content ps-4 pt-3 border-bottom pb-4">
+				<!-- 리플 작성 -->
+				<form action="/board/reply" method="post">
+					<div class="form-control-bg-light my-2 reply" style="width:900px;">
+						<input type="hidden" name="bNo" th:value="${board.bNo}"/>
+						<textarea class="form-control" name="content" id="replyContent" placeholder="악성 댓글은 상대방뿐만 아니라 자신에게도 악영향을 끼칠 수 있습니다.&#13;&#10;자유롭지만 성숙한 커뮤니티 문화를 만들기 위해 함께 노력합시다." rows="3" style="width:900px;"></textarea>
+					</div> 
+					<button type="submit" class="btn btn-primary mb-0 reply_button" style="margin-left:122px;">댓글달기<i class="bi fa-fw bi-arrow-right ms-2"></i></button>
+				</form>
+			</div>
+		</th:block>
+		<div class="d-flex justify-content-end">
+			<button th:onclick="|location.href='@{/board/board-list}'|" class="badge-2 text-bg-secondary modify-btn border-0 mt-4 mb-4">목록</button>
+		</div>
+	</div>
+</section>
+<!-- =======================
+Main banner START -->
+
+
+</main>
+<!-- **************** MAIN CONTENT END **************** -->
+
+<!-- Back to top -->
+<div class="back-top"></div>
+
+<footer th:replace="~{common/layout :: #footer}"></footer>
+
+</body>
+
+<script>
+	$(document).ready(() => {
+		$("#btnUpdate").on("click", (e) => {
+			location.href = "/board/board-update?no=[[${board.bNo}]]";
+		});
+		
+		$("#btnDelete").on("click", (e) => {
+			if(confirm("정말로 게시글을 삭제 하시겠습니까?")) {
+				location.replace("/board/delete?boardNo=[[${board.bNo}]]");
+			}
+		});
+	});
+	
+	function deleteReply(replyNo, boardNo){
+		var url = "/board/replyDel?replyNo=";
+		var requestURL = url + replyNo +"&boardNo=" + boardNo;
+		location.replace(requestURL);
+	}
+</script>
+
+</html>

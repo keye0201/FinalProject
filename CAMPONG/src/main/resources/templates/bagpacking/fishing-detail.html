@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="~{common/layout :: head}"></th:block>
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/bagpacking.css}">
+</head>
+
+<body>
+	<header th:replace="~{common/layout :: #header}"></header>
+	<!-- **************** MAIN CONTENT START **************** -->
+	<main>
+		<!-- =======================Main Title START -->
+		<section class="py-0 pt-8">
+			<div class="container position-relative">
+				<!-- Title and button START -->
+				<div class="row mb-3">
+					<div class="col-12">
+						<!-- Meta -->
+						<div class="d-lg-flex justify-content-lg-between mb-1">
+							<!-- Title -->
+							<div class="mb-2 mb-lg-2">
+								<h1 class="fs-2">[[${content.fishingNm}]] </h1>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Title and button END -->
+			</div>
+		</section>
+		<!-- =======================Main Title END -->
+
+		<!-- =======================Image gallery START -->
+		<section class="card-grid pt-0">
+			<div class="container">
+				<div class="row g-2">
+					<!-- Image -->
+					<div class="col-md-6">
+						<a data-glightbox data-gallery="gallery" th:href="@{/assets/images/bagpacking/mountain.jpg}">
+							<div class="card card-grid-lg card-element-hover card-overlay-hover overflow-hidden"
+								th:style="'background-image:url('+ |/assets/images/bagpacking/fishing${content.fishingNo % 18}.jpg| +'); background-position: center left; background-size: cover;'">
+								<!-- Card hover element -->
+								<div class="hover-element position-absolute w-100 h-100">
+									<i class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
+								</div>
+							</div>
+						</a>
+					</div>
+
+					<div class="col-md-6">
+						<!-- Card item START -->
+						<div class="row g-2">
+							<!-- Image -->
+							<div class="col-12">
+								<a data-glightbox data-gallery="gallery" th:href="@{/assets/images/bagpacking/mountain.jpg}">
+									<div class="card card-grid-sm card-element-hover card-overlay-hover overflow-hidden"
+										th:style="'background-image:url('+ |/assets/images/bagpacking/fishingDetail1.jpg| +'); background-position: center left; background-size: cover;'">
+										<!-- Card hover element -->
+										<div class="hover-element position-absolute w-100 h-100">
+											<i
+												class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
+										</div>
+									</div>
+								</a>
+							</div>
+
+							<!-- Image -->
+							<div class="col-md-6">
+								<a data-glightbox data-gallery="gallery" th:href="@{/assets/images/bagpacking/mountain.jpg}">
+									<div class="card card-grid-sm card-element-hover card-overlay-hover overflow-hidden"
+										th:style="'background-image:url('+ |/assets/images/bagpacking/fishingDetail2.jpg| +'); background-position: center left; background-size: cover;'">
+										<!-- Card hover element -->
+										<div class="hover-element position-absolute w-100 h-100">
+											<i
+												class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
+										</div>
+									</div>
+								</a>
+							</div>
+
+							<!-- Images -->
+							<div class="col-md-6">
+								<div class="card card-grid-sm overflow-hidden"
+									th:style="'background-image:url('+ |/assets/images/bagpacking/fishingDetail3.jpg| +'); background-position: center left; background-size: cover;'">
+									<!-- Background overlay -->
+									<div class="bg-overlay bg-dark opacity-7"></div>
+
+									<!-- Popup Images -->
+									<a data-glightbox="" data-gallery="gallery"
+										th:href="|/assets/images/bagpacking/fishingDetail1.jpg|"
+										class="stretched-link z-index-9"></a>
+									<a data-glightbox="" data-gallery="gallery"
+										th:href="|/assets/images/bagpacking/fishingDetail2.jpg|"></a>
+									<a data-glightbox="" data-gallery="gallery"
+										th:href="|/assets/images/bagpacking/fishingDetail3.jpg|"></a>
+
+									<!-- Overlay text -->
+									<div class="card-img-overlay d-flex h-100 w-100">
+										<h6 class="card-title m-auto fw-light text-decoration-underline"><a th:href="@{#}"
+												class="text-white">View all</a></h6>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Card item END -->
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- =======================Image gallery END -->
+
+		<!-- =======================About hotel START -->
+		<section class="pt-0">
+			<div class="container" data-sticky-container>
+				<div class="row g-4 g-xl-5">
+					<!-- Content START -->
+					<div class="col-xl-6 order-1">
+						<div class="vstack gap-5">
+							<!-- About hotel START -->
+							<div class="card bg-transparent">
+								<!-- Card header -->
+								<div class="card-header border-bottom bg-transparent px-0 pt-0">
+									<h4 class="mb-0">정보</h4>
+								</div>
+
+								<!-- Card body START -->
+								<div class="card-body pt-4 p-0">
+									<p class="mb-3 h5">어종</p>
+									<p class="mb-3">[[${content.species}]]</p>
+									<p class="mb-3 h5">이용금액</p>
+									<p class="mb-3">[[${content.usecharge}]]</p>
+								</div>
+								<!-- Card body END -->
+							</div>
+							<!-- About hotel START -->
+						</div>
+					</div>
+					<!-- Content END -->
+
+					<!-- Right side content START -->
+					<aside class="col-xl-6 order-xl-2">
+						<!-- Direction START -->
+						<div class="card shadow mb-4">
+							<!-- Card header -->
+							<div class="card-header border-bottom">
+								<h5 class="mb-0">위치</h5>
+							</div>
+
+							<!-- Card body -->
+							<div class="card-body">
+								<!-- Map START -->
+									<!-- 카카오맵(오류뜸) -->
+								<div class="w-100 rounded"
+									id="map"
+									style="border:0; height:250px;" aria-hidden="false" tabindex="0"></div>
+
+								<!-- Info -->
+								<ul class="list-group list-group-borderless my-3">
+									<!-- Address -->
+									<li class="list-group-item">
+										<a th:href="@{#}" class="h6 fw-normal mb-0">
+											<i class="bi fa-fw bi-geo-alt me-2"></i>[[${content.addr}]] <!-- 주소 -->
+										</a>
+									</li>
+									<!-- Call no -->
+									<li class="list-group-item">
+										<a th:href="@{#}" class="h6 fw-normal mb-0">
+											<i class="bi fa-fw bi-telephone-forward me-2"></i>
+											<th:block th:if="${content.phone == ''}">
+												정보 없음
+											</th:block>
+											<th:block th:if="${content.phone != ''}">
+												[[${content.phone}]] <!-- 전화번호 -->
+											</th:block>
+										</a>
+									</li>
+							</div>
+						</div>
+						<!-- Direction END -->
+					</aside>
+					<!-- Right side content END -->
+				</div> <!-- Row END -->
+
+				<div class="row g-4 g-xl-5 mt-2 mb-3">
+					<!-- Customer Review START -->
+					<div class="card bg-transparent">
+						<!-- Card header -->
+						<div class="card-header border-bottom bg-transparent px-0 pt-0">
+							<h4 class="card-title mb-0">고객 리뷰</h4>
+						</div>
+
+						<!-- Card body START -->
+						<div class="card-body pt-4 p-0">
+							<th:block th:if="${session.mvo != null}">
+								<!-- Leave review START -->
+								<form class="mb-5" action="/bagpacking/fishingReply" method="post" enctype="multipart/form-data">
+									<input type="hidden" name="fishingNo" th:value="${content.fishingNo}"/>
+									<!-- Message -->
+									<div class="form-control-bg-light mb-3">
+										<textarea class="form-control" id="replyContent" name="content"
+											placeholder="리뷰를 남겨주세요." rows="5"></textarea>
+									</div>
+									<!-- 이미지 첨부 -->
+<!-- 												<label class="fs-4" for="upfile" style="cursor: pointer;"> -->
+<!-- 													<i class="bi bi-image"></i> -->
+<!-- 												</label> -->
+<!-- 												<input class="" type="file" id="upfile" name="upfile" accept="image/*" style="display: none"> -->
+									<input class="" type="file" id="upfile" name="upfile" accept="image/*"><br>
+									<!-- Button -->
+									<button type="submit" class="btn btn-primary mb-0 mt-2">리뷰 등록<i
+											class="bi fa-fw bi-arrow-right ms-2"></i></button>
+								</form>
+								<!-- Leave review END -->
+							</th:block>
+							<th:block th:if="${session.mvo == null}">
+							<div class="row text-center">
+								<h5>로그인 후 리뷰를 남겨보세요!</h5>
+							</div>
+							</th:block>
+							
+							<th:block th:if="${replyList == null}">
+								<!-- Review item START -->
+								<div class="d-md-flex my-4">
+									<h5>등록된 리뷰가 없습니다.</h5>
+								</div>
+							</th:block>
+							<th:block th:if="${replyList != null}">
+								<th:block th:each="reply : ${replyList}">
+								<!-- Review item START -->
+								<div class="d-md-flex my-4">
+									<!-- Avatar -->
+									<div class="avatar avatar-lg me-3 flex-shrink-0">
+										<img class="avatar-img rounded-circle" th:src="@{/assets/images/bagpacking/08.jpg}"
+											alt="avatar">
+									</div>
+									<!-- Text -->
+									<div>
+										<div class="d-flex justify-content-between mt-1 mt-md-0">
+											<div>
+												<h5 class="me-3 mb-0">[[${reply.nickName}]]</h5>
+												<!-- Info -->
+												<p class="small">[[${#dates.format(reply.createDate)}]]</p>
+											</div>
+										</div>
+										<p class="mb-2">[[${reply.content}]]</p>
+									</div>
+								</div>
+	
+								<!-- Divider -->
+								<hr>
+								<!-- Review item END -->
+								</th:block>
+							</th:block>
+<!-- 							Button -->
+<!-- 							<div class="text-center mt-5"> -->
+<!-- 								<a th:href="@{#}" class="btn btn-primary-soft mb-0">더보기</a> -->
+<!-- 							</div> -->
+						</div>
+						<!-- Card body END -->
+					</div>
+					<!-- Customer Review END -->
+				</div>
+			</div>
+		</section>
+		<!-- =======================About hotel END -->
+	</main>
+	<!-- **************** MAIN CONTENT END **************** -->
+
+
+	<!-- Back to top -->
+	<div class="back-top"></div>
+
+	<footer th:replace="~{common/layout :: #footer}"></footer>
+	
+	<script th:src="@{/assets/vendor/sticky-js/sticky.min.js}"></script>
+	
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=d98d7c798170c9d69b276e269080b4ff"></script>
+	
+	<script>
+		// 카카오 맵
+		var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+		var mapx = "[[${content.longitude}]]";
+		var mapy = "[[${content.latitude}]]";
+		
+		var options = { //지도를 생성할 때 필요한 기본 옵션
+			center: new kakao.maps.LatLng(mapy, mapx), //지도의 중심좌표.
+			level: 6 //지도의 레벨(확대, 축소 정도)
+		};
+	
+		var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+		
+		//마커를 표시할 위치와 내용을 가지고 있는 객체 배열입니다 
+		var positions = [
+			{
+				content: '<div>[[${content.fishingNm}]]</div>',
+				latlng: new kakao.maps.LatLng(mapy, mapx)
+			}
+			
+		];
+		
+		for (var i = 0; i < positions.length; i ++) {
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+		    map: map, // 마커를 표시할 지도
+		    position: positions[i].latlng // 마커의 위치
+		});
+		
+		// 마커에 표시할 인포윈도우를 생성합니다 
+		var infowindow = new kakao.maps.InfoWindow({
+		    content: positions[i].content // 인포윈도우에 표시할 내용
+		});
+		
+		// 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+		// 이벤트 리스너로는 클로저를 만들어 등록합니다 
+		// for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+		kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+		kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+		}
+		
+		//인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+		function makeOverListener(map, marker, infowindow) {
+		return function() {
+		    infowindow.open(map, marker);
+		};
+		}
+		
+		//인포윈도우를 닫는 클로저를 만드는 함수입니다 
+		function makeOutListener(infowindow) {
+		return function() {
+		    infowindow.close();
+		};
+		}
+		
+		
+	</script>
+
+</body>
+
+</html>

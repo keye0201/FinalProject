@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.campong.moim.model.mapper.MeetingMapper">
+
+<resultMap type="com.multi.campong.moim.model.vo.MeetingMember" id="MoimMap">
+	<result property="meetNo" column="MEET_NO" />
+	<result property="mNo" column="USER_NO" />
+</resultMap>
+
+<resultMap type="com.multi.campong.moim.model.vo.Moim" id="MoimMap2">
+		<id property="meetNo" column="MEET_NO"/>
+		<result property="mNo" column="USER_NO"/>
+		<result property="contentId" column="CONTENTID"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="gender" column="GENDER"/>
+		<result property="title" column="TITLE"/>
+		<result property= "apes" column= "APES"/>
+		<result property= "introduction" column= "INTRODUCTION"/>
+		<result property= "status" column= "STATUS"/>
+		<result property= "startDate" column= "STARTDATE"/>
+		<result property= "endDate" column= "ENDDATE"/>
+		<result property= "ageRange" column= "AGERANGE"/>
+		<result property= "expense" column= "EXPENSE"/>
+		<result property= "phone" column= "PHONE"/>
+		<result property= "count" column= "COUNT"/>
+</resultMap>
+
+
+
+
+
+<insert id="insertMoim" parameterType="com.multi.campong.moim.model.vo.MeetingMember">
+	INSERT INTO MEETINGMEMBER(
+		MEET_NO,USER_NO
+	)VALUES(#{meetNo},#{mNo})
+</insert>
+<select id="getMeetingByNo" resultMap="MoimMap2">
+    select * from MEETINGMEMBER inner join MEETING on meetingmember.meet_no = meeting.meet_no where user_no=#{mNo};
+</select>
+<select id="getMeetingByMeetNo" resultMap="MoimMap2">
+	select * FROM MEETING where MEET_NO=#{meetNo}
+</select>
+
+<select id="moimRegisterCheck" resultMap="MoimMap">
+	select * from MEETINGMEMBER where MEET_NO=#{meetNo} and USER_NO=#{mNo}
+</select>
+<select id="moimCountMember" resultType="int">
+SELECT count(*) FROM MEETINGMEMBER where MEET_NO=#{meetNo}
+</select>
+
+<select id="meetingCountByMeetNo" resultMap="MoimMap2">
+SELECT DISTINCT M.MEET_NO, M.*, (SELECT COUNT(*) from MEETINGMEMBER MM where MM.MEET_NO = M.MEET_NO) AS COUNT
+FROM MEETING M
+LEFT OUTER JOIN MEETINGMEMBER MM ON MM.MEET_NO = M.MEET_NO WHERE MM.MEET_NO=#{meetNo}
+</select>
+
+<select id="meetingCount" resultMap="MoimMap2">
+SELECT DISTINCT M.MEET_NO, M.*, (SELECT COUNT(*) from MEETINGMEMBER MM where MM.MEET_NO = M.MEET_NO) AS COUNT
+FROM MEETING M
+LEFT OUTER JOIN MEETINGMEMBER MM ON MM.MEET_NO = M.MEET_NO
+</select>
+<select id="moimCheck" resultType="int">
+SELECT COUNT(*) FROM MEETINGMEMBER WHERE MEET_NO=#{meetNo} AND USER_NO=#{mNo}
+</select>
+<delete id="deleteMeeting">
+	DELETE FROM MEETINGMEMBER WHERE USER_NO=#{mNo} AND  MEET_NO=#{meetNo} 
+</delete>
+<delete id="deleteMeetingMoim">
+	DELETE FROM MEETING WHERE NICKNAME=#{nickName} AND MEET_NO=#{meetNo};
+</delete>
+<delete id="deleteMoimFirst">
+	DELETE FROM MEETINGMEMBER WHERE MEET_NO =#{meetNo};
+</delete>
+</mapper>

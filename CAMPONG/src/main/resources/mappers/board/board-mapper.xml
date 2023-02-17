@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.multi.campong.board.model.mapper.BoardMapper">
+
+	<resultMap type="Board" id="boardListResultMap">
+		<id property="bNo" column="BOARD_NO"/>
+		<result property="uNo" column="USER_NO"/>
+		<result property="title" column="TITLE"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="content" column="CONTENT"/>
+		<result property="originalFileName" column="ORIGINAL_FILENAME"/>
+		<result property="renameFileName" column="RENAME_FILENAME"/>
+		<result property="status" column="STATUS"/>
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="readCount" column="READCOUNT"/>
+		<result property="type" column="TYPE"/>
+	</resultMap>
+	
+	<resultMap type="Reply" id="boardReplyResultMap">
+		<id property="rNo" column="REPLY_NO"/>
+		<result property="bNo" column="BOARD_NO"/>
+		<result property="uNo" column="USER_NO"/>
+		<result property="content" column="CONTENT"/>
+		<result property="status" column="STATUS"/>
+		<result property="createDate" column="CREATE_DATE"/>
+		<result property="nickName" column="NICKNAME"/>
+	</resultMap>
+	
+	<resultMap type="Board" id="boardDetailResultMap" extends="boardListResultMap">
+		<collection property="replyList" javaType="arrayList" columnPrefix="R_" 
+												resultMap="boardReplyResultMap"/>
+	</resultMap>
+	
+	<select id="selectBoardList" resultMap="boardListResultMap" parameterType="map">
+		SELECT B.BOARD_NO, B.TITLE, M.NICKNAME, B.CREATE_DATE, B.ORIGINAL_FILENAME, B.READCOUNT, B.STATUS, B.TYPE
+		FROM BOARD B 
+		JOIN MEMBER M ON(B.USER_NO = M.USER_NO) 
+		WHERE B.STATUS = 'Y' AND (B.TYPE = 'free' OR B.TYPE = 'question')
+		<if test="title != null">
+			AND B.TITLE LIKE '%${title}%' 
+		</if>	
+		<if test="all != null">
+			AND (
+				B.TITLE LIKE '%${all}%'
+				OR B.CONTENT LIKE '%${all}%'
+			)
+		</if>	
+		ORDER BY B.BOARD_NO DESC LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	<select id="selectBoardCount" resultType="int" parameterType="map">
+		SELECT  
+			 COUNT(DISTINCT B.BOARD_NO)
+		FROM BOARD B
+		LEFT OUTER JOIN MEMBER M1 ON B.USER_NO = M1.USER_NO
+		LEFT OUTER JOIN BOARD_REPLY R ON R.BOARD_NO = B.BOARD_NO 
+		LEFT OUTER JOIN MEMBER M2 ON R.USER_NO = M2.USER_NO 
+		WHERE B.STATUS = 'Y' AND (B.TYPE = 'free' OR B.TYPE = 'question')
+		<if test="title != null">
+			AND B.TITLE LIKE '%${title}%' 
+		</if>	
+		<if test="all != null">
+			AND (
+				B.TITLE LIKE '%${all}%'
+				OR B.CONTENT LIKE '%${all}%'
+			)
+		</if>	
+	</select>
+	
+	<select id="selectBoardByNo" parameterType="int" resultMap="boardDetailResultMap">
+		SELECT  
+			B.BOARD_NO, B.TITLE, M.USER_NO, M.NICKNAME, B.READCOUNT, B.TYPE, B.ORIGINAL_FILENAME, B.RENAME_FILENAME, B.CONTENT, B.CREATE_DATE, B.READCOUNT,
+			R.REPLY_NO AS R_REPLY_NO, 
+		    R.BOARD_NO AS R_BOARD_NO,
+		    R.USER_NO AS R_USER_NO,
+		    R.CONTENT  AS R_CONTENT, 
+		    M2.NICKNAME  AS R_NICKNAME, 
+		    R.CREATE_DATE  AS R_CREATE_DATE
+		FROM BOARD B
+		JOIN MEMBER M ON(B.USER_NO = M.USER_NO)
+		LEFT OUTER JOIN BOARD_REPLY R ON (B.BOARD_NO = R.BOARD_NO)
+		LEFT OUTER JOIN MEMBER M2 ON (R.USER_NO = M2.USER_NO)
+		WHERE B.STATUS = 'Y' AND B.BOARD_NO = #{bNo}
+	</select>
+	
+	<insert id="insertBoard" parameterType="Board">
+		INSERT INTO BOARD(
+			BOARD_NO, USER_NO, TITLE,
+			CONTENT, ORIGINAL_FILENAME,
+			RENAME_FILENAME, READCOUNT, STATUS,
+			CREATE_DATE, TYPE
+		) VALUES (
+			0, #{uNo}, #{title}, 
+			#{content}, #{originalFileName}, 
+			#{renameFileName}, DEFAULT, DEFAULT, 
+			DEFAULT, #{type}
+		)
+	</insert>
+
+	<insert id="insertReply" parameterType="Reply">
+		INSERT INTO BOARD_REPLY(
+				REPLY_NO, BOARD_NO, USER_NO, 
+				CONTENT, STATUS, CREATE_DATE) 
+			VALUES(
+				0, #{bNo}, #{uNo}, #{content}, 
+				DEFAULT, DEFAULT
+			)
+	</insert>
+	
+	<update id="updateBoard" parameterType="Board">
+		UPDATE BOARD
+		SET
+			TITLE=#{title},
+			<if test="originalFileName != null">
+				ORIGINAL_FILENAME=#{originalFileName},
+			</if>
+			<if test="renameFileName != null">
+				RENAME_FILENAME=#{renameFileName},
+			</if>
+			TYPE=#{type},
+			CONTENT=#{content}
+		WHERE BOARD_NO=#{bNo}
+	</update>
+	
+	<update id="updateReadCount" parameterType="map">
+		UPDATE BOARD SET READCOUNT=#{readCount} WHERE BOARD_NO=#{bNo}
+	</update>
+	
+	<update id="deleteBoard" parameterType="int">
+		UPDATE BOARD SET STATUS='N' WHERE BOARD_NO=#{bNo}
+	</update>
+	
+	<delete id="deleteReply" parameterType="int">
+		DELETE FROM BOARD_REPLY WHERE REPLY_NO=#{rNo}
+	</delete>
+	
+	<!-- 공지 게시판 -->
+	
+	<select id="selectNoticeList" resultMap="boardListResultMap" parameterType="map">
+		SELECT B.BOARD_NO, B.TITLE, M.NICKNAME, B.CREATE_DATE, B.ORIGINAL_FILENAME, B.READCOUNT, B.STATUS, B.TYPE
+		FROM BOARD B 
+		JOIN MEMBER M ON(B.USER_NO = M.USER_NO) 
+		WHERE B.STATUS = 'Y' AND B.TYPE = 'notice'
+		<if test="title != null">
+			AND B.TITLE LIKE '%${title}%' 
+		</if>	
+		<if test="all != null">
+			AND (
+				B.TITLE LIKE '%${all}%'
+				OR B.CONTENT LIKE '%${all}%'
+			)
+		</if>	
+		ORDER BY B.BOARD_NO DESC LIMIT ${limit} OFFSET ${offset}
+	</select>
+	
+	<select id="selectNoticeCount" resultType="int" parameterType="map">
+		SELECT  
+			 COUNT(DISTINCT B.BOARD_NO)
+		FROM BOARD B
+		LEFT OUTER JOIN MEMBER M1 ON B.USER_NO = M1.USER_NO
+		LEFT OUTER JOIN BOARD_REPLY R ON R.BOARD_NO = B.BOARD_NO 
+		LEFT OUTER JOIN MEMBER M2 ON R.USER_NO = M2.USER_NO 
+		WHERE B.STATUS = 'Y' AND B.TYPE = 'notice'
+		<if test="title != null">
+			AND B.TITLE LIKE '%${title}%' 
+		</if>	
+		<if test="all != null">
+			AND (
+				B.TITLE LIKE '%${all}%'
+				OR B.CONTENT LIKE '%${all}%'
+			)
+		</if>	
+	</select>
+	
+	<select id="selectNoticeByNo" parameterType="int" resultMap="boardDetailResultMap">
+		SELECT  
+			B.BOARD_NO, B.TITLE, M.NICKNAME, B.READCOUNT, B.TYPE, B.ORIGINAL_FILENAME, B.RENAME_FILENAME, B.CONTENT, B.CREATE_DATE, B.READCOUNT
+		FROM BOARD B
+		JOIN MEMBER M ON(B.USER_NO = M.USER_NO)
+		WHERE B.STATUS = 'Y' AND B.BOARD_NO = #{bNo}
+	</select>
+	
+	<insert id="insertNotice" parameterType="Board">
+		INSERT INTO BOARD(
+			BOARD_NO, USER_NO, TITLE,
+			CONTENT, ORIGINAL_FILENAME,
+			RENAME_FILENAME, READCOUNT, STATUS,
+			CREATE_DATE, TYPE
+		) VALUES (
+			0, #{uNo}, #{title}, 
+			#{content}, #{originalFileName}, 
+			#{renameFileName}, DEFAULT, DEFAULT, 
+			DEFAULT, 'notice'
+		)
+	</insert>
+	
+	<update id="updateNotice" parameterType="Board">
+		UPDATE BOARD
+		SET
+			TITLE=#{title},
+			<if test="originalFileName != null">
+				ORIGINAL_FILENAME=#{originalFileName},
+			</if>
+			<if test="renameFileName != null">
+				RENAME_FILENAME=#{renameFileName},
+			</if>
+			CONTENT=#{content}
+		WHERE BOARD_NO=#{bNo}
+	</update>
+	
+</mapper>

@@ -1,0 +1,55 @@
+.moim {
+    width:200px;
+}
+.my-moim {
+    border-bottom:1px solid rgb(179, 179, 179);
+    height:40px;
+    line-height: 40px;
+    margin-top:0px;
+    margin-bottom:0px;
+}
+.title {
+    width:300px;
+    display:inline-block;
+    border-left:1px solid rgb(179, 179, 179);
+}
+.day {
+    width:200px;
+    display:inline-block;
+}
+.people {
+    width:100px;
+    display:inline-block;
+}
+.price {
+    width:100px;
+    display:inline-block;
+}
+.detail {
+    margin-left:27px;
+    padding-bottom:4px;
+    padding:0px;
+    border:0px;
+    background-color: beige;
+    padding-right:2px;
+    border-right:1px solid red;
+    border-left:1px solid red;
+    height:39px;
+}
+.moimbox {
+    min-height: 450px;
+}
+.camping {
+    margin-top:30px;
+}
+.hi {
+    border-top:1px solid white;
+}
+.card {
+    border :0px solid white;
+}
+.action {
+   text-align: center;
+   padding-left:0px;
+   margin-right:10px;
+}

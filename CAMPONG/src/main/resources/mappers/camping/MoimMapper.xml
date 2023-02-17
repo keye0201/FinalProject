@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.multi.campong.moim.model.mapper.MoimMapper">
+
+<resultMap type="com.multi.campong.moim.model.vo.Moim" id="MoimMap">
+		<id property="meetNo" column="MEET_NO"/>
+		<result property="contentId" column="CONTENTID"/>
+		<result property="nickName" column="NICKNAME"/>
+		<result property="gender" column="GENDER"/>
+		<result property="title" column="TITLE"/>
+		<result property= "apes" column= "APES"/>
+		<result property= "introduction" column= "INTRODUCTION"/>
+		<result property= "status" column= "STATUS"/>
+		<result property= "startDate" column= "STARTDATE"/>
+		<result property= "endDate" column= "ENDDATE"/>
+		<result property= "ageRange" column= "AGERANGE"/>
+		<result property= "expense" column= "EXPENSE"/>
+		<result property= "phone" column= "PHONE"/>
+</resultMap>
+
+
+	<insert id="moimInsert" parameterType="com.multi.campong.moim.model.vo.Moim" useGeneratedKeys="true" keyProperty="meetNo">
+		
+		INSERT INTO MEETING(
+		MEET_NO ,CONTENTID ,NICKNAME,TITLE , APES, INTRODUCTION,STATUS ,STARTDATE, ENDDATE,AGERANGE , EXPENSE, PHONE,
+		GENDER
+		) VALUES(0,1,#{nickName},#{title},#{apes},#{introduction},DEFAULT,"1",#{endDate} ,#{ageRange} ,#{expense} ,#{phone},#{gender}
+		)
+	</insert>
+	
+	<select id="getMoim" resultMap="MoimMap">
+		select 
+			* FROM MEETING
+	</select>
+	
+	<select id="MoimContent" parameterType="int" resultMap="MoimMap">
+		SELECT * FROM MEETING where MEET_NO=#{meetNo}
+	</select>
+	
+	<update id="modifyMoim" parameterType="com.multi.campong.moim.model.vo.Moim">
+		UPDATE MEETING SET TITLE=#{title} ,AGERANGE =#{ageRange},GENDER=#{gender},PHONE=#{phone},ENDDATE=#{endDate},EXPENSE=#{expense},INTRODUCTION=#{introduction}
+		WHERE MEET_NO=#{meetNo}
+	</update>
+
+	
+
+
+</mapper> 
