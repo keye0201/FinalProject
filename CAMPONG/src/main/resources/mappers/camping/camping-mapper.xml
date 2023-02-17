@@ -222,4 +222,11 @@
 	<insert id="unBookmarkCamp" parameterType="map">
 		DELETE FROM BOOKMARK WHERE USER_NO=#{mNo} AND CONTENTID=#{contentId}
 	</insert>
+	
+	<select id="selectBookmarkList" resultMap="campingListResultMap" parameterType="int">
+		SELECT C.CONTENTID, C.FACLTNM, C.ADDR1, C.FIRSTIMAGEURL
+		FROM CAMPING_CONTENTS C
+		LEFT OUTER JOIN BOOKMARK LK ON  LK.CONTENTID = C.CONTENTID
+		WHERE LK.USER_NO = 2;
+	</select>
 </mapper>

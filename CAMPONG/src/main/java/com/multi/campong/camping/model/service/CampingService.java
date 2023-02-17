@@ -115,5 +115,9 @@ public class CampingService {
 		}
 		return mapper.unBookmarkCamp(map);
 	}
+	
+	public List<Camping> getBookmarkList(int mNo) {
+		return mapper.selectBookmarkList(mNo);
+	}
 
 }
