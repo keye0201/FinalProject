@@ -149,6 +149,5 @@ gradle-app.setting
 checksums.lock
 md5-checksums.bin
 sha1-checksums.bin
-.classpath
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,java,windows
