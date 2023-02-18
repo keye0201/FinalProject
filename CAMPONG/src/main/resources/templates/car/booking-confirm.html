@@ -26,43 +26,27 @@ Main content START -->
 					<div class="card-body text-center p-4">
 						<!-- Title -->
 						<h1 class="card fs-3">🎊 예약이 완료됐습니다! 🎊</h1>
-						<p class="lead mb-3">마이페이지에서 예약정보를 확인할 수 있습니다.</p>
-
-						<!-- Second title -->
-						<h5 class="text-primary changesub mb-4 fw-bold">[[${content.entrpsNm}]]</h5>
+						<p class="lead mb-3"><a th:href="@{/myprofile(mNo=${session.mvo.mNo})}" style="font-weight: 600; ">[[${session.mvo.id}]]의 마이페이지</a> 에서 예약정보를 확인할 수 있습니다.</p>
 
 						<!-- List -->
 						<div class="row justify-content-between text-start mb-4">
-							<div class="col-lg-5">
+							<div class="" style="margin-left:20px; margin-top:15px">
 								<ul class="list-group list-group-borderless">
-									<li class="list-group-item d-sm-flex justify-content-between align-items-center">
-										<span class="mb-0"><i class="bi bi-vr fa-fw me-2"></i>예약자 ID:</span>
-										<span class="h6 fw-normal mb-0">캠핑맨</span>
+									<li class="list-group-item  justify-content-between align-items-center">
+										<span class="mb-0"><i class="bi bi-patch-check fa-fw me-2"></i>업체 이름 | </span>
+										<span class="h6 fw-normal mb-0">[[${content.entrpsNm}]]</span>
 									</li>
-									<li class="list-group-item d-sm-flex justify-content-between align-items-center">
-										<span class="mb-0"><i class="bi bi-person fa-fw me-2"></i>예약자 닉네임:</span>
-										<span class="h6 fw-normal mb-0">조인성</span>
+									<li class="list-group-item  justify-content-between align-items-center">
+										<span class="mb-0"><i class="bi bi-geo-alt fa-fw me-2"></i>업체 주소 | </span>
+										<span class="h6 fw-normal mb-0">[[${content.rdnmadr}]]</span>
 									</li>
-									<li class="list-group-item d-sm-flex justify-content-between align-items-center">
-										<span class="mb-0"><i class="bi bi-telephone fa-fw me-2"></i>업체번호:</span>
+									<li class="list-group-item  justify-content-between align-items-center">
+										<span class="mb-0"><i class="bi bi-telephone fa-fw me-2"></i>업체 번호 | </span>
 										<span class="h6  mb-0">[[${content.phoneNumber}]]</span>
 									</li>
-								</ul>
-							</div>
-
-							<div class="col-lg-5">
-								<ul class="list-group list-group-borderless">
-									<li class="list-group-item d-sm-flex justify-content-between align-items-center">
-										<span class="mb-0"><i class="bi bi-calendar-check fa-fw me-2"></i>예약일:</span>
-										<span class="h6 fw-normal mb-0"><div id="current_date"></p></span>
-									</li>
-									<li class="list-group-item d-sm-flex justify-content-between align-items-center">
-										<span class="mb-0"><i class="bi bi-calendar-event fa-fw me-2"></i>대여일:</span>
-										<span class="h6 fw-normal mb-0">2023년 1월 27일</span>
-									</li>
-									<li class="list-group-item d-sm-flex justify-content-between align-items-center">
-										<span class="mb-0"><i class="bi bi-calendar-week fa-fw me-2"></i>반납일:</span>
-										<span class="h6 fw-normal mb-0">2023년 2월 22일</span>
+									<li class="list-group-item  justify-content-between align-items-center">
+										<span class="mb-0"><i class="bi bi-calendar-check fa-fw me-2"></i>예약 일자 | </span>
+										<span class="h6 fw-normal mb-0" id="current_date"></span>
 									</li>
 								</ul>
 							</div>
@@ -70,6 +54,7 @@ Main content START -->
 
 						<!-- Button -->
 						<div class="d-sm-flex justify-content-sm-end d-grid">
+							<a th:href="@{/car/traffic-car}" style="color:white; margin-right:10px;" class="btn search-btn mb-0">&nbsp&nbsp&nbsp렌트카 계속보기&nbsp&nbsp&nbsp</a>
 							<a th:href="@{/}" class="btn btn-primary mb-0">&nbsp&nbsp&nbsp홈으로 돌아가기&nbsp&nbsp&nbsp</a>
 						</div>
 					</div>

@@ -28,6 +28,8 @@
 						</div>
 
 						<!-- Card body START -->
+						
+						<!-- *** -->
 						<form id="cardForm" class="card-body form-control-border p-3 p-sm-4" th:action="@{/car/traffic-car}" method="GET">
 							<!-- Tabs START -->
 							<div class="nav nav-pills mb-3" id="pills-tab" role="tablist">
@@ -41,6 +43,8 @@
 								</div>
 							</div>
 							<!-- Tabs END -->
+							
+							<!-- *** -->
 							<input type="hidden" id="page" name="page" value="1">
 
 							<!-- Tabs content START -->
@@ -85,25 +89,25 @@
 										<div class="col-md-6 text-md-end">
 											<div class="form-fs-lg form-control-transparent">
 												<label class="form-label small ms-3 ms-md-0 me-md-3">반납지점</label>
-												<select class="form-select js-choice" data-search-enabled="true">
-													<option value="">지역을 선택하세요</option>
-													<option>서울특별시</option>
-													<option>경기도</option>
-													<option>인천광역시</option>
-													<option>강원도</option>
-													<option>충청남도</option>
-													<option>대전광역시</option>
-													<option>충청북도</option>
-													<option>세종</option>
-													<option>부산광역시</option>
-													<option>울산</option>
-													<option>대구광역시</option>
-													<option>경상북도</option>
-													<option>경상남도</option>
-													<option>전라남도</option>
-													<option>광주광역시</option>
-													<option>전라북도</option>
-													<option>제주특별자치도</option>
+												<select class="form-select js-choice" id="city2" name="city2" data-search-enabled="true">
+													<option value=" " th:selected="${#strings.equals(param.city2, ' ')}">지역을 선택하세요</option>
+													<option value="서울특별시" th:selected="${#strings.equals(param.city2, '서울특별시')}">서울특별시</option>
+													<option value="경기도" th:selected="${#strings.equals(param.city2, '경기도')}">경기도</option>
+													<option value="인천광역시" th:selected="${#strings.equals(param.city2, '인천광역시')}">인천광역시</option>
+													<option value="강원도" th:selected="${#strings.equals(param.city2, '강원도')}">강원도</option>
+													<option value="충청남도" th:selected="${#strings.equals(param.city2, '충청남도')}">충청남도</option>
+													<option value="대전광역시" th:selected="${#strings.equals(param.city2, '대전광역시')}">대전광역시</option>
+													<option value="충청북도" th:selected="${#strings.equals(param.city2, '충청북도')}">충청북도</option>
+													<option value="세종" th:selected="${#strings.equals(param.city2, '세종')}">세종</option>
+													<option value="부산광역시" th:selected="${#strings.equals(param.city2, '부산광역시')}">부산광역시</option>
+													<option value="울산" th:selected="${#strings.equals(param.city2, '울산')}">울산</option>
+													<option value="대구광역시" th:selected="${#strings.equals(param.city2, '대구광역시')}">대구광역시</option>
+													<option value="경상북도" th:selected="${#strings.equals(param.city2, '경상북도')}">경상북도</option>
+													<option value="경상남도" th:selected="${#strings.equals(param.city2, '경상남도')}">경상남도</option>
+													<option value="전라남도" th:selected="${#strings.equals(param.city2, '전라남도')}">전라남도</option>
+													<option value="광주광역시" th:selected="${#strings.equals(param.city2, '광주광역시')}">광주광역시</option>
+													<option value="전라북도" th:selected="${#strings.equals(param.city2, '전라북도')}">전라북도</option>
+													<option value="제주특별자치도" th:selected="${#strings.equals(param.city2, '제주특별자치도')}">제주특별자치도</option>
 												</select>
 											</div>	
 										</div>
@@ -112,7 +116,7 @@
 										<div class="col-md-6">
 											<div class="form-fs-lg form-control-transparent">
 												<label class="form-label small">대여일</label>
-												<input type="text" id="day" name="day" class="form-control flatpickr" placeholder="날짜를 선택하세요">
+												<input type="text" id="date" name="date" class="form-control flatpickr" placeholder="날짜를 선택하세요">
 											</div>
 										</div>
 
@@ -120,7 +124,7 @@
 										<div class="col-md-6 text-md-end">
 											<div class="form-fs-lg form-control-transparent">
 												<label class="form-label small ms-3 ms-md-0 me-md-3">대여시간</label>
-												<input type="text" class="form-control flatpickr text-md-end" data-enableTime="true" data-noCalendar="true" placeholder="시간을 선택하세요">
+												<input type="text" id="time" name="time" class="form-control flatpickr text-md-end" data-enableTime="true" data-noCalendar="true" placeholder="시간을 선택하세요">
 											</div>
 										</div>
 									</div>
@@ -326,10 +330,16 @@
 										<li class="list-inline-item h6 fw-normal me-1 mb-0"><i class="bi bi-telephone"></i>&nbsp&nbsp[[${content.phoneNumber}]]</li>
 									</ul>
 								</div>
-
 								<!-- Button -->
+								<!-- 로그인전 -->
 								<div class="col-sm-6 col-md-4 col-xl-3 text-sm-end">
+								 <div class=""  th:if="${session.mvo ==null}">
+									<a class="btn btn-primary mb-0" th:onclick="alert('예약서비스는 로그인 후 이용가능합니다.');" style="cursor:pointer">&nbsp&nbsp&nbsp예약하기&nbsp&nbsp&nbsp</a>
+								</div>
+								<!-- 로그인후 -->
+					 			<div class="" th:if="${session.mvo !=null}">
 									<a th:href="@{|/car/booking-confirm?rentNo=${content.rentNo}|}" class="btn btn-primary mb-0">&nbsp&nbsp&nbsp예약하기&nbsp&nbsp&nbsp</a>
+								</div>
 								</div>
 							</div> <!-- Row END -->
 						</div>
@@ -446,7 +456,8 @@
 		page.value = pageNum;
 		form.submit();
 	}
-	</script>
 
+	</script>
+	
 </body>
 </html>
