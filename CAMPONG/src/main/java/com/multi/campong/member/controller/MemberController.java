@@ -7,6 +7,7 @@ import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -256,6 +257,49 @@ public class MemberController {
 		 
 		 return "redirect:/myprofile";
 	 }
+	 @GetMapping("/sign/sign.in/kakao")
+		public String kakaoLogin(Model model, String code, HttpSession session) {
+			log.info("로그인 요청");
+			if(code != null) {
+				try {
+					String loginUrl = "http://localhost/sign/sign.in/kakao";
+					String token = kakaoService.getToken(code, loginUrl);
+					Map<String, Object> map = kakaoService.getUserInfo(token);
+					String kakaoToken = (String) map.get("id");
+					Member loginMember = service.loginKaKao(kakaoToken);
+
+					if(loginMember != null) { // 로그인 성공
+						model.addAttribute("loginMember",loginMember); // 세션으로 저장되는 코드, 이유: @SessionAttributes
+						session.setAttribute("mvo", loginMember);
+						return "redirect:/";
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			model.addAttribute("msg", "로그인에 실패하였습니다.");
+			model.addAttribute("location","sign/sign-in");
+			return "common/msg";
+		}
+	 
+	 @GetMapping("/sign/sign.up/kakao")
+		public String signInKakao(Model model, String code) {
+			log.info("가입 페이지 요청");
+			if(code != null) {
+				try {
+					String enrollUrl = "http://localhost/sign/sign.up/kakao";
+					System.out.println("code : " + code);
+					String token = kakaoService.getToken(code, enrollUrl);
+					System.out.println("token : " + token);
+					Map<String, Object> map = kakaoService.getUserInfo(token);
+					System.out.println(map);
+					model.addAttribute("kakaoMap", map);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			return "sign/sign-up";
+		}
 }
 	 
 
