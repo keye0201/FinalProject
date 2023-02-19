@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-	<title>Booking - Multipurpose Online Booking Theme</title>
+	<title>캠퐁</title>
 
 	<!-- Meta Tags -->
 	<meta charset="utf-8">
@@ -9,32 +9,29 @@
 	<meta name="author" content="Webestica.com">
 	<meta name="description" content="Booking - Multipurpose Online Booking Theme">
 
-
-
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="assets/images/favicon.ico">
+	<link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
 
 	<!-- Google Font -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
+	<link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+	<link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+	<link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap}">
 
 	<!-- SUIT 폰트 추가-->
-	<link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
+	<link th:href="@{https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css}" rel="stylesheet">
 	
 	<!-- Plugins CSS -->
-	<link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap-icons/bootstrap-icons.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/font-awesome/css/all.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}">
 
 	<!-- Theme CSS -->
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/sign-up.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/sign-up.css}">
 	
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	<link rel="stylesheet" href="assets/css/total-style.css">
+	<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js}"></script>
+	<link rel="stylesheet" th:href="@{/assets/css/total-style.css}">
 	<!-- Dark mode -->
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script th:inline="javascript">
 		/* var msgType= "[[${msgType}]]";
 		$(document).ready(function(){
@@ -127,13 +124,13 @@
 							<div class="p-4 p-sm-7">
 								<!-- 로고 -->
 								<a href="/">
-									<img class="h-50px mb-4" src="assets/campongimg/campong.png" alt="logo">
+									<img class="h-50px mb-4" th:src="@{/assets/campongimg/campong.png}" alt="logo">
 								</a>
 								<!-- 로고 끝-->
 	
 								<h1 class="login-title mb-2 h3">회원가입</h1>
 								<!--로그인 하러가기-->
-								<p class="login mb-0">아이디가 있나요?<a href="/sign.in"> 로그인</a></p>
+								<p class="login mb-0">아이디가 있나요?<a th:href="@{/sign.in}"> 로그인</a></p>
 								<!--로그인 하러가기끝-->
 								
 								<!-- 폼데이터 -->
@@ -142,8 +139,17 @@
 									<!-- 아이디 -->
 									<div class="mb-3">
 										<label class="form-label sign-title" style="width:600px;">아이디</label>
+										
+										<th:block th:if="${kakaoMap} != null">
+										<input id="id" name="id" type="text" class="form-control" th:value="${kakaoMap.email}" style="width:575px;display:inline-block; margin-right:0px;" placeholder="5글자이상으로 작성해주세요">
+										<button type="button" class="btn btn-primary"onclick="registerCheck()">중복확인</button>
+										<input type="hidden" name="kakaoToKen" th:value="${kakaoMap.id}">
+										</th:block>
+										
+										<th:block th:if="${kakaoMap} == null">
 										<input id="id" name="id" type="text" class="form-control" style="width:575px;display:inline-block; margin-right:0px;" placeholder="5글자이상으로 작성해주세요">
 										<button type="button" class="btn btn-primary"onclick="registerCheck()">중복확인</button>
+										</th:block>
 									</div>
 									<!-- 아이디 -->
 									<!-- 비밀번호 -->
@@ -166,8 +172,15 @@
 									<!-- 닉네임 -->
 									<div class="mb-3">
 										<label class="form-label sign-title" style="width:600px;">닉네임</label>
+										<th:block th:if="${kakaoMap} != null">
+										<input id="name" name="nickName" type="text" th:value="${kakaoMap.nickname}" class="form-control" style="width:575px;display:inline-block; margin-right:0px;" placeholder="5글자이상으로 작성해주세요">
+										<button type="button" class="btn btn-primary" onclick="registerCheckName()">중복확인</button>
+										</th:block>
+										
+										<th:block th:if="${kakaoMap} == null">
 										<input id="name" name="nickName" type="text" class="form-control" style="width:575px;display:inline-block; margin-right:0px;" placeholder="5글자이상으로 작성해주세요">
 										<button type="button" class="btn btn-primary" onclick="registerCheckName()">중복확인</button>
+										</th:block>
 									</div>
 									<!-- 닉네임 끝-->
 									<!-- 출생년도 -->
@@ -248,7 +261,6 @@
 										<label class="form-label sign-title">주소</label>
 										<input type="address" name="address" class="form-control">
 									</div>
-
 									
 									<!-- Button -->
 									<div><button type="submit" class="btn btn-primary w-100 mb-0">회원가입</button></div>
@@ -261,13 +273,13 @@
 		
 									<!-- Google and facebook button -->
 									<div class="vstack gap-3">
-										<a href="#" class="btn btn-light mb-0"><i class="fab fa-fw fa-google text-google-icon me-2"></i>구글 로그인</a>
-										<a href="#" class="btn btn-light mb-0"><img class="hi" src="assets/campongimg/btnW_아이콘사각.png"> 네이버 로그인</a>
-										
+										<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=0bc2fdf55b3de7cdd886176853e729b2&redirect_uri=http://localhost/sign/sign.up/kakao">
+										<img th:src="@{/assets/images/icon/kakao_signup.png}" style="width: 100%;">
+										</a>
 									</div>
 		
 									<!-- Copyright -->
-									<p class="mb-0 mt-3 text-center">©2023 <a target="_blank" href="https://www.webestica.com/">Campong</a> All rights reserved</p>
+									<p class="mb-0 mt-3 text-center">©2023 <a target="_blank" th:href="@{https://www.webestica.com/}">Campong</a> All rights reserved</p>
 								</form>
 								<!-- 폼끝 -->
 							</div>	
@@ -328,13 +340,10 @@
 									      <!-- Modal footer -->
 									      <div class="modal-footer">
 									        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-									      </div>
-									
-									    </div>
-									  </div>
+									     </div>
 									</div>
-							  
-							  
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -342,8 +351,7 @@
 		</div>
 	</div>
 </section>
-<!-- =======================
-Main Content END -->
+<!-- =======================Main Content END -->
 
 </main>
 <!-- **************** MAIN CONTENT END **************** -->
@@ -352,13 +360,10 @@ Main Content END -->
 <div class="back-top"></div>
 
 <!-- Bootstrap JS -->
-<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
-	
+<script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 
 <!-- ThemeFunctions -->
-<script src="assets/js/functions.js"></script>
-
+<script th:src="@{/assets/js/functions.js}"></script>
 
 
 </body>

@@ -8,28 +8,27 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="author" content="Webestica.com">
 	<meta name="description" content="Booking - Multipurpose Online Booking Theme">
-	
 
 	<!-- Favicon -->
-	<link rel="shortcut icon" href="assets/images/favicon.ico">
+	<link rel="shortcut icon" th:href="@{/assets/images/favicon.ico}">
 
 	<!-- Google Font -->
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap">
+	<link rel="preconnect" th:href="@{https://fonts.googleapis.com}">
+	<link rel="preconnect" th:href="@{https://fonts.gstatic.com}" crossorigin>
+	<link rel="stylesheet" th:href="@{https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Poppins:wght@400;500;700&display=swap}">
 
 	<!-- SUIT 폰트 추가-->
-	<link href="https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css" rel="stylesheet">
-
+	<link th:href="@{https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/variable/woff2/SUIT-Variable.css}" rel="stylesheet">
+	
 	<!-- Plugins CSS -->
-	<link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/all.min.css">
-	<link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap-icons/bootstrap-icons.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/font-awesome/css/all.min.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}">
 
 	<!-- Theme CSS -->
-	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
-	<link rel="stylesheet" type="text/css" href="assets/css/total-style.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/style.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/total-style.css}">
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script th:src="@{https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js}"></script>
 	<script th:inline="javascript">
 			$(document).ready(function(){
 				var msgType =[[${msgType}]];
@@ -56,7 +55,7 @@ Main Content START -->
 						<!-- Vector Image -->
 						<div class="col-lg-6 d-flex align-items-center order-2 order-lg-1">
 							<div class="p-3 p-lg-5">
-								<img src="assets/campongimg/sign-incamp2.png" alt="">
+								<img th:src="@{/assets/campongimg/sign-incamp2.png}" alt="">
 							</div>
 							<!-- Divider -->
 							<div class="vr opacity-1 d-none d-lg-block"></div>
@@ -67,7 +66,7 @@ Main Content START -->
 							<div class="p-4 p-sm-7">
 								<!-- Logo -->
 								<a href="/">
-									<img class="h-50px mb-3" src="assets/images/campong.png" alt="logo">
+									<img class="h-50px mb-3" th:src="@{/assets/images/campong.png}" alt="logo">
 								</a>
 								<!-- Title -->
 								<h1 class="mb-2 h3">환영합니다</h1>
@@ -107,9 +106,9 @@ Main Content START -->
 		
 									<!-- Google and facebook button -->
 									<div class="vstack gap-3">
-										<a href="#" class="btn btn-light mb-0"><i class="fab fa-fw fa-google text-google-icon me-2"></i>구글 로그인</a>
-										<a href="#" class="btn btn-light mb-0"><img class="hi" src="assets/campongimg/btnW_아이콘사각.png">네이버 로그인</a>
-										
+										<a href="https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=0bc2fdf55b3de7cdd886176853e729b2&redirect_uri=http://localhost/sign/sign.in/kakao">
+										<img th:src="@{/assets/images/icon/kakao_login.png}" style="width: 100%;">
+										</a>
 									</div>
 									<!-- 실패 메시지 -->
 									<div class="modal" id="myMessage">
@@ -158,10 +157,10 @@ Main Content END -->
 <div class="back-top"></div>
 
 <!-- Bootstrap JS -->
-<script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js}"></script>
 
 <!-- ThemeFunctions -->
-<script src="assets/js/functions.js"></script>
+<script th:src="@{/assets/js/functions.js}"></script>
 
 </body>
 </html>
