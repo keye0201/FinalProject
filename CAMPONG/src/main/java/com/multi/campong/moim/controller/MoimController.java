@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.multi.campong.member.model.vo.Member;
 import com.multi.campong.moim.model.mapper.MeetingMapper;
 import com.multi.campong.moim.model.mapper.MoimMapper;
 import com.multi.campong.moim.model.vo.MeetingMember;
@@ -25,9 +27,9 @@ public class MoimController {
 	MeetingMapper meetMapper;
 	
 	@GetMapping("/moim")
-	public String moimMain(Model model,@RequestParam("mNo") int mNo) {
+	public String moimMain(Model model,@SessionAttribute(name="mvo",required = false)Member mvo) {
 		List<Moim> list = meetMapper.meetingCount();
-		System.out.println(mNo);
+		System.out.println();
 		model.addAttribute("list", list);
 		return "moim/moim";
 	}
@@ -39,7 +41,7 @@ public class MoimController {
 	}
 	
 	@GetMapping("/moim.modify")
-	public String moimModify(int mNo, int meetNo,Model model) {
+	public String moimModify( int meetNo,Model model) {
 		Moim m = mapper.MoimContent(meetNo);
 		System.out.println(m);
 		model.addAttribute("m", m);

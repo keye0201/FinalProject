@@ -7,7 +7,7 @@
 	<sql id="selectMemberSql">
 		SELECT 	
 			MNO, ID, PASSWORD, ROLE, NAME, PHONE,
-			EMAIL, ADDRESS, HOBBY,
+			EMAIL, ADDRESS, KAKAOTOKEN, HOBBY,
 			STATUS, ENROLL_DATE, MODIFY_DATE 
 		FROM MEMBER
 	</sql>
@@ -23,7 +23,7 @@
 		<result property="email1" column="EMAIL1" />
 		<result property="email2" column="EMAIL2" />
 		<result property="address" column="ADDRESS" />
-		<result property="kakaoToken" column="KAKAOTOKEN" />
+		<result property="kakaoToKen" column="KAKAOTOKEN" />
 		<result property="status" column="STATUS" />
 		<result property="enrollDate" column="ENROLL_DATE" />
 		<result property="modifyDate" column="MODIFY_DATE" />
@@ -40,20 +40,7 @@
 	<select id="selectMember" parameterType="string" resultMap="memberResultMap">
 		<include refid="selectMemberSql"/>
 		WHERE ID = #{id} AND STATUS = 'Y'
-	</select>	
-	
-	<insert id="insertMember" parameterType="Member">
-		INSERT INTO MEMBER(
-			MNO, ID, PASSWORD, 	
-			ROLE, NAME, PHONE,
-			EMAIL, ADDRESS,HOBBY, 		
-			STATUS, ENROLL_DATE, MODIFY_DATE
-		) VALUES (
-			 0, #{id}, #{password},
-			 default, #{name}, #{phone},
-			 #{email}, #{address}, #{hobby},
-			 DEFAULT, DEFAULT, DEFAULT)
-	</insert>
+	</select>
 	
 	 <update id="updateMember" parameterType="Member">
 	 	UPDATE MEMBER

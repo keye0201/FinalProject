@@ -2,9 +2,7 @@ package com.multi.campong.member.model.vo;
 
 import java.util.Date;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,10 +20,11 @@ public class Member {
 	private String email1;
 	private String email2;
 	private String address;
-	private String kakaoToken;
+	private String kakaoToKen;
 	private String status;
 	private Date enrollDate;
 	private Date modifyDate;
 	private String profileImage;
+	private String renamedProfileImage;
 	
 }

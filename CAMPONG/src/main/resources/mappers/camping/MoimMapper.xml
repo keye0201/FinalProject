@@ -41,7 +41,10 @@
 		UPDATE MEETING SET TITLE=#{title} ,AGERANGE =#{ageRange},GENDER=#{gender},PHONE=#{phone},ENDDATE=#{endDate},EXPENSE=#{expense},INTRODUCTION=#{introduction}
 		WHERE MEET_NO=#{meetNo}
 	</update>
-
+	
+	<delete id="deleteMoim">
+	 DELETE FROM MEETING WHERE NICKNAME=#{nickName} 
+	</delete>
 	
 
 

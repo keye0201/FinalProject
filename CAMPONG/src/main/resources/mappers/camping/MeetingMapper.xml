@@ -25,6 +25,9 @@
 		<result property= "count" column= "COUNT"/>
 </resultMap>
 
+<delete id="MeetingAllDelete">
+	DELETE FROM MEETINGMEMBER WHERE USER_NO=#{mNo}
+</delete>
 
 
 

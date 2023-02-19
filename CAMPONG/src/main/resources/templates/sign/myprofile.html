@@ -20,6 +20,7 @@
 		    document.getElementById('preview').src = "";
 		  }
 		}
+		
 	</script>
 
 </head>
@@ -54,9 +55,11 @@
 											<!-- Avatar -->
 											<div class="avatar avatar-xl mb-2">
 												<img class="avatar-img rounded-circle border border-2 border-white"
-													src="assets/images/account/01.jpg">
+													th:src="|/file/${session.mvo.renamedProfileImage}|" th:unless="${session.mvo.renamedProfileImage.toString().equals('0')}">
+													<img class="avatar-img rounded-circle border border-2 border-white"
+													src="/assets/campongimg/defaultImage.png" th:if="${session.mvo.renamedProfileImage.toString().equals('0')}">
 											</div>
-											<h6 class="mb-0 form-label" th:text=${session.mvo.id}>전도연</h6>
+											<h6 class="mb-0 form-label" th:text=${session.mvo.nickName}>전도연</h6>
 											<a href="#" class="text-reset text-primary-hover small" th:text=${session.mvo}></a>
 											<hr>
 										</div>
@@ -101,7 +104,7 @@
 
 					<!-- Main content START -->
 					<div class="col-lg-8 col-xl-9 ps-xl-5">
-
+					
 						<!-- Offcanvas menu button -->
 						<div class="d-grid mb-0 d-lg-none w-100">
 							<button class="btn btn-primary mb-4" type="button" data-bs-toggle="offcanvas"
@@ -121,7 +124,7 @@
 								<!-- Card body START -->
 								<div class="card-body">
 									<!-- Form START -->
-									<form class="row g-3" action="/memUpdate" method="post" enctype="multipart/form-data">
+									<form class="row g-3" th:action=@{/memUpdate} method="post" enctype="multipart/form-data">
 										<!-- Profile photo -->
 										<div class="col-md-6">
 											<div class="d-flex align-items-center">
@@ -130,15 +133,21 @@
 													<span class="avatar avatar-xl">
 														<img id="preview"
 															class="avatar-img rounded-circle border border-white border-3 shadow"
-															src="assets/images/account/01.jpg" style="object-fit:cover;" >
+															th:src="|/file/${session.mvo.renamedProfileImage}|" style="object-fit:cover;"
+															th:unless="${session.mvo.renamedProfileImage.toString().equals('0')}" >
+															<img id="preview"
+															class="avatar-img rounded-circle border border-white border-3 shadow"
+															src="/assets/campongimg/defaultImage.png"  style="object-fit:cover;" 
+															th:if="${session.mvo.renamedProfileImage.toString().equals('0')}"
+															>
 													</span>
 												</label>
 												<!-- Upload button -->
 												<label class="btn btn-sm btn-primary-soft mb-0" for="uploadfile-1">수정</label>
-												<input id="uploadfile-1" class="form-control d-none" type="file" name="profileImage" onchange="readImage(this);">
+							
+												<input id="uploadfile-1" class="form-control d-none" type="file" name="imageFile" onchange="readImage(this);">
 											</div>
 										</div>
-
 										<!-- Name -->
 										<div class="col-md-6">
 										</div>
@@ -152,8 +161,8 @@
 										<!-- Mobile -->
 										<div class="col-md-6">
 											<label class="form-label subtitle">핸드폰 번호 <span class="text-danger">*</span></label>
-											<input type="text" class="form-control" value="010 1234 5678" name="phone"
-												placeholder="Enter your mobile number">
+											<input type="text" class="form-control" value="01012345678" name="phone"
+												placeholder="Enter your mobile number" maxlength="11" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 										</div>
 
 
@@ -185,18 +194,18 @@
 								</div>
 
 								<!-- Card body START -->
-								<form class="card-body">
+								<form class="card-body" th:action="@{/update.password}" method="post">
 									<!-- Current password -->
 									<div class="mb-3">
 										<label class="form-label subtitle">현재 비밀번호</label>
-										<input class="form-control" type="password" placeholder="현재 비밀번호를 입력하세요">
+										<input class="form-control" type="password" name="nowPassword" placeholder="현재 비밀번호를 입력하세요">
 									</div>
 									<!-- New password -->
 									<div class="mb-3">
 										<label class="form-label subtitle">변경할 비밀번호</label>
 										<div class="input-group">
 											<input class="form-control fakepassword" placeholder="변경할 비밀번호를 입력하세요"
-												type="password" id="psw-input">
+												type="password" id="" name="password1">
 											<span class="input-group-text p-0 bg-transparent">
 												<i class="fakepasswordicon fas fa-eye-slash cursor-pointer p-2 px-3"></i>
 											</span>
@@ -205,11 +214,11 @@
 									<!-- Confirm -->
 									<div class="mb-3">
 										<label class="form-label subtitle">변경할 비밀번호 재입력</label>
-										<input class="form-control" type="password" placeholder="변경할 비밀번호를 재입력하세요">
+										<input class="form-control" type="password" name="password" placeholder="변경할 비밀번호를 재입력하세요">
 									</div>
 
 									<div class="text-end">
-										<a href="#" class="btn btn-primary mb-0">&nbsp&nbsp수정하기&nbsp&nbsp</a>
+										<input type="submit" class="btn btn-primary mb-0" th:value="수정하기"/>
 									</div>
 								</form>
 								<!-- Card body END -->
@@ -229,7 +238,7 @@
 									<ul>
 										<li>회원탈퇴시, 계정복구가 불가능합니다.</li>
 									</ul>
-									<a th:href="@{/delete.member(mNo=${session.mvo.mNo})}" class="btn btn-danger btn-sm mb-0">회원탈퇴하기</a>
+									<a th:href="@{/delete.member}" class="btn btn-danger btn-sm mb-0">회원탈퇴하기</a>
 								</div>
 								<!-- Card body END -->
 							</div>

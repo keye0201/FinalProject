@@ -30,4 +30,5 @@ public interface MeetingMapper {/*
 	public int deleteMeetingMoim(@Param("nickName")String nickName,@Param("meetNo") int meetNo);
 	public int deleteMoimFirst(@Param("meetNo")int meetNo);
 	public int modifyMoim(String nickName, int meetNo);
+	public int MeetingAllDelete(int mNo);
 }
