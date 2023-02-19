@@ -24,4 +24,5 @@ public interface MemberMapper {
 	
 	Member selectMember(@Param("id") String id);
 	Member selectMemberByKakaoToken(String kakaoToken);
+	Member selectByNickName(@Param("nickName")String nickName);
 }

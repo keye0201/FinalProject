@@ -106,6 +106,10 @@
 		<include refid="selectMemberSql"/>
 		WHERE KAKAOTOKEN = #{kakaoToKen} AND STATUS = 'Y'
 		</select>
+		
+		<select id="selectByNickName" resultMap="memberMap">
+			SELECT * FROM MEMBER WHERE NICKNAME =#{nickName}
+		</select>
 
 
 

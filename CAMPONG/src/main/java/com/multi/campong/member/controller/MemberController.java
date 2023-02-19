@@ -154,16 +154,25 @@ public class MemberController {
 	 
 	 @GetMapping("/myprofile")
 	 public String myProfile(@SessionAttribute(name = "mvo", required = false)Member mvo) {
+		 
 		Member mem = mapper.selectMemberByMno(mvo.getMNo());
 		System.out.println(mem);
+		mvo.setProfileImage(mem.getProfileImage());
+		mvo.setRenamedProfileImage(mem.getRenamedProfileImage());
 		 return "sign/myprofile";
 	 }
 	 
 	 @PostMapping("/memUpdate")
 	 public String updateMember(@SessionAttribute(name = "mvo", required = false)Member mvo,HttpSession session,
-			 @RequestParam(value="imageFile", required =false)MultipartFile imageFile,String nickName,String phone,String address,@ModelAttribute Member member,Model model) throws IOException,IllegalStateException, URISyntaxException{
+			 @RequestParam(value="imageFile", required =false)MultipartFile imageFile,@RequestParam(value="nickName")String nickName,String phone,String address,@ModelAttribute Member member,Model model) throws IOException,IllegalStateException, URISyntaxException{
 		//URL r= this.getClass().getClassLoader().getResource("upload");
 		
+		Member selectMember = mapper.selectByNickName(nickName); 
+		if(selectMember != null) {
+			model.addAttribute("msg", "중복된 닉네임이 있습니다.");
+			 return "redirect:myprofile";
+		 }
+		 
 		member.setMNo(mvo.getMNo());
 		
 		//Resource resource = new UrlResource("file:" + savePath + "");
@@ -266,7 +275,10 @@ public class MemberController {
 					String token = kakaoService.getToken(code, loginUrl);
 					Map<String, Object> map = kakaoService.getUserInfo(token);
 					String kakaoToken = (String) map.get("id");
+
 					Member loginMember = service.loginKaKao(kakaoToken);
+
+					System.out.println(loginMember);
 
 					if(loginMember != null) { // 로그인 성공
 						model.addAttribute("loginMember",loginMember); // 세션으로 저장되는 코드, 이유: @SessionAttributes

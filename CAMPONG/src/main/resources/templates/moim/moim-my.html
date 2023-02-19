@@ -17,70 +17,8 @@
 			<div class="container mt-8 mb-8">
 				<div class="row">
 
-					<!-- Sidebar START -->
-					<div class="col-lg-4 col-xl-3">
-						<!-- Responsive offcanvas body START -->
-						<div class="offcanvas-lg offcanvas-end" tabindex="-1" id="offcanvasSidebar">
-							<!-- Offcanvas header -->
-							<div class="offcanvas-header justify-content-end pb-2">
-								<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
-									data-bs-target="#offcanvasSidebar" aria-label="Close"></button>
-							</div>
-
-							<!-- Offcanvas body -->
-							<div class="offcanvas-body p-3 p-lg-0">
-								<div class="card bg-light w-100">
-
-									<!-- Card body START -->
-									<div class="card-body p-3">
-										<!-- Avatar and content -->
-										<div class="text-center mb-3">
-											<!-- Avatar -->
-											<div class="avatar avatar-xl mb-2">
-												<img class="avatar-img rounded-circle border border-2 border-white"
-													src="assets/images/account/01.jpg" alt="">
-											</div>
-											<h6 class="mb-0" th:text="${session.mvo.nickName}"></h6>
-											<hr>
-										</div>
-
-										<!-- Sidebar menu item START -->
-										<ul class="nav nav-pills-primary-soft flex-column">
-											<li class="nav-item">
-												<a class="nav-link" th:href="@{/myprofile(mNo=${session.mvo.mNo})}"><i
-														class="bi bi-person fa-fw me-2"></i>회원정보</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link" href="shopping-basket.html"><i
-														class="bi bi-cart"></i>&nbsp&nbsp&nbsp장바구니</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link" href="account-camping.html"><i
-														class="bi bi-bookmark"></i>&nbsp&nbsp&nbsp캠핑북마크</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link" href="account-traffic.html"><i
-														class="fa-solid fa-car"></i>&nbsp&nbsp&nbsp교통예약</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link  active" th:href="@{/moim.my(mNo=${session.mvo.mNo})}"><i
-														class="bi bi-chat-left-dots"></i>&nbsp&nbsp&nbsp내 모임</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link text-danger bg-danger-soft-hover"
-													href="index.html"><i
-														class="fas fa-sign-out-alt fa-fw me-2"></i>로그아웃</a>
-											</li>
-										</ul>
-										<!-- Sidebar menu item END -->
-									</div>
-									<!-- Card body END -->
-								</div>
-							</div>
-						</div>
-						<!-- Responsive offcanvas body END -->
-					</div>
-					<!-- Sidebar END -->
+					
+					<th:block th:replace="~{common/layout :: #sideBar}"></th:block>
 
 					<!-- Main content START -->
 					<div class="col-lg-8 col-xl-9">
