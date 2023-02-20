@@ -231,7 +231,7 @@
 							<th:block th:if="${session.mvo != null}">
 								<!-- Leave review START -->
 								<form class="mb-5" action="/bagpacking/bagpackingReply" method="post" enctype="multipart/form-data">
-									<input type="hidden" name="fishingNo" th:value="${content.contentId}"/>
+									<input type="hidden" name="contentId" th:value="${content.contentId}"/>
 									<!-- Message -->
 									<div class="form-control-bg-light mb-3">
 										<textarea class="form-control" id="replyContent" name="content"
