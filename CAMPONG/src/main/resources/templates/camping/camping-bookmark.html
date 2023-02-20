@@ -69,8 +69,10 @@
 									<!--캠핑장 체크박스 끝-->
 									<!--캠핑장 사진-->
 										<div class="item-image">
-											<img th:src="@{${content.firstImageUrl}}" style="height: 180px;">
+										<div style="height:180px;">
+											<img th:src="@{${content.firstImageUrl}}" style="width: 100%; height: 100%; object-fit:cover;">
 										</div>
+									</div>
 									<!--캠핑장 사진-->
 									<!--캠핑장 이름-->
 										<div class="ms-2 mt-2"><h5>[[${content.facltNm}]]</h5></div>
