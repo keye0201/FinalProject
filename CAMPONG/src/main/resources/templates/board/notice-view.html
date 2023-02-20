@@ -164,7 +164,8 @@
 				[[${board.content}]]
 				
 				
-				<th:block th:if="${session.loginMember != null && session.loginMember.role == 'ROLE_ADMIN'}">
+				<th:block th:if="${session.mvo != null && 
+					(session.mvo.mNo == board.uNo || session.mvo.role == 'ROLE_ADMIN')}">
 					<div class="d-flex justify-content-end">
 						<button type="button" id="btnUpdate" class="badge-2 modify-btn border-0 mt-4 mb-4 me-3">수정</button>
 						<button type="button" id="btnDelete" class="badge-2 text-bg-danger border-0 mt-4 mb-4">삭제</button>
