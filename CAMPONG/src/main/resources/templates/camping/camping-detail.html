@@ -16,7 +16,7 @@
 				<div class="row g-0">
 					<!-- 대표 이미지 -->
 					<div class="col-md-12">
-						<a data-glightbox data-gallery="gallery" th:href="@{/assets/images/campongimg/camping.jpg}">
+						<a data-glightbox data-gallery="gallery" th:href="@{${content.firstImageUrl}}">
 							<div class="card card-grid-lg card-element-hover card-overlay-hover overflow-hidden"
 								th:style="'background-image:url('+ @{${content.firstImageUrl}} +'); background-position: center left; background-size: cover;'">
 								<!-- Card hover element -->

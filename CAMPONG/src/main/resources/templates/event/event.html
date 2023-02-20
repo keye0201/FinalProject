@@ -227,20 +227,19 @@
 				<!-- Search END -->
 			</div>
 		</section>
-		<!-- =======================
-Main Banner END -->
+		<!-- =======================Main Banner END -->
 
-		<!-- =======================
-Tour grid START -->
+		<!-- =======================Tour grid START -->
 		<section class="pt-0">
 			<div class="container">
 				<div class="row g-4">
-					<th:block th:if="${list == null}">
-						<div>
-							<h6>조회된 글이 없습니다.</h6>
+					<th:block th:if="${list.size == 0}">
+						<div class="my-8 text-center">
+							<h6>현재 '[[${param.searchValue}]]' 관련 행사가 존재하지 않습니다.</h6>
 						</div>
 					</th:block>
-					<th:block th:if="${list != null}">
+					
+				<th:block th:if="${list.size != 0}">
 					<th:block th:each="content : ${list}">
 					<!-- Card item START 1 -->
 					<div class="col-md-6 col-xl-4">
@@ -290,11 +289,15 @@ Tour grid START -->
 					</div>
 					<!-- Card item END -->
 
-
+</th:block></th:block>
 				</div>
 				<!-- Row END -->
 
 				<!-- 페이징 -->
+				<th:block th:if="${list.size == 0}">
+						<div></div>
+					</th:block>
+					<th:block th:if="${list.size != 0}">
 				<div class="row" style="margin-top:50px; margin-bottom:50px;">
 					<div class="col-12">
 						<nav class="mt-4 d-flex justify-content-center" aria-label="navigation">
@@ -336,6 +339,7 @@ Tour grid START -->
 					</div>
 				</div>
 				<!-- Pagination END-->
+				</th:block>
 			</div>
 		</section>
 
