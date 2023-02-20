@@ -47,7 +47,7 @@ public class CampingController {
 	@Autowired
 	private CampingService service;
 	
-	final static private String savePath = "c:\\campong\\upload\\";
+	final static private String savePath = "c:\\campong";
 //	final static private String savePath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload\\";
 	
 	@GetMapping("/camping-main")
@@ -159,9 +159,10 @@ public class CampingController {
 	public String writeReply(Model model, @SessionAttribute(name = "mvo", required = false) Member loginMember,
 			@ModelAttribute CampingContentsReply reply,
 			@RequestParam("upfile") MultipartFile upfile) {
+		System.out.println("upfile:"+upfile);
 		// 로그인한 멤버의 정보 입력
 		reply.setMNo(loginMember.getMNo());
-
+		System.out.println("reply:"+reply);
 		// 파일 저장 로직
 		if (upfile != null && upfile.isEmpty() == false) {
 			String renameFileName = service.saveFile(upfile, savePath);
@@ -179,6 +180,7 @@ public class CampingController {
 		} else {
 			model.addAttribute("msg", "댓글 등록에 실패하였습니다.");
 		}
+		System.out.println("reply:"+reply);
 		model.addAttribute("location", "/camping/camping-detail?contentId=" + reply.getContentId());
 		return "common/msg";
 	}
@@ -201,7 +203,7 @@ public class CampingController {
 	@GetMapping("/file/{fileName}")
 	@ResponseBody
 	public Resource downloadImage(@PathVariable("fileName") String fileName, Model model) throws IOException {
-		return new UrlResource("file:" + savePath + fileName);
+		return new UrlResource("file:" + savePath +"/"+fileName);
 	}
 
 	@RequestMapping("/fileDown")
@@ -254,7 +256,7 @@ public class CampingController {
 	@ResponseBody
 	@GetMapping("/images/{filename}")
 	public Resource showImage(@PathVariable String filename) throws MalformedURLException {
-	    return new UrlResource("file:" + savePath + filename);
+	    return new UrlResource("file:" + savePath +"/" +filename);
 	}
 	
 	@GetMapping("/bookmark") 

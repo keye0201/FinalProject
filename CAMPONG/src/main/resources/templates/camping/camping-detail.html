@@ -369,13 +369,10 @@
 												<!-- Image -->
 												<div class="row g-4">
 													<div class="col-4 col-sm-3 col-lg-2">
-													<!-- 이미지 불러오기 안됨 -->
-<!-- 														<a th:href="|/display?filename=${reply.renameFileName}|" data-glightbox -->
-<!-- 															data-gallery="gallery"> -->
-<!-- <!-- 															<img th:src="|/display?filename=${reply.renameFileName}|" class="replyImg rounded" alt=""> --> 
-<!-- <!-- 															<img th:src="@{/display?filename=20230214_174305723.jpg}" class="replyImg rounded" alt=""> --> 
-<!-- 															<img th:src="@{/images/20230214_174305723.jpg}" class="replyImg rounded" alt=""> -->
-<!-- 														</a> -->
+													<a th:href="|/display?filename=${reply.renameFileName}|" data-glightbox
+															data-gallery="gallery"> 
+															<img th:src="|/file/${reply.renameFileName}|" class="replyImg rounded" alt=""> 
+														</a> 
 													</div>
 												</div>
 											</div>
@@ -385,29 +382,6 @@
 									</div>
 									</th:block>
 								</th:block>
-									
-								<!--페이지-->
-								<div class="pagination">
-									<nav class="mt-3" aria-label="navigation">
-										<ul class="pagination pagination-primary-soft rounded">
-											<li class="page-item"><a class="page-link" th:href="@{#}" tabindex="-1"><i
-														class="fas fa-angle-double-left"></i></a></li>
-											<li class="page-item"><a class="page-link" th:href="@{#}"><i
-														class="fas fa-angle-left"></i></a></li>
-											<li class="page-item"><a class="page-link" th:href="@{#}">1</a></li>
-											<li class="page-item active"><a class="page-link" th:href="@{#}">2</a>
-											</li>
-											<li class="page-item"><a class="page-link" th:href="@{#}">3</a></li>
-											<li class="page-item"><a class="page-link" th:href="@{#}">4</a></li>
-											<li class="page-item"><a class="page-link" th:href="@{#}">5</a></li>
-											<li class="page-item"><a class="page-link" th:href="@{#}"><i
-														class="fas fa-angle-right"></i></a></li>
-											<li class="page-item"><a class="page-link" th:href="@{#}"><i
-														class="fas fa-angle-double-right"></i></a></li>
-										</ul>
-									</nav>
-								</div>
-								<!--페이지끝-->
 							</div>
 						</div>
 					</div>

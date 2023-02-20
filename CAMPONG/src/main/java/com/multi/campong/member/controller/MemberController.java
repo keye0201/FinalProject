@@ -166,7 +166,7 @@ public class MemberController {
 	 public String updateMember(@SessionAttribute(name = "mvo", required = false)Member mvo,HttpSession session,
 			 @RequestParam(value="imageFile", required =false)MultipartFile imageFile,@RequestParam(value="nickName")String nickName,String phone,String address,@ModelAttribute Member member,Model model) throws IOException,IllegalStateException, URISyntaxException{
 		//URL r= this.getClass().getClassLoader().getResource("upload");
-		
+		System.out.println("imageFile:"+imageFile);
 		Member selectMember = mapper.selectByNickName(nickName); 
 		if(selectMember != null && !nickName.equals(mvo.getNickName())) {
 			model.addAttribute("msg","중복된 아이디입니다.");
@@ -294,7 +294,7 @@ public class MemberController {
 				}
 			}
 			model.addAttribute("msg", "로그인에 실패하였습니다.");
-			model.addAttribute("location","sign/sign-in");
+			model.addAttribute("location","sign-in");
 			return "common/msg";
 		}
 	 
