@@ -120,4 +120,12 @@ public class CampingService {
 		return mapper.selectBookmarkList(mNo);
 	}
 
+	public CampingContentsReply getCampingSelectmNoMax(int mNo) {
+		return mapper.getCampSelectmNoMax(mNo);
+	}
+
+	public List<CampingContentsReply> getCampingRepluAll() {
+		return mapper.getCampingReplyAll();
+	}
+
 }

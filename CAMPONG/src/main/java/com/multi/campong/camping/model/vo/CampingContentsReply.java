@@ -19,4 +19,6 @@ public class CampingContentsReply {
 	private String renameFileName;
 	private Date createDate;
 	private String nickName;
+	private String profileImage;
+	private String renamedProfileImage;
 }

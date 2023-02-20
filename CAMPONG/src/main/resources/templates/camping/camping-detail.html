@@ -321,6 +321,8 @@
 <!-- 												</label> -->
 <!-- 												<input class="" type="file" id="upfile" name="upfile" accept="image/*" style="display: none"> -->
 												<input class="" type="file" id="upfile" name="upfile" accept="image/*"><br>
+												<input type="hidden" name="profileImage" th:value="${session.mvo.ProfileImage}" th:unless="${session.mvo.renamedProfileImage==null}"/>
+												<input type="hidden" name="renamedProfileImage" th:value="${session.mvo.renamedProfileImage}" th:unless="${session.mvo.renamedProfileImage==null}"/>
 												<!-- Button -->
 												<button type="submit" class="btn btn-primary mb-0 mt-2">리뷰 등록<i
 														class="bi fa-fw bi-arrow-right ms-2"></i></button>
@@ -343,8 +345,8 @@
 										</div>
 									</div>
 								</th:block>
-								<th:block th:if="${replyList != null}">
-									<th:block th:each="reply : ${replyList}">
+								<th:block th:if="${mmo != null}">
+									<th:block th:each="mmo : ${mmo}">
 									<div class="row g-4m mt-3">
 										<div class="travelReview col-12">
 											<!--답글페이지-->
@@ -353,25 +355,28 @@
 												<div class="d-sm-flex justify-content-between">
 													<!-- Avatar image -->
 													<div class="d-sm-flex align-items-center mb-3">
+															
 														<img class="avatar avatar-md rounded-circle float-start me-3"
-															th:src="@{/assets/images/avatar/01.jpg}" alt="avatar">
+															th:src="|/file/${mmo.renameFileName}|" alt="avatar" th:unless="${mmo.renamedProfileImage==null} or ${mmo.renamedProfileImage.toString().equals('0')}">
+															<img class="avatar avatar-md rounded-circle float-start me-3"
+															src="/assets/campongimg/defaultImage.png" alt="avatar" th:if="${mmo.renamedProfileImage==null} or ${mmo.renamedProfileImage.toString().equals('0')}">
 														<!-- Title -->
 														<div>
-															<h6 class="m-0">[[${reply.nickName}]]</h6>
-															<span class="me-3 small">[[${#dates.format(reply.createDate)}]]</span>
+															<h6 class="m-0">[[${mmo.nickName}]]</h6>
+															<span class="me-3 small">[[${#dates.format(mmo.createDate)}]]</span>
 														</div>
 													</div>
 												</div>
 	
 												<!-- Content -->
-												<h6 class="fw-bold"><span class="text-body"></span> [[${reply.content}]] </h6>
+												<h6 class="fw-bold"><span class="text-body"></span> [[${mmo.content}]] </h6>
 	
 												<!-- Image -->
 												<div class="row g-4">
 													<div class="col-4 col-sm-3 col-lg-2">
-													<a th:href="|/display?filename=${reply.renameFileName}|" data-glightbox
+													<a th:href="|/display?filename=${mmo.renameFileName}|" data-glightbox
 															data-gallery="gallery"> 
-															<img th:src="|/file/${reply.renameFileName}|" class="replyImg rounded" alt=""> 
+															<img th:src="|/file/${mmo.renameFileName}|" class="replyImg rounded" alt=""> 
 														</a> 
 													</div>
 												</div>

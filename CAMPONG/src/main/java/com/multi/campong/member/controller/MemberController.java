@@ -211,6 +211,7 @@ public class MemberController {
 		}
 
 		int result = service.updateMember(member);
+		
 		if (result > 0) {
 			model.addAttribute("msg", "이미지 등록완료되었습니다");
 			model.addAttribute("loacation", "/myprofile");

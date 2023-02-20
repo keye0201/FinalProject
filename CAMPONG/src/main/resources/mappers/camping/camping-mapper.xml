@@ -57,6 +57,8 @@
 		<result property="renameFileName" column="RENAME_FILENAME"/>
 		<result property="createDate" column="CREATE_DATE"/>
 		<result property="nickName" column="NICKNAME"/>
+		<result property="profileImage" column="PROFILE_IMAGE"/>
+		<result property="renamedProfileImage" column="RENAMED_PROFILEIMAGE"/>
 	</resultMap>
 	
 	<resultMap type="Camping" id="campingDetailResultMap" extends="campingListResultMap">
@@ -191,11 +193,11 @@
 		INSERT INTO CAMPING_CONTENTS_REPLY(
 				REPLY_NO, CONTENTID, USER_NO, 
 				CONTENT, STATUS, ORIGINAL_FILENAME, 
-				RENAME_FILENAME, CREATE_DATE) 
+				RENAME_FILENAME, CREATE_DATE,PROFILE_IMAGE,RENAMED_PROFILEIMAGE) 
 			VALUES(
 				0, #{contentId}, #{mNo}, 
 				#{content}, DEFAULT, #{originalFileName}, 
-				#{renameFileName}, DEFAULT
+				#{renameFileName}, DEFAULT,#{profileImage},#{renamedProfileImage}
 			)
 	</insert>
 	
@@ -229,4 +231,13 @@
 		LEFT OUTER JOIN BOOKMARK LK ON  LK.CONTENTID = C.CONTENTID
 		WHERE LK.USER_NO = #{mNo};
 	</select>
+	
+	<select id="getCampSelectmNoMax" resultMap="campingContentsReplyResultMap">
+		SELECT *  FROM
+		CAMPING_CONTENTS_REPLY WHERE USER_NO=#{mNo} AND REPLY_NO =(SELECT MAX(REPLY_NO) FROM CAMPING_CONTENTS_REPLY) 
+	</select>
+	<select id="getCampingReplyAll" resultMap="campingContentsReplyResultMap">
+		SELECT * FROM CAMPING_CONTENTS_REPLY ORDER BY REPLY_NO DESC
+	</select>
+	
 </mapper>

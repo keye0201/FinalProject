@@ -107,6 +107,8 @@ public class MemberService {
 		return mapper.updatePwd(map);
 	}
 
+
+
 //	@Transactional(rollbackFor = Exception.class)
 //	public int save(Member member) {
 //		int result = 0;

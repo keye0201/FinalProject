@@ -142,7 +142,9 @@ public class CampingController {
 		}
 		
 		Camping content = service.findByNo(contentId, mNo);
-		
+
+		List<CampingContentsReply> mmo = service.getCampingRepluAll();
+		System.out.println(mmo);
 //		String dir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload";
 //		log.info("위치 : " + dir);
 		
@@ -154,14 +156,16 @@ public class CampingController {
 		model.addAttribute("content", content);
 		model.addAttribute("facilitys", facilitys);
 		model.addAttribute("replyList", content.getReplyList());
+		model.addAttribute("mmo", mmo);
 //		model.addAttribute("upload", savePath);
 		return "camping/camping-detail";
 	}
 	
 	@RequestMapping("/reply")
 	public String writeReply(Model model, @SessionAttribute(name = "mvo", required = false) Member loginMember,
-			@ModelAttribute CampingContentsReply reply,
+			@ModelAttribute CampingContentsReply reply,String profileImage,
 			@RequestParam("upfile") MultipartFile upfile) {
+		System.out.println(profileImage);
 		System.out.println("upfile:"+upfile);
 		// 로그인한 멤버의 정보 입력
 		reply.setMNo(loginMember.getMNo());
@@ -177,8 +181,12 @@ public class CampingController {
 		}
 		
 		int result = service.saveReply(reply);
+		
+		CampingContentsReply mo = service.getCampingSelectmNoMax(loginMember.getMNo());  //하나만 가져옴
 
+		System.out.println(mo);
 		if (result > 0) {
+			model.addAttribute("mo", mo);
 			model.addAttribute("msg", "댓글이 등록되었습니다.");
 		} else {
 			model.addAttribute("msg", "댓글 등록에 실패하였습니다.");

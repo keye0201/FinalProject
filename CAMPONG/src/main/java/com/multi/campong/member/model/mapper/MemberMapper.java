@@ -30,4 +30,5 @@ public interface MemberMapper {
 	Member selectByNickName(@Param("nickName")String nickName);
 	Member loginByID(@Param("id")String id);
 	public int updatePwd(Map<String, String> map);
+	public Member getInfor(int mNo);
 }
