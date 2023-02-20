@@ -31,18 +31,6 @@
 						
 						<!-- *** -->
 						<form id="cardForm" class="card-body form-control-border p-3 p-sm-4" th:action="@{/car/traffic-car}" method="GET">
-							<!-- Tabs START -->
-							<div class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-								<div class="form-check form-check-inline active" id="cab2-one-way-tab" data-bs-toggle="pill" data-bs-target="#cab2-one-way" role="tab" aria-controls="cab2-one-way" aria-selected="true">
-									<input class="form-check-input" type="radio" name="inlineRadioOptions" id="cabRadio1" value="option1" checked>
-									<label class="form-check-label" for="cabRadio1">단기 대여</label>
-								</div>
-								<div class="form-check form-check-inline" id="cab2-round-way-tab" data-bs-toggle="pill" data-bs-target="#cab2-round-way" role="tab" aria-controls="cab2-round-way" aria-selected="false">
-									<input class="form-check-input" type="radio" name="inlineRadioOptions" id="cabRadio2" value="option2">
-									<label class="form-check-label" for="cabRadio2">장기 대여</label>
-								</div>
-							</div>
-							<!-- Tabs END -->
 							
 							<!-- *** -->
 							<input type="hidden" id="page" name="page" value="1">
@@ -116,7 +104,7 @@
 										<div class="col-md-6">
 											<div class="form-fs-lg form-control-transparent">
 												<label class="form-label small">대여일</label>
-												<input type="text" id="date" name="date" class="form-control flatpickr" placeholder="날짜를 선택하세요">
+												<input th:value="${date}" type="text" id="date" name="date" class="form-control flatpickr" placeholder="날짜를 선택하세요">
 											</div>
 										</div>
 
@@ -124,109 +112,14 @@
 										<div class="col-md-6 text-md-end">
 											<div class="form-fs-lg form-control-transparent">
 												<label class="form-label small ms-3 ms-md-0 me-md-3">대여시간</label>
-												<input type="text" id="time" name="time" class="form-control flatpickr text-md-end" data-enableTime="true" data-noCalendar="true" placeholder="시간을 선택하세요">
+												<input th:value="${time}" type="text" id="time" name="time" class="form-control flatpickr text-md-end" data-enableTime="true" data-noCalendar="true" placeholder="시간을 선택하세요">
 											</div>
 										</div>
 									</div>
 								</div>
 								<!-- One way END -->
 
-								<!-- Round trip START -->
-								<div class="tab-pane fade" id="cab2-round-way" role="tabpanel" aria-labelledby="cab2-round-way-tab">
-									<div class="row g-2 g-md-4">
-										<!-- Pickup -->
-										<div class="col-md-6 position-relative">
-											<label class="form-label small">대여지점</label>
-											<div class="form-fs-lg form-control-transparent">
-												<select  class="form-select js-choice" data-search-enabled="true">
-													<option value="">지역을 선택하세요</option>
-													<option>서울특별시</option>
-													<option>경기도</option>
-													<option>인천광역시</option>
-													<option>강원도</option>
-													<option>충청남도</option>
-													<option>대전광역시</option>
-													<option>충청북도</option>
-													<option>세종</option>
-													<option>부산광역시</option>
-													<option>울산</option>
-													<option>대구광역시</option>
-													<option>경상북도</option>
-													<option>경상남도</option>
-													<option>전라남도</option>
-													<option>광주광역시</option>
-													<option>전라북도</option>
-													<option>제주특별자치도</option>
-												</select>
-											</div>	
-
-											<!-- Auto fill button -->
-											<div class="btn-flip-icon z-index-9 mt-2 mt-md-1">
-												<button class="btn btn-dark shadow btn-round mb-0"><i class="fa-solid fa-right-left"></i></button>
-											</div>
-										</div>
-
-										<!-- Drop -->
-										<div class="col-sm-6 text-sm-end">
-											<label class="form-label small ms-3 ms-md-0 me-md-3">반납지점</label>
-											<div class="form-fs-lg form-control-transparent">
-												<select class="form-select js-choice" data-search-enabled="true">
-													<option value="">지역을 선택하세요</option>
-													<option>서울특별시</option>
-													<option>경기도</option>
-													<option>인천광역시</option>
-													<option>강원도</option>
-													<option>충청남도</option>
-													<option>대전광역시</option>
-													<option>충청북도</option>
-													<option>세종</option>
-													<option>부산광역시</option>
-													<option>울산</option>
-													<option>대구광역시</option>
-													<option>경상북도</option>
-													<option>경상남도</option>
-													<option>전라남도</option>
-													<option>광주광역시</option>
-													<option>전라북도</option>
-													<option>제주특별자치도</option>
-												</select>
-											</div>	
-										</div>
-
-										<!-- Date -->
-										<div class="col-sm-6">
-											<div class="form-fs-lg form-control-transparent">
-												<label class="form-label small">대여일</label>
-												<input type="text" class="form-control flatpickr" placeholder="날짜를 선택하세요">
-											</div>
-										</div>
-
-										<!-- Time -->
-										<div class="col-sm-6 text-sm-end">
-											<div class="form-fs-lg form-control-transparent">
-												<label class="form-label small ms-3 ms-md-0 me-md-3">대여시간</label>
-												<input type="text" class="form-control flatpickr text-sm-end" data-enableTime="true" data-noCalendar="true" placeholder="시간을 선택하세요">
-											</div>
-										</div>
-
-										<!-- Date -->
-										<div class="col-sm-6">
-											<div class="form-fs-lg form-control-transparent">
-												<label class="form-label small">반납일</label>
-												<input type="text" class="form-control flatpickr" placeholder="날짜를 선택하세요">
-											</div>
-										</div>
-
-										<!-- Time -->
-										<div class="col-sm-6 text-sm-end">
-											<div class="form-fs-lg form-control-transparent">
-												<label class="form-label small ms-3 ms-md-0 me-md-3">반납시간</label>
-												<input type="text" class="form-control flatpickr text-sm-end" data-enableTime="true" data-noCalendar="true" placeholder="시간을 선택하세요">
-											</div>
-										</div>
-									</div> <!-- Row END -->
-								</div>
-								<!-- Round trip END -->
+								
 							</div>
 							<!-- Tabs content END -->
 

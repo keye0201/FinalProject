@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
@@ -59,17 +60,16 @@ public class CarController {
 	}
 
 	@GetMapping("/traffic-car")
-	public String car(Model model, @RequestParam Map<String, String> paramMap) {
-		
+	public String car(Model model, @RequestParam Map<String, String> paramMap,@RequestParam(required= false) String date,@RequestParam(required= false)String time) {
 //		String searchValue = null;
 		int page = 1;
 		
 		// 탐색할 맵을 선언
 		Map<String, String> searchMap = new HashMap<String, String>();
 		try {
-			String city = paramMap.get("city");
-			if (city != null) {
-				searchMap.put("city", city);
+			String city1 = paramMap.get("city");
+			if (city1 != null) {
+				searchMap.put("city", city1);
 			}
 			page = Integer.parseInt(paramMap.get("page"));
 		} catch (Exception e) {}
@@ -77,21 +77,30 @@ public class CarController {
 		int carCount = service.getCarCount(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 10, carCount, 4);
 		List<Car> list = service.getCarList(pageInfo, searchMap);
-		
+		System.out.println(list);
 		//업체 랜덤 이미지
 		int[] imgIdx = createRdImgIdx(4, 18);
-
 		model.addAttribute("list", list);
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("carCount", carCount);
 		model.addAttribute("imgIdx", imgIdx);
-		
+		model.addAttribute("time", time);
+		model.addAttribute("date", date);
 		log.info("searchMap : " + searchMap.toString());
 		log.info("paramMap : " + paramMap.toString());
 //		log.info(Integer.toString(carCount));
 		
 		return "car/traffic-car";
+	}
+	@PostMapping("/trafficGo")
+	public String trafficGo(Model model,@RequestParam(required = false)String date,@RequestParam(required= false)String time) {
+		System.out.println(date);
+		System.out.println(time);
+		model.addAttribute("date", date);
+		model.addAttribute("time", time);
+		
+		return "/car/traffic-car";
 	}
 	
 	@GetMapping("/booking-confirm")
