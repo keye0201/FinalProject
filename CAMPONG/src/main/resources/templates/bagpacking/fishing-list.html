@@ -143,15 +143,19 @@
 					<!-- Card item END -->
 				</div> <!-- Row END -->
 				
-				<!-- Pagination Start-->
-				<div class="row">
+				<!-- 페이징 -->
+				<th:block th:if="${list.size == 0}">
+						<div></div>
+					</th:block>
+					<th:block th:if="${list.size != 0}">
+				<div class="row" style="margin-top:50px; margin-bottom:50px;">
 					<div class="col-12">
 						<nav class="mt-4 d-flex justify-content-center" aria-label="navigation">
 							<ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
 								<!--이전 페이지 -->
 								<li class="page-item mb-0">
 									<button class="page-link"
-										th:onclick="|movePage('/bagpacking/fishing-list?page=${pageInfo.prevPage}');|" tabindex="-1">
+										th:onclick="|movePage('/event/event?page=${pageInfo.prevPage}');|" tabindex="-1">
 										<i class="fa-solid fa-angle-left"></i>
 									</button>
 								</li>
@@ -160,14 +164,14 @@
 								<th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
 									<th:block th:if="${status.current == pageInfo.currentPage}">
 										<li class="page-item mb-0">
-											<button class="page-link active" th:onclick="|movePage('/bagpacking/fishing-list?page=${status.current}');|" disabled>
+											<button class="page-link active" th:onclick="|movePage('/event/event?page=${status.current}');|" disabled>
 											[[${status.current}]]
 											</button>
 										</li>
 									</th:block>
 									<th:block th:if="${status.current != pageInfo.currentPage}">
 										<li class="page-item mb-0">
-											<button class="page-link" th:onclick="|movePage('/bagpacking/fishing-list?page=${status.current}');|">
+											<button class="page-link" th:onclick="|movePage('/event/event?page=${status.current}');|">
 											[[${status.current}]]
 											</button>
 										</li>
@@ -176,7 +180,7 @@
 								
 								<!--다음 페이지 -->
 								<li class="page-item mb-0">
-									<button class="page-link" th:onclick="|movePage('/bagpacking/fishing-list?page=${pageInfo.nextPage}');|">
+									<button class="page-link" th:onclick="|movePage('/event/event?page=${pageInfo.nextPage}');|">
 										<i class="fa-solid fa-angle-right"></i>
 									</button>
 								</li>
