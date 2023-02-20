@@ -1,38 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head th:fragment="head" th:replace="~{common/layout :: head}"></head>
-
 <head>
-	<style>
-		.tip-food-icon {
-			max-width: 65%;
-		}
-		.tip-food-recommend {
-			object-fit: cover; 
-			height:200px;
-		}
-		.tip-food-list {
-			object-fit: cover; 
-			height:265px;
-		}
-		.tip-tip {
-			object-fit: scale-down;
-			width: 130px;
-			height: 130px;
-		}
-		* {
-			font-family: 'SUIT Variable', sans-serif;
-		}
-		.card_w {
-			width: 145px;
-		}
-		.nothing {
-			text-align: center;
-		}
-		input[type=radio] {
-			display: none;
-		}
-	</style>
+	<th:block th:replace="~{common/layout :: head}"></th:block>
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/recipe.css}">
 </head>
 
 <body>
@@ -40,257 +10,245 @@
 <header th:replace="~{common/layout :: #header}"></header>
 
 <!-- **************** MAIN CONTENT START **************** -->
-<main>
+	<main>
 
-<!-- =======================
-Main banner START -->
-<section class="position-relative py-8 py-lg-5" style="background-image:url(/assets/images/bg/23.jpg); background-position: center left; background-size: cover;">
-	<div class="bg-overlay bg-dark opacity-5"></div>
-	<div class="container z-index-9 position-relative">
-		<div class="row py-sm-5">
+	<!-- =======================Main banner START -->
+	<section class="position-relative py-8 py-lg-5" style="background-image:url(/assets/images/bg/recipeTop.jpg); background-position: center 70%; background-size: cover;">
+		<div class="bg-overlay"></div>
+		<div class="container z-index-9 position-relative">
+			<div class="row py-sm-3 mt-9">
+				<!-- Search START -->
+				<div class="col-xl-7 mx-auto mt-3 pt-8">
+					<div class="bg-blur bg-white bg-opacity-10 border border-light border-opacity-25 rounded-3 p-3">
+						<!-- Form START -->
+						<form th:action="@{/recipe/recipe}" method="get" class="row g-3 justify-content-center align-items-center">
+							<div class="col-lg-10">
+								<!-- Input -->
+								<div class="form-input-dropdown position-relative">
+									<input class="form-control form-control-lg me-1 ps-5" type="text" placeholder="레시피를 검색하세요" id="searchValue" name="searchValue" th:value="${param.searchValue}">
+									<!-- Icon -->
+									<span class="position-absolute top-50 start-0 translate-middle ps-5"><i class="bi bi-search fs-5"></i></span>
+								</div>
+							</div>
+	
+							<div class="col-lg-2 d-grid">
+								<!-- Search -->
+								<button class="btn btn-lg btn-primary mb-0" type="submit">검색</button>
+							</div>
+						</form>
+						<!-- Form END -->
+					</div>
+				</div>	
+				<!-- Search END -->
+	
+			</div> <!-- Row END -->
+		</div>
+	</section>
+	<!-- =======================	Main banner END -->
+	
+	<!-- =======================	Listing START -->
+	<section class="pt-0 pt-sm-5">
+		<div class="container">
 			<!-- Title -->
-			<div class="col-xl-8 m-auto text-center">
-				<h1 class="display-4 text-white mb-0">레시피</h1>
+			<div class="row mb-4 mb-sm-5">
+				<div class="col-12 text-center">
+					<h2 class="mb-0">캠퐁이 추천하는<span style="color: var(--cp-green);"> 레시피</span></h2>
+				</div>	
 			</div>
-
-			<!-- Search START -->
-			<div class="col-xl-7 mx-auto">
-				<div class="bg-blur bg-white bg-opacity-10 border border-light border-opacity-25 rounded-3 p-4 mt-5">
-					<!-- Form START -->
-					<form th:action="@{/recipe/recipe}" method="get" class="row g-3 justify-content-center align-items-center">
-						<div class="col-lg-10">
-							<!-- Input -->
-							<div class="form-input-dropdown position-relative">
-								<input class="form-control form-control-lg me-1 ps-5" type="text" placeholder="레시피를 검색하세요" id="searchValue" name="searchValue" th:value="${param.searchValue}">
-								<!-- Icon -->
-								<span class="position-absolute top-50 start-0 translate-middle ps-5"><i class="bi bi-search fs-5"></i></span>
+			<!-- 랜덤 4개 리스트 -->
+			<div class="row g-4">
+				<div th:each="recipe : ${randomList}" class="col-sm-6 col-lg-4 col-xl-3">
+					<div class="card shadow p-2 pb-0 h-100">
+						<!-- Image -->
+						<img th:src="${recipe.imageUrl}" class="rounded-2 tip-food-recommend" alt="Card image">
+	
+						<!-- Card body START -->
+						<div class="card-body px-3 pb-0">
+	
+							<!-- Title -->
+							<h5 class="card-title">[[${recipe.title}]]</h5>
+	
+							<!-- Contents -->
+							[[${recipe.content}]]					
+						</div>
+						<!-- Card body END -->
+	
+						<!-- Card footer START-->
+						<div class="card-footer border-top py-2 mt-2">
+							<!-- Price and Button -->
+							<div class="d-sm-flex justify-content-end">
+								<!-- Button -->
+								<div class="mt-2 mt-sm-0 z-index-2">
+									<a th:href="${recipe.url}" class="btn btn-sm btn-primary-soft mb-0 w-100">레시피 보기<i class="bi bi-arrow-right ms-2"></i></a>    
+								</div>                  
 							</div>
 						</div>
-
-						<div class="col-lg-2 d-grid">
-							<!-- Search -->
-							<button class="btn btn-lg btn-primary mb-0" type="submit">검색</button>
-						</div>
-					
-					<!-- Form END -->
-				</div>
-			</div>	
-			<!-- Search END -->
-
-		</div> <!-- Row END -->
-	</div>
-</section>
-<!-- =======================
-Main banner END -->
-
-<!-- =======================
-Listing START -->
-<section class="pt-0 pt-sm-5">
-	<div class="container">
-		<!-- Title -->
-		<div class="row mb-4 mb-sm-5">
-			<div class="col-12 text-center">
-				<h2 class="mb-0">캠퐁이 추천하는 레시피</h2>
-			</div>	
-		</div>
-		<!-- 랜덤 4개 리스트 -->
-		<div class="row g-4">
-			<div th:each="recipe : ${randomList}" class="col-sm-6 col-lg-4 col-xl-3">
-				<div class="card shadow p-2 pb-0 h-100">
-					<!-- Image -->
-					<img th:src="${recipe.imageUrl}" class="rounded-2 tip-food-recommend" alt="Card image">
-
-					<!-- Card body START -->
-					<div class="card-body px-3 pb-0">
-
-						<!-- Title -->
-						<h5 class="card-title">[[${recipe.title}]]</h5>
-
-						<!-- Contents -->
-						[[${recipe.content}]]					
-					</div>
-					<!-- Card body END -->
-
-					<!-- Card footer START-->
-					<div class="card-footer border-top py-2 mt-2">
-						<!-- Price and Button -->
-						<div class="d-sm-flex justify-content-end">
-							<!-- Button -->
-							<div class="mt-2 mt-sm-0 z-index-2">
-								<a th:href="${recipe.url}" class="btn btn-sm btn-primary-soft mb-0 w-100">레시피 보기<i class="bi bi-arrow-right ms-2"></i></a>    
-							</div>                  
-						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</section>
-<!-- =======================
-Listing END -->
-
-<!-- =======================
-Category START -->
-<Section style="padding-top: 0px;">
-	<div class="container">
-		<div class="row">
-			
-			<!-- Category START -->
-			<div class="col-12 align-items-center">
-				<div class="card card-body bg-light text-center align-items-center float-start card_w me-4">
-					<!-- Icon -->
-					<div class="icon-xl bg-mode rounded-circle mb-3">
-						<figure>
-							<img src="/assets/images/icon/7.png" class="tip-food-icon" alt="">
-						</figure>
-					</div>
-					<h6 class="mb-0"><a onclick="movePage('/recipe/recipe?page=1')" class="stretched-link">카테고리 적용</a></h6>
-				</div>
-				<div class="card card-body bg-light text-center align-items-center float-start card_w me-4" style="padding-bottom: 12px;">
-					<!-- Icon -->
-					<div class="icon-xl bg-mode rounded-circle mb-3">
-						<figure>
-							<img src="/assets/images/icon/1.png" class="tip-food-icon" alt="">
-						</figure>
-					</div>
-					<label class="form-check-label" for="Item1"><h6>소고기 <input class="form-check-input" style="margin-top: 3px;" type="checkbox" value="소고기" th:checked="${#arrays.contains(Item, '소고기') ? 'checked' : null}" name="Item" id="Item1"></h6></label>
-					
-					
-					<!-- <h6 class="mb-0"><a href="/recipe/recipe?searchType=소고기" class="stretched-link">소고기</a></h6> -->
-				</div>
-				
-				<div class="card card-body bg-light text-center align-items-center float-start card_w me-4" style="padding-bottom: 12px;">
-					<!-- Icon -->
-					<div class="icon-xl bg-mode rounded-circle mb-3">
-						<figure>
-							<img src="/assets/images/icon/2.png" class="tip-food-icon" alt="">
-						</figure>
-					</div>
-					<label class="form-check-label" for="Item2"><h6>돼지고기 <input class="form-check-input" style="margin-top: 3px;" type="checkbox" value="돼지고기" th:checked="${#arrays.contains(Item, '돼지고기') ? 'checked' : null}" name="Item" id="Item2"></h6></label>
-				</div>
-				
-				<div class="card card-body bg-light text-center align-items-center float-start card_w me-4" style="padding-bottom: 12px;">
-					<!-- Icon -->
-					<div class="icon-xl bg-mode rounded-circle mb-3">
-						<figure>
-							<img src="/assets/images/icon/3.png" class="tip-food-icon" alt="">
-						</figure>
-					</div>
-					<label class="form-check-label" for="Item3"><h6>닭고기 <input class="form-check-input" style="margin-top: 3px;" type="checkbox" value="닭고기" th:checked="${#arrays.contains(Item, '닭고기') ? 'checked' : null}" name="Item" id="Item3"></h6></label>
-				</div>
-				
-				<div class="card card-body bg-light text-center align-items-center float-start card_w me-4" style="padding-bottom: 12px;">
-					<!-- Icon -->
-					<div class="icon-xl bg-mode rounded-circle mb-3">
-						<figure>
-							<img src="/assets/images/icon/4.png" class="tip-food-icon" alt="">
-						</figure>
-					</div>
-					<label class="form-check-label" for="Item4"><h6>해산물 <input class="form-check-input" style="margin-top: 3px;" type="checkbox" value="해산물" th:checked="${#arrays.contains(Item, '해산물') ? 'checked' : null}" name="Item" id="Item4"></h6></label>
-				</div>
-				
-				<div class="card card-body bg-light text-center align-items-center float-start card_w me-4" style="padding-bottom: 12px;">
-					<!-- Icon -->
-					<div class="icon-xl bg-mode rounded-circle mb-3">
-						<figure>
-							<img src="/assets/images/icon/5.png" class="tip-food-icon" alt="">
-						</figure>
-					</div>
-					<label class="form-check-label" for="Item5"><h6>채소 <input class="form-check-input" style="margin-top: 3px;" type="checkbox" value="채소" th:checked="${#arrays.contains(Item, '채소') ? 'checked' : null}" name="Item" id="Item5"></h6></label>
-				</div>
-				
-				<div class="card card-body bg-light text-center align-items-center float-start card_w" style="padding-bottom: 12px;">
-					<!-- Icon -->
-					<div class="icon-xl bg-mode rounded-circle mb-3">
-						<figure>
-							<img src="/assets/images/icon/6.png" class="tip-food-icon" alt="">
-						</figure>
-					</div>
-					<label class="form-check-label" for="Item6"><h6>칵테일 <input class="form-check-input" style="margin-top: 3px;" type="checkbox" value="칵테일" th:checked="${#arrays.contains(Item, '칵테일') ? 'checked' : null}" name="Item" id="Item6"></h6></label>
-				</div>
-			</div>
-			<!-- Category END -->
-			</form>
-		</div>
-	</div>
-</Section>
-<!-- =======================
-Category END -->
-
-<!-- =======================
-Hotel grid START -->
-<section class="pt-0">
-	<div class="container">
-		<th:block th:if="${list.size == 0}">
-			<div class="nothing mb-5 mt-3">검색하신 제목의 레시피가 없습니다.</div>
-		</th:block>
-		<div class="row g-4">
-			<!-- Card item START -->
-			<div th:each="recipe : ${list}" class="col-md-6 col-xl-4">
-				<div class="card shadow p-2 pb-0 h-100">
-					<!-- Image -->
-					<img th:src="${recipe.imageUrl}" class="rounded-2 tip-food-list" alt="Card image">
-
-					<!-- Card body START -->
-					<div class="card-body px-3 pb-0">
-
-						<!-- Title -->
-						<h5 class="card-title">[[${recipe.title}]]</h5>
-
-						<!-- Contents -->
-						[[${recipe.content}]]
-					</div>
-					<!-- Card body END -->
-
-					<!-- Card footer START-->
-					<div class="card-footer pt-4">
-						<!-- Price and Button -->
-						<div class="d-sm-flex justify-content-end">
-							<!-- Button -->
-							<div class="mt-2 mt-sm-0 z-index-2">
-								<a th:href="${recipe.url}" class="btn btn-sm btn-primary-soft mb-0 w-100">레시피 보기<i class="bi bi-arrow-right ms-2"></i></a>    
-							</div>                  
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- Card item END -->
-		</div>
-		<th:block th:if="${list.size != 0}">
-			<!-- 페이징 -->
+	</section>
+	<!-- =======================	Listing END -->
+	
+	<!-- =======================	Category START -->
+	<Section style="padding-top: 0px;">
+		<div class="container">
 			<div class="row">
-				<div class="col-12">
-					<nav class="mt-4 d-flex justify-content-center" aria-label="navigation">
-						<ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
-							<!-- 이전페이지 -->
-							<li class="page-item mb-0"><a class="page-link" style="cursor:pointer;" th:onclick="|movePage('/recipe/recipe?page=${pageInfo.prevPage}');|"><i
-										class="fa-solid fa-angle-left"></i></a></li>
-							<!-- 10개 페이지 -->
-							<th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
-								<th:block th:if="${status.current == pageInfo.currentPage}">
-									<li class="page-item mb-0 active"><a class="page-link">[[${status.current}]]</a></li>
-								</th:block>
-								<th:block th:if="${status.current != pageInfo.currentPage}">
-									<li class="page-item mb-0"><a class="page-link" style="cursor:pointer;" th:onclick="|movePage('/recipe/recipe?page=${status.current}');|">[[${status.current}]]</a></li>
-								</th:block>
-							</th:block>
-							<!-- 다음페이지 -->
-							<li class="page-item mb-0"><a class="page-link" style="cursor:pointer;" th:onclick="|movePage('/recipe/recipe?page=${pageInfo.nextPage}');|"><i
-										class="fa-solid fa-angle-right"></i></a></li>
-										
-						</ul>
-					</nav>
+				
+				<!-- Category START -->
+				<div class="col-12 align-items-center">
+					<div class="card card-body text-center align-items-center float-start card_w me-4" style="cursor:pointer; background-color: rgba(var(--bs-campong-violet-rgb), 0.2);">
+						<!-- Icon -->
+						<div class="icon-xl bg-mode rounded-circle mb-3">
+							<figure>
+								<img src="/assets/images/icon/7.png" class="tip-food-icon" alt="">
+							</figure>
+						</div>
+						<h6 class="mb-0"><a onclick="movePage('/recipe/recipe?page=1')" class="stretched-link">카테고리 적용</a></h6>
+					</div>
+					<div class="card card-body bg-light text-center align-items-center float-start card_w me-4" style="padding-bottom: 12px;">
+						<!-- Icon -->
+						<div class="icon-xl bg-mode rounded-circle mb-3">
+							<figure>
+								<img src="/assets/images/icon/1.png" class="tip-food-icon" alt="">
+							</figure>
+						</div>
+						<label class="form-check-label" for="Item1"><h6>소고기 <input class="form-check-input" style="margin-top: 3px;" type="checkbox" value="소고기" th:checked="${#arrays.contains(Item, '소고기') ? 'checked' : null}" name="Item" id="Item1"></h6></label>
+						
+						
+						<!-- <h6 class="mb-0"><a href="/recipe/recipe?searchType=소고기" class="stretched-link">소고기</a></h6> -->
+					</div>
+					
+					<div class="card card-body bg-light text-center align-items-center float-start card_w me-4" style="padding-bottom: 12px;">
+						<!-- Icon -->
+						<div class="icon-xl bg-mode rounded-circle mb-3">
+							<figure>
+								<img src="/assets/images/icon/2.png" class="tip-food-icon" alt="">
+							</figure>
+						</div>
+						<label class="form-check-label" for="Item2"><h6>돼지고기 <input class="form-check-input" style="margin-top: 3px;" type="checkbox" value="돼지고기" th:checked="${#arrays.contains(Item, '돼지고기') ? 'checked' : null}" name="Item" id="Item2"></h6></label>
+					</div>
+					
+					<div class="card card-body bg-light text-center align-items-center float-start card_w me-4" style="padding-bottom: 12px;">
+						<!-- Icon -->
+						<div class="icon-xl bg-mode rounded-circle mb-3">
+							<figure>
+								<img src="/assets/images/icon/3.png" class="tip-food-icon" alt="">
+							</figure>
+						</div>
+						<label class="form-check-label" for="Item3"><h6>닭고기 <input class="form-check-input" style="margin-top: 3px;" type="checkbox" value="닭고기" th:checked="${#arrays.contains(Item, '닭고기') ? 'checked' : null}" name="Item" id="Item3"></h6></label>
+					</div>
+					
+					<div class="card card-body bg-light text-center align-items-center float-start card_w me-4" style="padding-bottom: 12px;">
+						<!-- Icon -->
+						<div class="icon-xl bg-mode rounded-circle mb-3">
+							<figure>
+								<img src="/assets/images/icon/4.png" class="tip-food-icon" alt="">
+							</figure>
+						</div>
+						<label class="form-check-label" for="Item4"><h6>해산물 <input class="form-check-input" style="margin-top: 3px;" type="checkbox" value="해산물" th:checked="${#arrays.contains(Item, '해산물') ? 'checked' : null}" name="Item" id="Item4"></h6></label>
+					</div>
+					
+					<div class="card card-body bg-light text-center align-items-center float-start card_w me-4" style="padding-bottom: 12px;">
+						<!-- Icon -->
+						<div class="icon-xl bg-mode rounded-circle mb-3">
+							<figure>
+								<img src="/assets/images/icon/5.png" class="tip-food-icon" alt="">
+							</figure>
+						</div>
+						<label class="form-check-label" for="Item5"><h6>채소 <input class="form-check-input" style="margin-top: 3px;" type="checkbox" value="채소" th:checked="${#arrays.contains(Item, '채소') ? 'checked' : null}" name="Item" id="Item5"></h6></label>
+					</div>
+					
+					<div class="card card-body bg-light text-center align-items-center float-start card_w" style="padding-bottom: 12px;">
+						<!-- Icon -->
+						<div class="icon-xl bg-mode rounded-circle mb-3">
+							<figure>
+								<img src="/assets/images/icon/6.png" class="tip-food-icon" alt="">
+							</figure>
+						</div>
+						<label class="form-check-label" for="Item6"><h6>칵테일 <input class="form-check-input" style="margin-top: 3px;" type="checkbox" value="칵테일" th:checked="${#arrays.contains(Item, '칵테일') ? 'checked' : null}" name="Item" id="Item6"></h6></label>
+					</div>
 				</div>
+				<!-- Category END -->
+				</form>
 			</div>
-		</th:block>
-	</div>
-</section>
-<!-- =======================
-Hotel grid END -->
-
-
-</main>
-<!-- **************** MAIN CONTENT END **************** -->
+		</div>
+	</Section>
+	<!-- =======================	Category END -->
+	
+	<!-- =======================	Hotel grid START -->
+	<section class="pt-0">
+		<div class="container">
+			<th:block th:if="${list.size == 0}">
+				<div class="nothing mb-5 mt-3">검색하신 제목의 레시피가 없습니다.</div>
+			</th:block>
+			<div class="row g-4">
+				<!-- Card item START -->
+				<div th:each="recipe : ${list}" class="col-md-6 col-xl-4">
+					<div class="card shadow p-2 pb-0 h-100">
+						<!-- Image -->
+						<img th:src="${recipe.imageUrl}" class="rounded-2 tip-food-list" alt="Card image">
+	
+						<!-- Card body START -->
+						<div class="card-body px-3 pb-0">
+	
+							<!-- Title -->
+							<h5 class="card-title">[[${recipe.title}]]</h5>
+	
+							<!-- Contents -->
+							[[${recipe.content}]]
+						</div>
+						<!-- Card body END -->
+	
+						<!-- Card footer START-->
+						<div class="card-footer pt-4">
+							<!-- Price and Button -->
+							<div class="d-sm-flex justify-content-end">
+								<!-- Button -->
+								<div class="mt-2 mt-sm-0 z-index-2">
+									<a th:href="${recipe.url}" class="btn btn-sm btn-primary-soft mb-0 w-100">레시피 보기<i class="bi bi-arrow-right ms-2"></i></a>    
+								</div>                  
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Card item END -->
+			</div>
+			<th:block th:if="${list.size != 0}">
+				<!-- 페이징 -->
+				<div class="row">
+					<div class="col-12">
+						<nav class="mt-4 d-flex justify-content-center" aria-label="navigation">
+							<ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
+								<!-- 이전페이지 -->
+								<li class="page-item mb-0"><a class="page-link" style="cursor:pointer;" th:onclick="|movePage('/recipe/recipe?page=${pageInfo.prevPage}');|"><i
+											class="fa-solid fa-angle-left"></i></a></li>
+								<!-- 10개 페이지 -->
+								<th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
+									<th:block th:if="${status.current == pageInfo.currentPage}">
+										<li class="page-item mb-0 active"><a class="page-link">[[${status.current}]]</a></li>
+									</th:block>
+									<th:block th:if="${status.current != pageInfo.currentPage}">
+										<li class="page-item mb-0"><a class="page-link" style="cursor:pointer;" th:onclick="|movePage('/recipe/recipe?page=${status.current}');|">[[${status.current}]]</a></li>
+									</th:block>
+								</th:block>
+								<!-- 다음페이지 -->
+								<li class="page-item mb-0"><a class="page-link" style="cursor:pointer;" th:onclick="|movePage('/recipe/recipe?page=${pageInfo.nextPage}');|"><i
+											class="fa-solid fa-angle-right"></i></a></li>
+											
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</th:block>
+		</div>
+	</section>
+	<!-- =======================
+	Hotel grid END -->
+	
+	
+	</main>
+	<!-- **************** MAIN CONTENT END **************** -->
 
 
 <!-- Back to top -->

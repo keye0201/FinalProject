@@ -35,15 +35,9 @@
 				<div class="row g-2">
 					<!-- Image -->
 					<div class="col-md-6">
-						<a data-glightbox data-gallery="gallery" th:href="@{/assets/images/bagpacking/mountain.jpg}">
-							<div class="card card-grid-lg card-element-hover card-overlay-hover overflow-hidden"
-								th:style="'background-image:url('+ |/assets/images/bagpacking/fishing${content.fishingNo % 18}.jpg| +'); background-position: center left; background-size: cover;'">
-								<!-- Card hover element -->
-								<div class="hover-element position-absolute w-100 h-100">
-									<i class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
-								</div>
-							</div>
-						</a>
+						<div class="card card-grid-lg overflow-hidden"
+							th:style="'background-image:url('+ |/assets/images/bagpacking/fishing${content.fishingNo % 18}.jpg| +'); background-position: center left; background-size: cover;'">
+						</div>
 					</div>
 
 					<div class="col-md-6">
@@ -51,30 +45,16 @@
 						<div class="row g-2">
 							<!-- Image -->
 							<div class="col-12">
-								<a data-glightbox data-gallery="gallery" th:href="@{/assets/images/bagpacking/mountain.jpg}">
-									<div class="card card-grid-sm card-element-hover card-overlay-hover overflow-hidden"
-										th:style="'background-image:url('+ |/assets/images/bagpacking/fishingDetail1.jpg| +'); background-position: center left; background-size: cover;'">
-										<!-- Card hover element -->
-										<div class="hover-element position-absolute w-100 h-100">
-											<i
-												class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
-										</div>
-									</div>
-								</a>
+								<div class="card card-grid-sm overflow-hidden"
+									th:style="'background-image:url('+ |/assets/images/bagpacking/fishingDetail1.jpg| +'); background-position: center left; background-size: cover;'">
+								</div>
 							</div>
 
 							<!-- Image -->
 							<div class="col-md-6">
-								<a data-glightbox data-gallery="gallery" th:href="@{/assets/images/bagpacking/mountain.jpg}">
-									<div class="card card-grid-sm card-element-hover card-overlay-hover overflow-hidden"
-										th:style="'background-image:url('+ |/assets/images/bagpacking/fishingDetail2.jpg| +'); background-position: center left; background-size: cover;'">
-										<!-- Card hover element -->
-										<div class="hover-element position-absolute w-100 h-100">
-											<i
-												class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
-										</div>
-									</div>
-								</a>
+								<div class="card card-grid-sm overflow-hidden"
+									th:style="'background-image:url('+ |/assets/images/bagpacking/fishingDetail2.jpg| +'); background-position: center left; background-size: cover;'">
+								</div>
 							</div>
 
 							<!-- Images -->
@@ -86,8 +66,10 @@
 
 									<!-- Popup Images -->
 									<a data-glightbox="" data-gallery="gallery"
-										th:href="|/assets/images/bagpacking/fishingDetail1.jpg|"
+										th:href="|/assets/images/bagpacking/fishing${content.fishingNo % 18}.jpg|"
 										class="stretched-link z-index-9"></a>
+									<a data-glightbox="" data-gallery="gallery"
+										th:href="|/assets/images/bagpacking/fishingDetail1.jpg|"></a>
 									<a data-glightbox="" data-gallery="gallery"
 										th:href="|/assets/images/bagpacking/fishingDetail2.jpg|"></a>
 									<a data-glightbox="" data-gallery="gallery"
