@@ -17,23 +17,17 @@ $('document').ready(function () {
     var area15 = ["전체", "거제시", "김해시", "마산시", "밀양시", "사천시", "양산시", "진주시", "진해시", "창원시", "통영시", "거창군", "고성군", "남해군", "산청군", "의령군", "창녕군", "하동군", "함안군", "함양군", "합천군"];
     var area16 = ["전체", "서귀포시", "제주시", "남제주군", "북제주군"];
 
-
-
     // 시/도 선택 박스 초기화
-
     $("#sido").each(function () {
         $selsido = $(this);
         $.each(eval(area0), function () {
-            $selsido.append("<option value='" + this + "'>" + this + "</option>");
+            $selsido.append("<option value='" + this + "' >" + this + "</option>");
         });
         $selsido.next().append("<option value=''>구/군 선택</option>");
     });
 	
-	// ${param.sido == '"+this+"' ? 'selected=&quot;selected&quot;' : '' }
-
 
     // 시/도 선택시 구/군 설정
-
     $("#sido").change(function () {
         var area = "area" + $("option", $(this)).index($("option:selected", $(this))); // 선택지역의 구군 Array
         var $gugun = $(this).next(); // 선택영역 군구 객체
@@ -47,13 +41,4 @@ $('document').ready(function () {
             });
         }
     });
-	
-	// 시/도, 구/군 선택 후 검색하고 유지
-	//if($('#sido').val($('#selectedSido').text()) != null){
-	//	$('#sido').val($('#selectedSido').text()).prop("selected",true);
-	//}
-	//if($('#gugun').val($('#selectedGugun').text()) != null){
-	//	$('#gugun').val($('#selectedGugun').text()).prop("selected",true);
-	//}
-
 });

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<th:block th:replace="~{common/layout :: head}"></th:block>
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/traffic.css}">
+
+	<script>
+	// 소요시간 계산
+	function calTime(depHour, depMin, arrHour, arrMin) {
+		var takeHour;
+		var takeMin;
+		
+		if(arrMin < depMin) {
+			if(arrHour < depHour) {
+				takeHour = arrHour - depHour - 1 + 24;
+			}else {
+				takeHour = arrHour - depHour - 1;
+			}
+			takeMin = arrMin - depMin + 60;
+		}else {
+			if(arrHour < depHour) {
+				takeHour = arrHour - depHour + 24;
+			}else {
+				takeHour = arrHour - depHour;
+			}
+			takeMin = arrMin - depMin;
+		}
+		var result;
+		if(takeMin === 0){
+			result = takeHour+"시간";
+		}else {
+			result = takeHour+"시간 "+takeMin+"분";
+		}
+	
+		return result;
+	}
+	
+	function checkInput() {
+		var BusSearchForm = document.getElementById("BusSearchForm");
+		var dep = document.getElementById("addressKindD");
+		var arr = document.getElementById("addressKindD2");
+		var day = document.getElementById("startDay");
+		
+		if(dep.value.includes("NAEK") && arr.value.includes("NAEK") && day.value.length != 0){
+			BusSearchForm.submit();
+		}else {
+			alert("미입력된 값이 있습니다.");
+		}
+		
+	}
+	
+	
+	</script>	
+</head>
+
+<body>
+	<header th:replace="~{common/layout :: #header}"></header>
+
+	<main>
+		<!--검색-->
+		<section class="pt-8 pt-lg-8">
+			<div class="container">
+				<div class="row">
+
+					<div class="col-lg-10 ms-auto position-relative">
+						<img th:src="@{/assets/images/traffic/bus.jpg}" class="rounded-3" alt="">
+
+						<!-- Search START -->
+						<div class="col-11 col-sm-10 col-lg-8 col-xl-6 position-lg-middle ms-lg-8 ms-xl-7">
+							<div class="bih-d-1 card shadow pb-0 mt-n7 mt-sm-n8 mt-lg-0">
+
+								<!-- Card header -->
+								<div class="card-header border-bottom p-3 p-sm-4">
+									<h5 class="card-title mb-0">고속버스 조회하기</h5>
+								</div>
+
+								<!-- Card body START -->
+								<form id="BusSearchForm" class="bih-t-2 card-body form-control-border p-3 p-sm-4">
+									<!-- Tabs START -->
+									<div class="bih-t-1 nav nav-pills mb-3" id="pills-tab" role="tablist">
+										<div class="form-check form-check-inline active" id="cab2-one-way-tab"
+											data-bs-toggle="pill" data-bs-target="#cab2-one-way" role="tab"
+											aria-controls="cab2-one-way" aria-selected="true">
+											<input class="form-check-input" type="radio" name="inlineRadioOptions"
+												id="cabRadio1" value="option1" checked>
+											<label class="form-check-label" for="cabRadio1">편도</label>
+										</div>
+										<div class="form-check form-check-inline" id="cab2-round-way-tab"
+											data-bs-toggle="pill" data-bs-target="#cab2-round-way" role="tab"
+											aria-controls="cab2-round-way" aria-selected="false">
+<!-- 											<input class="form-check-input" type="radio" name="inlineRadioOptions" -->
+<!-- 												id="cabRadio2" value="option2"> -->
+<!-- 											<label class="form-check-label" for="cabRadio2">왕복</label> -->
+										</div>
+									</div>
+									<!-- Tabs END -->
+
+									<!-- Tabs content START -->
+									<div class="tab-content my-4" id="pills-tabContent">
+										<!-- 편도 -->
+										<div class="bih-d-5 tab-pane fade show active" id="cab2-one-way" role="tabpanel"
+											aria-labelledby="cab2-one-way-tab">
+											<div class="row g-2 g-md-4">
+												<!-- 출발 -->
+												<div class="bih-d-2 col-md-6 position-relative">
+													<div class="bih-d-3 form-group col-sm-5">
+														<label for="addressKindU">출발지역 선택</label>
+														<select class="bih-f-1 form-control" id="addressKindU"
+															name="addressKindU" onchange="addressKindChange(this)">
+															<option>지역을 선택하세요</option>
+															<option value="a">서울</option>
+															<option value="b">인천/경기</option>
+															<option value="c">강원</option>
+															<option value="d">대전/충남</option>
+															<option value="e">충북</option>
+															<option value="f">광주/전남</option>
+															<option value="g">전북</option>
+															<option value="h">부산/경남</option>
+															<option value="i">대구/경북</option>
+														</select>
+													</div>
+													<div class="bih-d-3 form-group col-sm-4">
+														<label for="addressKindD">출발터미널 선택</label>
+														<select class="bih-f-1 form-control" id="addressKindD"
+															name="addressKindD">
+															<option>터미널을 선택하세요</option>
+														</select>
+													</div>
+
+													<!-- 화살표 -->
+													<div class="btn-flip-icon z-index-9 mt-2 mt-md-1">
+														<button class="btn btn-dark shadow btn-round mb-0"><i
+																class="fa-solid fa-right-left"></i></button>
+													</div>
+												</div>
+
+												<!-- 도착 -->
+												<div class="bih-d-2 col-md-6 text-md-end">
+													<div class="bih-d-3 form-group col-sm-5">
+														<label for="addressKindU2">도착지역 선택</label>
+														<select class="bih-f-1 form-control" id="addressKindU2"
+															name="addressKindU2" onchange="addressKindChange2(this)">
+															<option>지역을 선택하세요</option>
+															<option value="a">서울</option>
+															<option value="b">인천/경기</option>
+															<option value="c">강원</option>
+															<option value="d">대전/충남</option>
+															<option value="e">충북</option>
+															<option value="f">광주/전남</option>
+															<option value="g">전북</option>
+															<option value="h">부산/경남</option>
+															<option value="i">대구/경북</option>
+														</select>
+													</div>
+													<div class="bih-d-3 form-group col-sm-4">
+														<label for="addressKindD2">도착터미널 선택</label>
+														<select class="bih-f-1 form-control" id="addressKindD2"
+															name="addressKindD2">
+															<option>터미널을 선택하세요</option>
+														</select>
+													</div>
+												</div>
+
+												<!-- Date -->
+												<div class="col-md-12">
+													<div class="form-fs-lg form-control-transparent">
+														<label class="form-label small">날짜</label>
+														<input id="startDay" name="startDay" type="text" class="form-control flatpickr"
+															placeholder="날짜를 선택하세요">
+													</div>
+												</div>
+
+											</div>
+										</div>
+										<!-- One way END -->
+										<!-- Round trip END -->
+									</div>
+									<!-- Tabs content END -->
+
+									<!-- Button -->
+									<div class="d-grid">
+										<button type="button" onclick="checkInput();" class="btn btn-apply mb-0">검색하기</button>
+									</div>
+
+								</form>
+								<!-- Card-body END -->
+							</div>
+						</div>
+						<!-- Search END -->
+					</div>
+				</div> <!-- Row END -->
+			</div>
+		</section>
+
+		<!--안내배너-->
+		<section class="pt-0">
+			<div class="container position-relative">
+
+				<!-- Title and button START -->
+				<div class="row">
+					<div class="col-12">
+						<div class="d-sm-flex justify-content-sm-between align-items-center">
+							<!-- Title -->
+							<div class="mb-3 mb-sm-0">
+								<h1 class="fs-3">고속버스 목록</h1>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Notice board START -->
+				<div class="bg-primary bg-opacity-10 rounded-3 overflow-hidden mt-4 p-4">
+					<div class="row g-4 align-items-center">
+						<!-- Image -->
+						<div class="col-6 col-md-3 text-center order-1">
+							<img th:src="@{/assets/images/traffic/11.svg}" class="mb-n5" alt="">
+						</div>
+
+						<!-- Content -->
+						<div class="col-md-6 order-md-2">
+							<!-- Title -->
+							<h4>코로나 방역수칙 준수</h4>
+							<!-- Content -->
+							<p class="mb-2">더욱 안전하게 즐기는 여행! 안전은 모두가 함께 지켜야 합니다.
+								캠퐁과 제휴업체는 코로나 감염 방지를 위해 클리닝 서비스를 실시하고 있습니다. </p>
+							<!-- Button -->
+							<a th:href="@{#}" class="btn btn-sm btn-primary mb-0">&nbsp&nbsp&nbsp확인하기&nbsp&nbsp&nbsp</a>
+						</div>
+
+						<!-- Image -->
+						<div class="col-6 col-md-3 text-center order-3">
+							<img th:src="@{/assets/images/traffic/10.svg}" class="mb-n5" alt="">
+						</div>
+					</div>
+				</div>
+				<!-- Notice board END -->
+
+			</div>
+		</section>
+
+		<!--내용-->
+		<section class="pt-0">
+			<div class="container">
+				<div class="row">
+
+					<!-- 왼쪽 사이드바 -->
+					<aside class="col-xl-4 col-xxl-3">
+						<!-- Responsive offcanvas body START -->
+						<div class="offcanvas-xl offcanvas-end" tabindex="-1" id="offcanvasSidebar"
+							aria-labelledby="offcanvasSidebarLabel">
+							<!-- Offcanvas header -->
+							<div class="offcanvas-header">
+								<h5 class="offcanvas-title" id="offcanvasSidebarLabel">Advance Filters</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="offcanvas"
+									data-bs-target="#offcanvasSidebar" aria-label="Close"></button>
+							</div>
+
+							<!-- Offcanvas body -->
+							<div class="offcanvas-body flex-column p-3 p-xl-0">
+								<form class="rounded-3 shadow">
+									<!-- Popular filters START -->
+									<div class="card card-body rounded-0 rounded-top p-4">
+										<!-- Title -->
+										<h6 class="mb-2">좌석 등급</h6>
+										<!-- Popular filters group -->
+										<div class="col-12">
+											<!-- Checkbox -->
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="popolarType1">
+													<label class="form-check-label" for="popolarType1">전체</label>
+												</div>
+												<th:block th:if="${list == null}">
+													<span class="small">(0)</span>
+												</th:block>
+												<th:block th:if="${list != null}">
+													<span class="small">([[${list.size()}]])</span>
+												</th:block>
+											</div>
+											<!-- Checkbox -->
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="popolarType2">
+													<label class="form-check-label" for="popolarType2">우등</label>
+												</div>
+												<span id="grade1" class="small">(20)</span>
+											</div>
+											<!-- Checkbox -->
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="popolarType3">
+													<label class="form-check-label" for="popolarType3">고속</label>
+												</div>
+												<span class="small">(4)</span>
+											</div>
+											<!-- Checkbox -->
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="popolarType4">
+													<label class="form-check-label" for="popolarType4">심야우등</label>
+												</div>
+												<span class="small">(2)</span>
+											</div>
+											<!-- Checkbox -->
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="popolarType4">
+													<label class="form-check-label" for="popolarType4">심야고속</label>
+												</div>
+												<span class="small">(2)</span>
+											</div>
+											<!-- Checkbox -->
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="popolarType4">
+													<label class="form-check-label" for="popolarType4">일반</label>
+												</div>
+												<span class="small">(2)</span>
+											</div>
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="popolarType4">
+													<label class="form-check-label" for="popolarType4">일반심야</label>
+												</div>
+												<span class="small">(2)</span>
+											</div>
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="popolarType4">
+													<label class="form-check-label" for="popolarType4">프리미엄</label>
+												</div>
+												<span class="small">(2)</span>
+											</div>
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="popolarType4">
+													<label class="form-check-label" for="popolarType4">심야프리미엄</label>
+												</div>
+												<span class="small">(2)</span>
+											</div>
+										</div>
+									</div>
+									<!-- Popular filters END -->
+
+
+								</form><!-- Form End -->
+							</div>
+
+							<!-- Buttons -->
+							<div class="d-flex justify-content-between p-2 p-xl-0 mt-xl-4">
+								<button class="btn btn-link p-0 mb-0">초기화</button>
+								<button class="btn btn-primary mb-0">검색하기</button>
+							</div>
+
+						</div>
+						<!-- Responsive offcanvas body END -->
+					</aside>
+
+					<!-- 오른쪽 목록 -->
+					<div class="col-xl-8 col-xxl-9">
+						<div class="vstack gap-4">
+						<!-- 광고 -->
+						<div
+							class="bg-success bg-opacity-10 p-3 rounded-2 d-sm-flex justify-content-sm-between align-items-center mb-4">
+							<!-- Title and badge -->
+							<div class="d-flex align-items-center mb-3 mb-sm-0">
+								<div class="position-relative z-index-1 me-2">
+									<img th:src="@{/assets/images/traffic/05.svg}" class="position-relative h-40px" alt="">
+									<span
+										class="smaller text-white position-absolute top-50 start-50 translate-middle">Now</span>
+								</div>
+								<!-- Title -->
+								<h6 class="mb-0 fw-normal">캠퐁에서 캠핑장 예약하고 고속버스 <strong class='text-success'>10%
+										할인</strong> 쿠폰받기</h6>
+							</div>
+
+							<!-- Button -->
+							<a th:href="@{#}" class="btn btn-sm btn-success mb-0">&nbsp&nbsp확인하기&nbsp&nbsp</a>
+							</div>
+							
+							<th:block th:if="${list == null}">
+								<div class="text-center">
+									<h5>조회된 버스가 없습니다.</h5>
+								</div>
+							</th:block>
+							<th:block th:if="${list != null}">
+							<th:block th:each="content, contentStat : ${list}">
+								<!--버스1-->
+								<div class="card border">
+									<!--소속,등급-->
+									<div class="card-header d-sm-flex justify-content-sm-between align-items-center">
+										<div class="d-flex align-items-center mb-2 mb-sm-0">
+											<img th:src="@{/assets/images/traffic/09.svg}" class="w-30px me-2" alt="">
+											<h6 class="fw-normal mb-0">캠퐁고속</h6>
+										</div>
+										<h6 class="fw-normal mb-0"><span class="text-body">좌석 등급:</span> [[${content.gradeNm}]]</h6>
+									</div>
+	
+									<div class="card-body p-4 pb-0">
+										<div class="row g-4">
+											<!-- 출발 -->
+											<div class="col-sm-4 col-md-3">
+												<h4>[[${#strings.substring(content.depPlandTime, 8, 10)}]]:[[${#strings.substring(content.depPlandTime, 10, 12)}]]</h4>
+												<p class="mb-0">[[${content.depPlaceNm}]]</p>
+											</div>
+	
+											<!-- 이동시간 -->
+											<div class="col-sm-4 col-md-3 my-sm-auto text-center">
+												<!-- Time -->
+												<h5 th:id="|timeTaken${contentStat.count}|">
+												<script>
+													$(document).ready(function() {
+														var idx = "[[${contentStat.count}]]";
+														var depPlandTime = "[[${content.depPlandTime}]]";
+														var arrPlandTime = "[[${content.arrPlandTime}]]";
+														var timeTakenTag = document.getElementById("timeTaken"+idx);
+														
+														var depHour = depPlandTime.substring(8, 10);
+														var depMin = depPlandTime.substring(10, 12);
+														var arrHour = arrPlandTime.substring(8, 10);
+														var arrMin = arrPlandTime.substring(10, 12);
+														
+														var result = calTime(depHour, depMin, arrHour, arrMin);
+														
+														timeTakenTag.innerHTML = result;
+													})
+												</script>
+												</h5>
+												<div class="position-relative my-4">
+													<!-- Line -->
+													<hr class="bg-primary opacity-5 position-relative">
+													<!-- Icon -->
+													<div
+														class="icon-md bg-primary text-white rounded-circle position-absolute top-50 start-50 translate-middle">
+														<i class="bi bi-chevron-right"></i>
+													</div>
+												</div>
+											</div>
+	
+											<!-- 도착 -->
+											<div class="col-sm-4 col-md-3">
+												<h4>[[${#strings.substring(content.arrPlandTime, 8, 10)}]]:[[${#strings.substring(content.arrPlandTime, 10, 12)}]]</h4>
+												<p class="mb-0">[[${content.arrPlaceNm}]]</p>
+											</div>
+	
+											<!-- 가격 -->
+											<div class="col-md-3 text-md-end">
+												<h4>[[${#strings.substring(content.charge, 0, content.charge.length-3)}]],[[${#strings.substring(content.charge, content.charge.length-3, content.charge.length)}]] 원</h4>
+												<th:block th:if="${session.mvo == null}">
+												<a th:onclick="alert('예약서비스는 로그인 후 이용가능합니다.');"
+													class="btn btn-primary mb-0 mb-sm-2">&nbsp&nbsp예매하기&nbsp&nbsp</a>
+												</th:block>
+												<th:block th:if="${session.mvo != null}">
+<!-- 												<a th:href="|/car/bookingBus?busInfo=${content}|" -->
+												<a th:href="|/car/bookingBus?arrPlaceNm=${content.arrPlaceNm}&arrPlandTime=${content.arrPlandTime}&
+															charge=${content.charge}&depPlaceNm=${content.depPlaceNm}&
+															depPlandTime=${content.depPlandTime}&gradeNm=${content.gradeNm}|"
+													class="btn btn-primary mb-0 mb-sm-2">&nbsp&nbsp예매하기&nbsp&nbsp</a>
+												</th:block>
+											</div>
+										</div>
+									</div>
+	
+									<!-- 하단 정보 -->
+									<div class="card-footer pt-4">
+										<ul
+											class="list-inline bg-light rounded-2 d-sm-flex text-center justify-content-sm-between mb-0 px-4 py-2">
+											<li class="list-inline-item text-danger">음식물 취식 금지</li>
+											<li class="list-inline-item text-danger">당일환불무료</li>
+										</ul>
+									</div>
+								</div>
+							</th:block>
+							</th:block>
+
+							<!-- 페이징 -->
+<!-- 							<div class="row"> -->
+<!-- 								<div class="col-12"> -->
+<!-- 									<nav class="mt-7 my-4 d-flex justify-content-center" aria-label="navigation"> -->
+<!-- 										<ul -->
+<!-- 											class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0"> -->
+<!-- 											<li class="page-item mb-0"><a class="page-link" th:href="@{#}" tabindex="-1"><i -->
+<!-- 														class="fa-solid fa-angle-left"></i></a></li> -->
+<!-- 											<li class="page-item mb-0 active"><a class="page-link" th:href="@{#}">1</a></li> -->
+<!-- 											<li class="page-item mb-0"><a class="page-link" th:href="@{#}">2</a></li> -->
+<!-- 											<li class="page-item mb-0"><a class="page-link" th:href="@{#}">3</a></li> -->
+<!-- 											<li class="page-item mb-0"><a class="page-link" th:href="@{#}">4</a></li> -->
+<!-- 											<li class="page-item mb-0"><a class="page-link" th:href="@{#}">5</a></li> -->
+<!-- 											<li class="page-item mb-0"><a class="page-link" th:href="@{#}">..</a></li> -->
+<!-- 											<li class="page-item mb-0"><a class="page-link" th:href="@{#}">10</a></li> -->
+<!-- 											<li class="page-item mb-0"><a class="page-link" th:href="@{#}"><i -->
+<!-- 														class="fa-solid fa-angle-right"></i></a></li> -->
+<!-- 										</ul> -->
+<!-- 									</nav> -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+
+	</main>
+
+	<!-- Back to top -->
+	<div class="back-top"></div>
+
+	<!-- =======================Footer START -->
+	<footer th:replace="~{common/layout :: #footer}"></footer>
+	<!-- =======================Footer END -->
+
+	<!--지역선택-->
+	<script th:src="@{/assets/js/addressbus2.js}"></script>
+	
+	<script>
+// 	$(document).ready(function() {
+// 		var grade1Tag = document.getElementById("grade1");
+// 		alert(grade1Tag.value);
+		
+// 		var list = "[[${list}]]";
+// 		var grade1 = 0;
+		
+// 		for(bus in list) {
+// 			if(bus.gradeNm.equals("우등")) {
+// 				grade1++;
+// 			}
+// 		}
+		
+// 		grade1Tag.innerHTML = grade1;
+// 	}
+	</script>
+
+
+</body>
+
+</html>

@@ -11,6 +11,28 @@
 		<result property="phoneNumber" column="PHONENUMBER"/>
 		<result property="homepageUrl" column="HOMEPAGEURL"/>
 	</resultMap>
+	
+	<resultMap type="Bus" id="BusResultMap">
+		<id property="ticketNo" column="TICKET_NO"/>
+		<result property="mNo" column="USER_NO"/>
+		<result property="arrPlaceNm" column="ARRPLACENM"/> <!-- 출발위치 -->
+		<result property="arrPlandTime" column="ARRPLANDTIME"/> <!-- 출발시간 -->
+		<result property="charge" column="CHARGE"/> <!-- 요금 -->
+		<result property="depPlaceNm" column="DEPPLACENM"/> <!-- 도착위치 -->
+		<result property="depPlandTime" column="DEPPLANDTIME"/> <!-- 도착시간 -->
+		<result property="gradeNm" column="GRADENM"/> <!-- 등급 -->
+	</resultMap>
+	
+	<resultMap type="Train" id="TrainResultMap">
+		<id property="ticketNo" column="TICKET_NO"/>
+		<result property="mNo" column="USER_NO"/>
+		<result property="arrPlaceNm" column="ARRPLACENM"/> <!-- 출발위치 -->
+		<result property="arrPlandTime" column="ARRPLANDTIME"/> <!-- 출발시간 -->
+		<result property="charge" column="CHARGE"/> <!-- 요금 -->
+		<result property="depPlaceNm" column="DEPPLACENM"/> <!-- 도착위치 -->
+		<result property="depPlandTime" column="DEPPLANDTIME"/> <!-- 도착시간 -->
+		<result property="gradeNm" column="GRADENM"/> <!-- 등급 -->
+	</resultMap>
 
  	<select id="selectCarCount" resultType="int" parameterType="map">
 		SELECT COUNT(*) FROM RENT 
@@ -37,4 +59,41 @@
 		WHERE RENT_NO = #{RENT_NO}
 	</select>
 	
+	
+	
+	<!-- 버스 -->
+	<select id="selectBusTicketList" resultMap="BusResultMap" parameterType="map">
+		SELECT 
+			TICKET_NO, USER_NO, ARRPLACENM, ARRPLANDTIME, CHARGE, DEPPLACENM, DEPPLANDTIME, GRADENM
+		FROM BUS_TICKET	
+		WHERE USER_NO = #{mNo}
+	</select> 
+	
+	<insert id="insertBookingBus" parameterType="Bus">
+		INSERT INTO BUS_TICKET(
+			TICKET_NO, USER_NO, ARRPLACENM, ARRPLANDTIME,
+			CHARGE, DEPPLACENM, DEPPLANDTIME, GRADENM
+		) VALUES (
+			0, #{mNo}, #{arrPlaceNm}, #{arrPlandTime},
+			#{charge}, #{depPlaceNm}, #{depPlandTime}, #{gradeNm}
+		)
+	</insert>
+	
+	<!-- 열차 -->
+	<select id="selectTrainTicketList" resultMap="TrainResultMap" parameterType="map">
+		SELECT 
+			TICKET_NO, USER_NO, ARRPLACENM, ARRPLANDTIME, CHARGE, DEPPLACENM, DEPPLANDTIME, GRADENM
+		FROM TRAIN_TICKET	
+		WHERE USER_NO = #{mNo}
+	</select> 
+	
+	<insert id="insertBookingTrain" parameterType="Train">
+		INSERT INTO TRAIN_TICKET(
+			TICKET_NO, USER_NO, ARRPLACENM, ARRPLANDTIME,
+			CHARGE, DEPPLACENM, DEPPLANDTIME, GRADENM
+		) VALUES (
+			0, #{mNo}, #{arrPlaceNm}, #{arrPlandTime},
+			#{charge}, #{depPlaceNm}, #{depPlandTime}, #{gradeNm}
+		)
+	</insert>
 </mapper>

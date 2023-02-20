@@ -34,7 +34,6 @@
 	<link rel="stylesheet" type="text/css" th:href="@{/assets/vendor/nouislider/nouislider.css}">
 	<!-- Theme CSS -->
 	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/style.css}">
-	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/header.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/total-style.css}">
 	
 	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/index.css}">
@@ -87,7 +86,7 @@
 														class="bi bi-bookmark"></i>&nbsp&nbsp&nbsp캠핑북마크</a>
 											</li>
 											<li class="nav-item">
-												<a class="nav-link submenu" th:href="@{/myTraffic}"><i
+												<a class="nav-link submenu" th:href="@{/car/traffic-mybook}"><i
 														class="fa-solid fa-car"></i>&nbsp&nbsp&nbsp교통예약</a>
 											</li>
 											<li class="nav-item">
@@ -150,11 +149,11 @@
 						<li class="nav-item"> <a class="nav-link" id="listingMenu"  th:href="@{/shop/shopping}">쇼핑</a> </li>
 						<!-- Nav item Listing -->
 						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" th:href="@{/traffic/traffic-bus}" id="listingMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">교통</a>
+							<a class="nav-link dropdown-toggle" th:href="@{/car/traffic-bus}" id="listingMenu" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">교통</a>
 							<ul class="dropdown-menu" aria-labelledby="listingMenu">
 								<li> <a class="dropdown-item" th:href="@{/car/traffic-car}">렌트카</a></li>
-								<li> <a class="dropdown-item" th:href="@{/traffic/traffic-bus}">고속버스</a></li>
-								<li> <a class="dropdown-item" th:href="@{/traffic/traffic-train}">열차</a></li>
+								<li> <a class="dropdown-item" th:href="@{/car/traffic-bus}">고속버스</a></li>
+								<li> <a class="dropdown-item" th:href="@{/car/traffic-train}">열차</a></li>
 							</ul>
 						</li>
 						<!-- Nav item Link -->
