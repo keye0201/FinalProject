@@ -1,0 +1,35 @@
+.tip-food-icon {
+	max-width: 65%;
+}
+
+.tip-food-recommend {
+	object-fit: cover;
+	height: 200px;
+}
+
+.tip-food-list {
+	object-fit: cover;
+	height: 265px;
+}
+
+.tip-tip {
+	object-fit: scale-down;
+	width: 130px;
+	height: 130px;
+}
+
+* {
+	font-family: 'SUIT Variable', sans-serif;
+}
+
+.card_w {
+	width: 145px;
+}
+
+.nothing {
+	text-align: center;
+}
+
+input[type=radio] {
+	display: none;
+}
