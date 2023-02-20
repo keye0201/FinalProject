@@ -74,7 +74,7 @@ Main banner START -->
 				<!-- 대표 이미지 -->
 				<div class="col-md-12 mt-3 pt-2">
 					<div class="row pt-2">
-						<div class="col-3" th:each="list : ${list}">
+						<div class="col-3" th:each="list : ${list}" th:unless="${session.mvo ==null}">
 
 							<a
 								th:href="${'moim.detail?meetNo='+list.meetNo+'&mNo='+session.mvo.mNo}">
@@ -100,7 +100,10 @@ Main banner START -->
 							</a>
 
 						</div>
-
+						
+						<div class="col-4" th:if="${'session.mvo ==null'}">
+							<h5 style="color:green;">캠퐁에 가입하고 모임에 가입해보세요.</h5>
+						</div>
 					</div>
 					<!-- 대표 이미지끝-->
 				</div>

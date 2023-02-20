@@ -752,7 +752,7 @@
 								</div>
 								<!-- 모임 -->
 								<div>
-									<div
+									<div>
 										class="card card-body bg-light text-center align-items-center">
 										<!-- Icon -->
 										<div class="icon-xl bg-mode rounded-circle mb-3">
@@ -768,7 +768,8 @@
 											</figure>
 										</div>
 										<h6 class="mb-0">
-											<a th:href="@{/meeting/moim}" class="stretched-link">모임</a>
+											<a th:href="@{/meeting/moim}" class="stretched-link" th:unless="${session.mvo==null}">모임</a>
+			 								<a th:href="javascript:void(0);" onclick="alert('가입후이용하세요');" class="stretched-link" th:if="${session.mvo==null}">모임</a>
 										</h6>
 									</div>
 								</div>

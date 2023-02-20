@@ -415,7 +415,7 @@
 												<div class="d-flex justify-content-between">
 													<input type="hidden" name="mNo" th:value="${session.mvo.mNo}" th:unless="${session.mvo == null}"/>
 													<input type="hidden" name="pno" th:value="${shop.pno}" th:unless="${session.mvo == null}"/>
-													<input type="image" th:src="@{/assets/campongimg//shop-basketOn.png}" class= "h6 z-index-2" style="width:20px;" th:unless="${session.vmo ==null}" />										
+													<input type="image" th:src="@{/assets/campongimg//shop-basketOn.png}" class= "h6 z-index-2" style="width:20px;" th:unless="${session.mvo ==null}" />										
 												</div>
 											</div>
 										</div>
