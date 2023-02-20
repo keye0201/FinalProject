@@ -96,7 +96,7 @@ public class MemberController {
 	 
 
 	
-	 @GetMapping("/memRegister.do") public String memRegister(@RequestParam("kakaoToKen") String kakaoToKen, Member m,	  RedirectAttributes attr, HttpSession session) { //RedirectAttributes는 값을 한번만 다시전달해줌 
+	 @GetMapping("/memRegister.do") public String memRegister(@RequestParam(required = false)String kakaoToKen, Member m,	  RedirectAttributes attr, HttpSession session) { //RedirectAttributes는 값을 한번만 다시전달해줌 
 		 if(m.getId()==null || m.getId().equals("") || m.getPassword()==null || m.getPassword().equals("") 
 				 ||	  m.getNickName()==null || m.getBirthYear()==null || m.getBirthYear().equals("") || m.getEmail1()==null ||m.getEmail2().equals("") ||
 				 m.getPhone()==null || m.getPhone().equals("") || m.getAddress()==null || m.getAddress().equals("")) {
@@ -168,9 +168,10 @@ public class MemberController {
 		//URL r= this.getClass().getClassLoader().getResource("upload");
 		
 		Member selectMember = mapper.selectByNickName(nickName); 
-		if(selectMember != null) {
-			model.addAttribute("msg", "중복된 닉네임이 있습니다.");
-			 return "redirect:myprofile";
+		if(selectMember != null && !nickName.equals(mvo.getNickName())) {
+			model.addAttribute("msg","중복된 아이디입니다.");
+			model.addAttribute("location", "/myprofile");
+			return "common/msg";
 		 }
 		 
 		member.setMNo(mvo.getMNo());
@@ -203,11 +204,11 @@ public class MemberController {
 			int result= service.updateMember(member);
 			if(result >0) {
 				model.addAttribute("msg", "이미지 등록완료되었습니다");
-				model.addAttribute("loacation","redirect:/myprofile");
+				model.addAttribute("loacation","/myprofile");
 				 
 			}else {
 				model.addAttribute("msg", "이미지 등록실패했습니다.");
-				model.addAttribute("location", "redirect:/myprofile");
+				model.addAttribute("location", "/myprofile");
 			}
 			System.out.println("멤버최종확인"+member);
 			session.setAttribute("mvo", member);
@@ -246,25 +247,28 @@ public class MemberController {
 		 System.out.println(password);
 		 if(!nowPassword.equals(mvo.getPassword())) {
 			 model.addAttribute("msg","비밀 번호가 틀렸습니다.");
+			 model.addAttribute("loacation","/myprofile");
 			 System.out.println("비밀번호가 틀림");
-			 return "redirect:/myprofile";
+			 return "common/msg";
 		 }
 		 if(!password1.equals(password)) {
 			 model.addAttribute("msg", "변경할 비밀번호가 같지않습니다.");
-
+			 model.addAttribute("loacation","/myprofile");
 			 System.out.println("비밀번호가 맞지않음");
-			 return "redirect:/myprofile";
+			 return "common/msg";
 		 }
 		 
 		 mapper.updatePassword(mvo.getMNo(),password);
 		 System.out.println("성공");
 
-		 model.addAttribute("msg", "변경할 비밀번호가 같지않습니다.");
+
+		 model.addAttribute("msg", "비밀번호 변경에 성공했습니다.");
+		 model.addAttribute("loacation","/myprofile");
 		 mvo.setPassword(mvo.getPassword());
 		 System.out.println(mvo);
 		 session.setAttribute("mvo", mvo);
 		 
-		 return "redirect:/myprofile";
+		 return "common/msg";
 	 }
 	 @GetMapping("/sign/sign.in/kakao")
 		public String kakaoLogin(Model model, String code, HttpSession session) {

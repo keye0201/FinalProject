@@ -94,13 +94,19 @@ public class ShoppingController {
 		return "shop/shopping-basket";
 	}
 	@PostMapping("/shopping.basket2")
-	public String shoppingBasketInsert(@RequestParam("mNo")int mNo,@RequestParam("pno")int pno) {
+	public String shoppingBasketInsert(int mNo,@RequestParam("pno")int pno,Model model) {
 				int result = service.basketCheck(mNo, pno);
 				System.out.println(result);
 				if(result==0) {
 					service.insertBasket(mNo,pno);
+
+					model.addAttribute("msg", "장바구니에 추가했습니다.");
+					model.addAttribute("location", "/shop/shopping");
+					return "common/msg";
 				}
-		return "redirect:/shop/shopping.basket?mNo="+mNo;
+				model.addAttribute("msg", "이미등록된상품입니다.");
+				model.addAttribute("location", "/shop/shopping");
+		return "common/msg";
 	}
 	@GetMapping("/deleteBasket")
 	public String deleteBasket(int mNo,int pno) {

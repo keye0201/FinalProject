@@ -22,7 +22,6 @@
 			<div class="bg-overlay bg-dark opacity-3"></div>
 			<div class="container z-index-9 position-relative">
 				<div class="row py-sm-7">
-					<!-- Title -->
 					<div class="col-xl-8 m-auto my-7 text-center">
 						<h3 class="text-white mb-0">
 							캠핑 필수 아이템, <br>캠퐁에서 손쉽게 찾아보세요
@@ -414,9 +413,9 @@
 											<div class="mt-2 mt-sm-0">
 												<!-- Rating and basket -->
 												<div class="d-flex justify-content-between">
-													<input type="hidden" name="mNo" th:value="${session.mvo.mNo}"/>
-													<input type="hidden" name="pno" th:value="${shop.pno}"/>
-													<input type="image" th:src="@{/assets/campongimg//shop-basketOn.png}" class= "h6 z-index-2" style="width:20px;" />										
+													<input type="hidden" name="mNo" th:value="${session.mvo.mNo}" th:unless="${session.mvo == null}"/>
+													<input type="hidden" name="pno" th:value="${shop.pno}" th:unless="${session.mvo == null}"/>
+													<input type="image" th:src="@{/assets/campongimg//shop-basketOn.png}" class= "h6 z-index-2" style="width:20px;" th:unless="${session.vmo ==null}" />										
 												</div>
 											</div>
 										</div>
