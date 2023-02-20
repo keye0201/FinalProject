@@ -1,5 +1,7 @@
 package com.multi.campong.member.model.mapper;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,7 +17,8 @@ public interface MemberMapper {
 	public Member registerCheckName(String name);
 	
 	//로그인
-	public Member login(Member member);
+	public Member login(@Param("id")String id,@Param("password")String password);
+	public Member loginMember(Member m);
 	public Member selectMemberByMno(int mNo);
 	public void deleteMember(int mNo);
 	public void updatePassword(@Param("mNo")int mNo,@Param("password")String password); 
@@ -25,4 +28,6 @@ public interface MemberMapper {
 	Member selectMember(@Param("id") String id);
 	Member selectMemberByKakaoToken(String kakaoToken);
 	Member selectByNickName(@Param("nickName")String nickName);
+	Member loginByID(@Param("id")String id);
+	public int updatePwd(Map<String, String> map);
 }

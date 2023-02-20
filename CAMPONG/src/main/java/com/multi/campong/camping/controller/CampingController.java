@@ -58,7 +58,9 @@ public class CampingController {
 			@RequestParam(required = false) List<String> checkedFclty,
 			@RequestParam(required = false) String checkedPet,
 			@RequestParam(required = false) String sido,
-			@RequestParam(required = false) String lctCl) {
+			@RequestParam(required = false) String lctCl,
+			@RequestParam(required = false) String gogun
+			) {
 //		log.info("리스트 요청, param : " + paramMap);
 //		log.info("리스트 요청, checkedTheme : " + checkedTheme);
 //		log.info("리스트 요청, checkedFclty : " + checkedFclty);
@@ -115,7 +117,7 @@ public class CampingController {
 		int campingCount = service.getCampingCount(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 10, campingCount, 5);
 		List<Camping> list = service.getCampingList(pageInfo, searchMap);
-		
+		System.out.println("gogun="+gogun);
 		model.addAttribute("list", list);
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("pageInfo", pageInfo);
@@ -125,13 +127,14 @@ public class CampingController {
 		model.addAttribute("checkedPet", checkedPet);
 		model.addAttribute("selectedSido", sido);
 		model.addAttribute("selectedLctCl", lctCl);
+		System.out.println(lctCl);
+		System.out.println(sido);
 		
 		return "camping/camping-main";
 	}
 	
 	@RequestMapping("/camping-detail")
-	public String campingDetail(Model model,
-			@SessionAttribute(name = "mvo", required = false) Member loginMember,
+	public String campingDetail(Model model, @SessionAttribute(name = "mvo", required = false) Member loginMember,
 			@RequestParam("contentId") int contentId) {
 		int mNo = 0;
 		if(loginMember != null) {

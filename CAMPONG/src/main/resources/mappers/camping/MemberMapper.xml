@@ -8,7 +8,7 @@
 			EMAIL1, EMAIL2, ADDRESS, KAKAOTOKEN, STATUS, 
 			ENROLL_DATE, MODIFY_DATE 
 		FROM MEMBER
-	</sql>
+		</sql>
 
 
 	<resultMap type="com.multi.campong.member.model.vo.Member" id="memberMap">
@@ -70,7 +70,14 @@
 			 </if>
 			 )
 		</insert>
+		<select id="loginByID" resultMap="memberMap">
+			select * from MEMBER where ID=#{id}
+		</select>
 		<select id="login" parameterType="com.multi.campong.member.model.vo.Member" resultMap="memberMap">
+		select * from MEMBER where ID=#{id} and PASSWORD=#{password}
+		</select>
+		
+		<select id="loginMember" parameterType="com.multi.campong.member.model.vo.Member" resultMap="memberMap">
 		select * from MEMBER where ID=#{id} and PASSWORD=#{password}
 		</select>
 	
@@ -110,6 +117,12 @@
 		<select id="selectByNickName" resultMap="memberMap">
 			SELECT * FROM MEMBER WHERE NICKNAME =#{nickName}
 		</select>
+		
+		<update id="updatePwd" parameterType="map">
+			UPDATE MEMBER
+				SET PASSWORD = #{password}
+				WHERE USER_NO = #{mNo}
+		</update>
 
 
 
