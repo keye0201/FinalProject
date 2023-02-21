@@ -192,12 +192,12 @@
 	<insert id="insertReply" parameterType="CampingContentsReply">
 		INSERT INTO CAMPING_CONTENTS_REPLY(
 				REPLY_NO, CONTENTID, USER_NO, 
-				CONTENT, STATUS, ORIGINAL_FILENAME, 
-				RENAME_FILENAME, CREATE_DATE,PROFILE_IMAGE,RENAMED_PROFILEIMAGE) 
+				CONTENT, STATUS, ORIGINAL_FILENAME,
+				RENAME_FILENAME, CREATE_DATE, NICKNAME, PROFILE_IMAGE, RENAMED_PROFILEIMAGE) 
 			VALUES(
 				0, #{contentId}, #{mNo}, 
-				#{content}, DEFAULT, #{originalFileName}, 
-				#{renameFileName}, DEFAULT,#{profileImage},#{renamedProfileImage}
+				#{content}, DEFAULT, #{originalFileName},
+				#{renameFileName}, DEFAULT, #{nickName}, #{profileImage}, #{renamedProfileImage}
 			)
 	</insert>
 	

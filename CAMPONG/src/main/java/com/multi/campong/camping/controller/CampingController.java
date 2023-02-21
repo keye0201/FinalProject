@@ -170,6 +170,8 @@ public class CampingController {
 		System.out.println("upfile:"+upfile);
 		// 로그인한 멤버의 정보 입력
 		reply.setMNo(loginMember.getMNo());
+		reply.setNickName(loginMember.getNickName());
+		System.out.println("로그인한 닉네임 : " + loginMember.getNickName());
 		System.out.println("reply:"+reply);
 		// 파일 저장 로직
 		if (upfile != null && upfile.isEmpty() == false) {

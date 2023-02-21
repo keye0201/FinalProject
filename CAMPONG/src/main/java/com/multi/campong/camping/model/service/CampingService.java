@@ -49,6 +49,8 @@ public class CampingService {
 		Map<String, String> map = new HashMap<>();
 		map.put("contentId", ""+ reply.getContentId());
 		map.put("mNo", ""+ reply.getMNo());
+		map.put("nickName", ""+ reply.getNickName());
+		System.out.println("서비스 넘어온 닉네임: " + reply.getNickName());
 		Camping camping = mapper.selectCampingByNo(map);
 		camping.setReviewCount(camping.getReviewCount() + 1);
 		mapper.updateReviewCount(camping);
