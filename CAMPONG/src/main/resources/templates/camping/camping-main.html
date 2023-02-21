@@ -7,7 +7,7 @@
 	<script th:inline="javascript">
    			 /*<![CDATA[*/
 		
-   				 $(function(){
+   			$(function(){
 			var selectedSido = /*[[${sido}]]*/;
 			var selectedGugun = /*[[${gugun}]]*/;
 			var temp = {};
@@ -432,7 +432,7 @@
 								<!--이전 페이지 -->
 								<li class="page-item mb-0">
 									<button class="page-link"
-										th:onclick="|movePage('/event/event?page=${pageInfo.prevPage}');|" tabindex="-1">
+										th:onclick="|movePage('/camping/camping-main?page=${pageInfo.prevPage}');|" tabindex="-1">
 										<i class="fa-solid fa-angle-left"></i>
 									</button>
 								</li>
@@ -441,14 +441,14 @@
 								<th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
 									<th:block th:if="${status.current == pageInfo.currentPage}">
 										<li class="page-item mb-0">
-											<button class="page-link active" th:onclick="|movePage('/event/event?page=${status.current}');|" disabled>
+											<button class="page-link active" th:onclick="|movePage('/camping/camping-main?page=${status.current}');|" disabled>
 											[[${status.current}]]
 											</button>
 										</li>
 									</th:block>
 									<th:block th:if="${status.current != pageInfo.currentPage}">
 										<li class="page-item mb-0">
-											<button class="page-link" th:onclick="|movePage('/event/event?page=${status.current}');|">
+											<button class="page-link" th:onclick="|movePage('/camping/camping-main?page=${status.current}');|">
 											[[${status.current}]]
 											</button>
 										</li>
@@ -457,7 +457,7 @@
 								
 								<!--다음 페이지 -->
 								<li class="page-item mb-0">
-									<button class="page-link" th:onclick="|movePage('/event/event?page=${pageInfo.nextPage}');|">
+									<button class="page-link" th:onclick="|movePage('/camping/camping-main?page=${pageInfo.nextPage}');|">
 										<i class="fa-solid fa-angle-right"></i>
 									</button>
 								</li>
