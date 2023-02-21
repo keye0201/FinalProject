@@ -137,10 +137,10 @@ public class MemberController {
 
 	@PostMapping("/memLogin.do")
 	public String memLogin(Member m,@RequestParam("id")String id,@RequestParam("password")String password, RedirectAttributes rttr, HttpSession session, Model model) {
-		if (m.getId() == null || m.getId().equals("") || m.getPassword() == null || m.getPassword().equals("")) {
-			rttr.addFlashAttribute("msgType", "실패 메세지");
-			rttr.addFlashAttribute("msg", "값을 다시 입력해주세요.");
-			return "redirect:/sign.in";
+		if (id == null || id.equals("") || password == null || password.equals("")) {
+			model.addAttribute("msg", "값을 입력해주세요.");
+			model.addAttribute("location", "/sign.in");
+			return "common/msg";
 		}
 		Member mo = mapper.loginByID(id);
 		System.out.println("mo"+mo);
@@ -153,9 +153,9 @@ public class MemberController {
 			session.setAttribute("mvo", mo);
 			return "redirect:/";
 		} else {
-			rttr.addFlashAttribute("msgType", "실패 메세지");
-			rttr.addFlashAttribute("msg", "다시 로그인 해주세요.");
-			return "redirect:/sign.in";
+			model.addAttribute("msg", "아이디 또는 비밀번호가 일치하지 않습니다.");
+			model.addAttribute("location", "/sign.in");
+			return "common/msg";
 		}
 	}
 
