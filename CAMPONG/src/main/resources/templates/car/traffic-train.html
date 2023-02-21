@@ -5,7 +5,8 @@
 	
 	<link rel="stylesheet" type="text/css" th:href="@{/assets/css/traffic.css}">
 
-	<script>
+	<script th:inline="javascript">
+   		/*<![CDATA[*/
 	// 소요시간 계산
 	function calTime(depHour, depMin, arrHour, arrMin) {
 		var takeHour;
@@ -50,7 +51,50 @@
 		
 	}
 	
-	
+	$(document).ready(function(){
+		var list = /*[[${list}]]*/;
+		
+		var pt1 = 0; // KTX
+		var pt2 = 0; // ITX
+		var pt3 = 0; // SRT
+		var pt4 = 0; // AREX직통
+		var pt5 = 0; // 무궁화호
+		var pt6 = 0; // 새마을호
+		var pt7 = 0; // 누리로
+		var pt8 = 0; // 통근열차
+		
+		if(list.length !== 0){
+			for(var i=0; i<list.length; i++){
+				if(list[i].gradeNm.includes('KTX')){
+					pt1++;
+				}else if(list[i].gradeNm.includes('ITX')){
+					pt2++;
+				}else if(list[i].gradeNm === 'SRT'){
+					pt3++;
+				}else if(list[i].gradeNm === 'AREX직통'){
+					pt4++;
+				}else if(list[i].gradeNm === '무궁화호'){
+					pt5++;
+				}else if(list[i].gradeNm === '새마을호'){
+					pt6++;
+				}else if(list[i].gradeNm === '누리로'){
+					pt7++;
+				}else if(list[i].gradeNm === '통근열차'){
+					pt8++;
+				}
+			}
+		}
+		document.getElementById("gradeNmNum1").innerHTML = "(" + pt1 + ")";
+		document.getElementById("gradeNmNum2").innerHTML = "(" + pt2 + ")";
+		document.getElementById("gradeNmNum3").innerHTML = "(" + pt3 + ")";
+		document.getElementById("gradeNmNum4").innerHTML = "(" + pt4 + ")";
+		document.getElementById("gradeNmNum5").innerHTML = "(" + pt5 + ")";
+		document.getElementById("gradeNmNum6").innerHTML = "(" + pt6 + ")";
+		document.getElementById("gradeNmNum7").innerHTML = "(" + pt7 + ")";
+		document.getElementById("gradeNmNum8").innerHTML = "(" + pt8 + ")";
+		
+	})
+		/*]]>*/
 	</script>	
 </head>
 
@@ -255,8 +299,8 @@
 							</div>
 
 							<!-- Offcanvas body -->
-							<div class="offcanvas-body flex-column p-3 p-xl-0">
-								<form class="rounded-3 shadow">
+							<form th:action="@{/car/traffic-train}" method="get" class="rounded-3 shadow">
+								<div class="offcanvas-body flex-column p-3 p-xl-0">
 									<!-- 열차 선택 -->
 									<div class="card card-body rounded-0 rounded-top p-4">
 										<!-- Title -->
@@ -266,8 +310,8 @@
 											<!-- Checkbox -->
 											<div class="d-flex justify-content-between align-items-center">
 												<div class="form-check">
-													<input class="form-check-input" type="checkbox" id="popolarType1">
-													<label class="form-check-label" for="popolarType1">전체</label>
+													<input class="form-check-input" type="checkbox" id="gradeNm0" name="gradeNm">
+													<label class="form-check-label" for="gradeNm0">전체</label>
 												</div>
 												<th:block th:if="${list == null}">
 													<span class="small">(0)</span>
@@ -279,54 +323,78 @@
 											<!-- Checkbox -->
 											<div class="d-flex justify-content-between align-items-center">
 												<div class="form-check">
-													<input class="form-check-input" type="checkbox" id="popolarType2">
-													<label class="form-check-label" for="popolarType2">KTX</label>
+													<input class="form-check-input" type="checkbox" id="gradeNm1" name="gradeNm">
+													<label class="form-check-label" for="gradeNm1">KTX</label>
 												</div>
-												<span class="small">(20)</span>
+												<span id="gradeNmNum1" class="small"></span>
 											</div>
 											<!-- Checkbox -->
 											<div class="d-flex justify-content-between align-items-center">
 												<div class="form-check">
-													<input class="form-check-input" type="checkbox" id="popolarType3">
-													<label class="form-check-label" for="popolarType3">새마을</label>
+													<input class="form-check-input" type="checkbox" id="gradeNm2" name="gradeNm">
+													<label class="form-check-label" for="gradeNm2">ITX</label>
 												</div>
-												<span class="small">(4)</span>
+												<span id="gradeNmNum2" class="small"></span>
 											</div>
 											<!-- Checkbox -->
 											<div class="d-flex justify-content-between align-items-center">
 												<div class="form-check">
-													<input class="form-check-input" type="checkbox" id="popolarType4">
-													<label class="form-check-label" for="popolarType4">무궁화</label>
+													<input class="form-check-input" type="checkbox" id="gradeNm3" name="gradeNm">
+													<label class="form-check-label" for="gradeNm3">SRT</label>
 												</div>
-												<span class="small">(2)</span>
+												<span id="gradeNmNum3" class="small"></span>
 											</div>
 											<!-- Checkbox -->
 											<div class="d-flex justify-content-between align-items-center">
 												<div class="form-check">
-													<input class="form-check-input" type="checkbox" id="popolarType4">
-													<label class="form-check-label" for="popolarType4">ITX-청춘</label>
+													<input class="form-check-input" type="checkbox" id="gradeNm4" name="gradeNm">
+													<label class="form-check-label" for="gradeNm4">AREX직통</label>
 												</div>
-												<span class="small">(2)</span>
+												<span id="gradeNmNum4" class="small"></span>
 											</div>
 											<!-- Checkbox -->
 											<div class="d-flex justify-content-between align-items-center">
 												<div class="form-check">
-													<input class="form-check-input" type="checkbox" id="popolarType4">
-													<label class="form-check-label" for="popolarType4">통근열차</label>
+													<input class="form-check-input" type="checkbox" id="gradeNm5" name="gradeNm">
+													<label class="form-check-label" for="gradeNm5">무궁화호</label>
 												</div>
-												<span class="small">(2)</span>
+												<span id="gradeNmNum5" class="small"></span>
+											</div>
+											<!-- Checkbox -->
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="gradeNm6" name="gradeNm">
+													<label class="form-check-label" for="gradeNm6">새마을호</label>
+												</div>
+												<span id="gradeNmNum6" class="small"></span>
+											</div>
+											<!-- Checkbox -->
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="gradeNm7" name="gradeNm">
+													<label class="form-check-label" for="gradeNm7">누리로</label>
+												</div>
+												<span id="gradeNmNum7" class="small"></span>
+											</div>
+											<!-- Checkbox -->
+											<div class="d-flex justify-content-between align-items-center">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="gradeNm8" name="gradeNm">
+													<label class="form-check-label" for="gradeNm8">통근열차</label>
+												</div>
+												<span id="gradeNmNum8" class="small"></span>
 											</div>
 										</div>
 									</div>
 									<hr class="my-0"> <!-- Divider -->
-								</form><!-- Form End -->
 							</div>
 
 							<!-- Buttons -->
 							<div class="d-flex justify-content-between p-2 p-xl-0 mt-xl-4">
 								<button class="btn btn-link p-0 mb-0">초기화</button>
-								<button class="btn btn-primary mb-0">검색하기</button>
+								<button type="submit" class="btn btn-primary mb-0">검색하기</button>
 							</div>
+						</form><!-- Form End -->
 
 						</div>
 						<!-- Responsive offcanvas body END -->
