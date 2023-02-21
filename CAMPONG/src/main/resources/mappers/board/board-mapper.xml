@@ -25,6 +25,7 @@
 		<result property="status" column="STATUS"/>
 		<result property="createDate" column="CREATE_DATE"/>
 		<result property="nickName" column="NICKNAME"/>
+		<result property="renamedProfileImage" column="RENAMED_PROFILEIMAGE"/>
 	</resultMap>
 	
 	<resultMap type="Board" id="boardDetailResultMap" extends="boardListResultMap">
@@ -75,7 +76,8 @@
 		    R.BOARD_NO AS R_BOARD_NO,
 		    R.USER_NO AS R_USER_NO,
 		    R.CONTENT  AS R_CONTENT, 
-		    M2.NICKNAME  AS R_NICKNAME, 
+		    M2.NICKNAME  AS R_NICKNAME,
+		    M2.RENAMED_PROFILEIMAGE AS R_RENAMED_PROFILEIMAGE,
 		    R.CREATE_DATE  AS R_CREATE_DATE
 		FROM BOARD B
 		JOIN MEMBER M ON(B.USER_NO = M.USER_NO)

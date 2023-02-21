@@ -17,4 +17,5 @@ public class Reply {
 	private String status;
 	private Date createDate;
 	private String nickName;
+	private String renamedProfileImage;
 }

@@ -86,7 +86,7 @@
 		}
 		.reply {
 			margin: auto;
-    	display: block;
+    		display: block;
 		}
 		.reply_button{
 			margin-left: 10%;
@@ -210,7 +210,14 @@ Main banner START -->
 			<th:block th:each="reply : ${replyList}">
 				<div class="content pt-3 border-bottom pb-3">
 				<div class="row ms-4">
-					<img class="col-1 reply_avatar rounded-circle shadow p-0" th:src="@{/assets/images/avatar/01.jpg}" alt="avatar">
+					<th:block th:if="${reply.renamedProfileImage.equals('0')}">
+						<img class="col-1 reply_avatar rounded-circle shadow p-0" th:src="@{/assets/campongimg/defaultImage.png}" alt="avatar">
+					</th:block>
+					<th:block th:if="!${reply.renamedProfileImage.equals('0')}">
+						<!-- <img class="col-1 reply_avatar rounded-circle shadow p-0" th:src="@{/assets/images/avatar/01.jpg}" alt="avatar"> -->
+						<img class="col-1 reply_avatar rounded-circle shadow p-0" th:src="|file/${reply.renamedProfileImage}|" alt="avatar">
+					</th:block>
+					
 					<span class="col-8 fw-bold ms-3">[[${reply.nickName}]]</span>
 					<span class="col-2 ms-5" style="font-size:0.85rem;">[[${#dates.format(reply.createDate)}]]</span>
 					<th:block th:if="${session.mvo != null && 
