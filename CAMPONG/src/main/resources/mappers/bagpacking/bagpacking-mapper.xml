@@ -22,6 +22,7 @@
 		<result property="status" column="STATUS"/>
 		<result property="createDate" column="CREATE_DATE"/>
 		<result property="nickName" column="NICKNAME"/>
+		<result property="renamedProfileImage" column="RENAMED_PROFILEIMAGE"/>
 	</resultMap>
 	
 	<resultMap type="Bagpacking" id="bagpackingDetailResultMap" extends="bagpackingListResultMap">
@@ -48,6 +49,7 @@
 		<result property="status" column="STATUS"/>
 		<result property="createDate" column="CREATE_DATE"/>
 		<result property="nickName" column="NICKNAME"/>
+		<result property="renamedProfileImage" column="RENAMED_PROFILEIMAGE"/>
 	</resultMap>
 	
 	<resultMap type="Fishing" id="fishingDetailResultMap" extends="fishingListResultMap">
@@ -117,6 +119,7 @@
 		    R.CONTENTID AS R_CONTENTID,
 		    R.CONTENT AS R_CONTENT, 
 		    M.NICKNAME AS R_NICKNAME, 
+		    M.RENAMED_PROFILEIMAGE AS R_RENAMED_PROFILEIMAGE,
 		    R.CREATE_DATE AS R_CREATE_DATE
 		FROM MOUNTAINISLAND B
 		LEFT OUTER JOIN MOUNTAINISLAND_REPLY R ON (B.CONTENTID = R.CONTENTID)
@@ -219,6 +222,7 @@
 		    R.FISHING_NO AS R_FISHING_NO,
 		    R.CONTENT AS R_CONTENT,
 		    M.NICKNAME AS R_NICKNAME,
+		    M.RENAMED_PROFILEIMAGE AS R_RENAMED_PROFILEIMAGE,
 		    R.CREATE_DATE AS R_CREATE_DATE
 		FROM FISHING F
 		LEFT OUTER JOIN FISHING_REPLY R ON (F.FISHING_NO = R.FISHING_NO)

@@ -186,7 +186,7 @@
 <!-- 													<i class="bi bi-image"></i> -->
 <!-- 												</label> -->
 <!-- 												<input class="" type="file" id="upfile" name="upfile" accept="image/*" style="display: none"> -->
-									<input class="" type="file" id="upfile" name="upfile" accept="image/*"><br>
+<!-- 									<input class="" type="file" id="upfile" name="upfile" accept="image/*"><br> -->
 									<!-- Button -->
 									<button type="submit" class="btn btn-primary mb-0 mt-2">리뷰 등록<i
 											class="bi fa-fw bi-arrow-right ms-2"></i></button>
@@ -207,18 +207,19 @@
 							</th:block>
 							<th:block th:if="${replyList != null}">
 								<th:block th:each="reply : ${replyList}">
-								<!-- Review item START -->
 								<div class="d-md-flex my-4">
 									<!-- Avatar -->
-									<div class="avatar avatar-lg me-3 flex-shrink-0">
-										<img class="avatar-img rounded-circle" th:src="@{/assets/images/bagpacking/08.jpg}"
-											alt="avatar">
-									</div>
+									<th:block th:if="${reply.renamedProfileImage.equals('0')}">
+										<img class="avatar-img rounded-circle reply_avatar" th:src="@{/assets/campongimg/defaultImage.png}" alt="avatar">
+									</th:block>
+									<th:block th:if="!${reply.renamedProfileImage.equals('0')}">
+										<img class="avatar-img rounded-circle reply_avatar" th:src="|file/${reply.renamedProfileImage}|" alt="avatar">
+									</th:block>
 									<!-- Text -->
-									<div>
+									<div class="ms-3">
 										<div class="d-flex justify-content-between mt-1 mt-md-0">
 											<div>
-												<h5 class="me-3 mb-0">[[${reply.nickName}]]</h5>
+												<h5 class="mb-0">[[${reply.nickName}]]</h5>
 												<!-- Info -->
 												<p class="small">[[${#dates.format(reply.createDate)}]]</p>
 											</div>
@@ -226,7 +227,6 @@
 										<p class="mb-2">[[${reply.content}]]</p>
 									</div>
 								</div>
-	
 								<!-- Divider -->
 								<hr>
 								<!-- Review item END -->
