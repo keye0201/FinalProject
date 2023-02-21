@@ -357,7 +357,7 @@
 													<div class="d-sm-flex align-items-center mb-3">
 															
 														<img class="avatar avatar-md rounded-circle float-start me-3"
-															th:src="|/file/${mmo.renameFileName}|" alt="avatar" th:unless="${mmo.renamedProfileImage==null} or ${mmo.renamedProfileImage.toString().equals('0')}">
+															th:src="|/file/${mmo.renamedProfileImage}|" alt="avatar" th:unless="${mmo.renamedProfileImage==null} or ${mmo.renamedProfileImage.toString().equals('0')}">
 															<img class="avatar avatar-md rounded-circle float-start me-3"
 															src="/assets/campongimg/defaultImage.png" alt="avatar" th:if="${mmo.renamedProfileImage==null} or ${mmo.renamedProfileImage.toString().equals('0')}">
 														<!-- Title -->

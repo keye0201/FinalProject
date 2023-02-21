@@ -3,17 +3,41 @@
 <head>
 	<th:block th:replace="~{common/layout :: head}"></th:block>
 
+	<script src="https://code.jquery.com/jquery-3.6.3.slim.js" integrity="sha256-DKU1CmJ8kBuEwumaLuh9Tl/6ZB6jzGOBV/5YpNE2BWc=" crossorigin="anonymous"></script>
 	<script th:inline="javascript">
    			 /*<![CDATA[*/
-		document.ready(function(){
-			alert([[${selectedSido}]]);
-		});
 		
+   				 $(function(){
+			var selectedSido = /*[[${sido}]]*/;
+			var selectedGugun = /*[[${gugun}]]*/;
+			var temp = {};
+			temp['value'] = selectedSido;
+			categoryChange(temp);
+			var target = document.getElementById("sido");
+			for(var i = 0; i < target.options.length; i++){
+				if(target.options[i].value == selectedSido){
+					target.options[i].selected = true;
+					break;
+				}
+			}
+			
+			
+			target = document.getElementById("gugun");
+			for(var i = 0; i < target.options.length; i++){
+				if(target.options[i].value == selectedGugun){
+					target.options[i].selected = true;
+					break;
+				}
+			}
+		});
+	
+       function init(){
+    	   
+       }
    			 
    				 
 		/* 드롭박스 */
 		function categoryChange(e) {
-			
 			
 			var good_a = ["전체", "강남구", "강동구", "강북구", "강서구", "관악구", "광진구", "구로구", "금천구", "노원구", "도봉구", "동대문구", "동작구", "마포구", "서대문구", "서초구", "성동구", "성북구", "송파구", "양천구", "영등포구", "용산구", "은평구", "종로구", "중구", "중랑구"];
 			var good_b = ["전체", "강서구", "금정구", "기장군", "남구", "동구", "동래구", "부산진구", "북구", "사상구", "사하구", "서구", "수영구", "연제구", "영도구", "중구", "해운대구"];
@@ -52,11 +76,11 @@
 			else if (e.value == "경상북도") var d = good_o;
 			else if (e.value == "경상남도") var d = good_p;
 			else if (e.value == "제주도") var d = good_q;
+			else var d = good_a;
+
 			
 			target.options.length = 0;
 	
-			
-			
 			for (x in d) {
 				var opt = document.createElement("option");
 				opt.value = d[x];
@@ -116,24 +140,24 @@
 					</div>
 					<div class="col-4 mt-0">
 						<select id = "sido" name="sido" class="select me-2 ps-1" onchange="categoryChange(this)" th:value="${selectedSido}">
-							<option th:selected="${selectedSido}==''">전체</option>
-							<option value="서울"  th:selected="${selectedSido}=='서울'">서울</option> <!-- 수정 필요 -->
-							<option value="부산시" th:selected="${selectedSido}=='부산시'">부산시</option>
-							<option value="대구시" th:selected="${selectedSido}=='대구시'">대구시</option>
-							<option value="인천시" th:selected="${selectedSido}=='인천시'">인천시</option>
-							<option value="광주시" th:selected="${selectedSido}=='광주시'">광주시</option>
-							<option value="대전시" th:selected="${selectedSido}=='대전시'">대전시</option>
-							<option value="울산시" th:selected="${selectedSido}=='울산시'">울산시</option>
-							<option value="세종시" th:selected="${selectedSido}=='세종시'">세종시</option>
-							<option value="경기도" th:selected="${selectedSido}=='경기도'">경기도</option>
-							<option value="강원도" th:selected="${selectedSido}=='강원도'">강원도</option>
-							<option value="충청북도" th:selected="${selectedSido}=='충청북도'">충청북도</option>
-							<option value="충청남도" th:selected="${selectedSido}=='충청남도'">충청남도</option>
-							<option value="전라북도" th:selected="${selectedSido}=='전라북도'">전라북도</option>
-							<option value="전라남도" th:selected="${selectedSido}=='전라남도'">전라남도</option>
-							<option value="경상북도" th:selected="${selectedSido}=='경상북도'">경상북도</option>
-							<option value="경상남도" th:selected="${selectedSido}=='경상남도'">경상남도</option>
-							<option value="제주도" th:selected="${selectedSido}=='제주도'">제주도</option>
+							<option>전체</option>
+							<option value="서울">서울</option> <!-- 수정 필요 -->
+							<option value="부산시">부산시</option>
+							<option value="대구시">대구시</option>
+							<option value="인천시">인천시</option>
+							<option value="광주시">광주시</option>
+							<option value="대전시">대전시</option>
+							<option value="울산시">울산시</option>
+							<option value="세종시">세종시</option>
+							<option value="경기도">경기도</option>
+							<option value="강원도">강원도</option>
+							<option value="충청북도">충청북도</option>
+							<option value="충청남도">충청남도</option>
+							<option value="전라북도">전라북도</option>
+							<option value="전라남도">전라남도</option>
+							<option value="경상북도">경상북도</option>
+							<option value="경상남도">경상남도</option>
+							<option value="제주도">제주도</option>
 						</select>
 
 						<select id="gugun" name="gugun" class="good ps-1">
@@ -408,7 +432,7 @@
 								<!--이전 페이지 -->
 								<li class="page-item mb-0">
 									<button class="page-link"
-										th:onclick="|movePage('/camping/camping-main?page=${pageInfo.prevPage}');|" tabindex="-1">
+										th:onclick="|movePage('/event/event?page=${pageInfo.prevPage}');|" tabindex="-1">
 										<i class="fa-solid fa-angle-left"></i>
 									</button>
 								</li>
@@ -417,14 +441,14 @@
 								<th:block th:each="num, status : ${#numbers.sequence(pageInfo.startPage, pageInfo.endPage)}">
 									<th:block th:if="${status.current == pageInfo.currentPage}">
 										<li class="page-item mb-0">
-											<button class="page-link active" th:onclick="|movePage('/camping/camping-main?page=${status.current}');|" disabled>
+											<button class="page-link active" th:onclick="|movePage('/event/event?page=${status.current}');|" disabled>
 											[[${status.current}]]
 											</button>
 										</li>
 									</th:block>
 									<th:block th:if="${status.current != pageInfo.currentPage}">
 										<li class="page-item mb-0">
-											<button class="page-link" th:onclick="|movePage('/camping/camping-main?page=${status.current}');|">
+											<button class="page-link" th:onclick="|movePage('/event/event?page=${status.current}');|">
 											[[${status.current}]]
 											</button>
 										</li>
@@ -433,7 +457,7 @@
 								
 								<!--다음 페이지 -->
 								<li class="page-item mb-0">
-									<button class="page-link" th:onclick="|movePage('/camping/camping-main?page=${pageInfo.nextPage}');|">
+									<button class="page-link" th:onclick="|movePage('/event/event?page=${pageInfo.nextPage}');|">
 										<i class="fa-solid fa-angle-right"></i>
 									</button>
 								</li>

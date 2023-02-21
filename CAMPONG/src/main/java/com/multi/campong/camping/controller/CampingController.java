@@ -59,7 +59,7 @@ public class CampingController {
 			@RequestParam(required = false) String checkedPet,
 			@RequestParam(required = false) String sido,
 			@RequestParam(required = false) String lctCl,
-			@RequestParam(required = false) String gogun
+			@RequestParam(required = false) String gugun
 			) {
 //		log.info("리스트 요청, param : " + paramMap);
 //		log.info("리스트 요청, checkedTheme : " + checkedTheme);
@@ -117,8 +117,9 @@ public class CampingController {
 		int campingCount = service.getCampingCount(searchMap);
 		PageInfo pageInfo = new PageInfo(page, 10, campingCount, 5);
 		List<Camping> list = service.getCampingList(pageInfo, searchMap);
-		System.out.println("gogun="+gogun);
 		model.addAttribute("list", list);
+		model.addAttribute("gugun", gugun);
+		model.addAttribute("sido", sido);
 		model.addAttribute("paramMap", paramMap);
 		model.addAttribute("pageInfo", pageInfo);
 		model.addAttribute("campingCount", campingCount);
