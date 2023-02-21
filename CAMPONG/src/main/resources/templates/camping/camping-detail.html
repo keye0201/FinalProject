@@ -16,68 +16,18 @@
 				<div class="row g-0">
 					<!-- 대표 이미지 -->
 					<div class="col-md-12">
-						<a data-glightbox data-gallery="gallery" th:href="@{${content.firstImageUrl}}">
-							<div class="card card-grid-lg card-element-hover card-overlay-hover overflow-hidden"
+							<div class="card card-grid-lg overflow-hidden"
 								th:style="'background-image:url('+ @{${content.firstImageUrl}} +'); background-position: center left; background-size: cover;'">
-								<!-- Card hover element -->
-								<div class="hover-element position-absolute w-100 h-100">
-									<i class="bi bi-fullscreen fs-6 text-white position-absolute top-50 start-50 translate-middle bg-dark rounded-1 p-2 lh-1"></i>
-								</div>
 							</div>
-						</a>
 					</div>
 					<!-- 대표 이미지끝-->
 				</div>
 			</div>
 		</section>
-		<!-- 슬라이드 바깥쪽 시작-->
-		<section class="pb-0 pt-0">
-			<div class="container">
-				<!-- 슬라이드안쪽시작 -->
-				<div class="tiny-slider arrow-round arrow-blur arrow-hover">
-					<div class="tiny-slider-inner mb-6" data-autoplay="true" data-arrow="true" data-edge="4"
-						data-dots="false" data-items-xl="3" data-items-lg="3" data-items-md="2" data-items-sm="1">
-
-						<!-- 이미지2 -->
-						<div>
-							<div class="card">
-								<img th:src="@{/assets/images/offer/07.jpg}" class="card-img" alt="" style="border-radius:0">
-							</div>
-						</div>
-						<!-- 이미지2 끝 -->
-
-						<!-- 이미지3 -->
-						<div>
-							<div class="card" id="slideCard">
-								<img th:src="@{/assets/images/offer/08.jpg}" class="card-img" alt="" style="border-radius:0">
-							</div>
-						</div>
-						<!-- 이미지3끝 -->
-
-						<!-- 이미지4 -->
-						<div>
-							<div class="card">
-								<img th:src="@{/assets/images/offer/05.jpg}" class="card-img" alt="" style="border-radius:0">
-							</div>
-						</div>
-						<!--이미지4 끝-->
-						<!-- 이미지1 -->
-						<div>
-							<div class="card">
-								<img th:src="@{/assets/images/offer/06.jpg}" class="card-img" alt="" style="border-radius:0">
-							</div>
-						</div>
-						<!-- 이미지1 끝 -->
-					</div>
-				</div>
-				<!-- 슬라이드 안쪽끝 -->
-			</div>
-		</section>
-		<!-- 슬라이드 바깥끝-->
 		<!-- =======================Image gallery END -->
 
 		<!--여행지 제목 -->
-		<section class="pt-0">
+		<section class="pt-6">
 			<div class="container">
 				<div class="justify-content-between">
 				<h3 class="mb-1 d-inline-block">[[${content.facltNm}]]</h3>
