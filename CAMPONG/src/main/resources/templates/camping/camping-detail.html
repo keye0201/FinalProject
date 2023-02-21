@@ -266,15 +266,15 @@
 														placeholder="리뷰를 남겨주세요." rows="5"></textarea>
 												</div>
 												<!-- 이미지 첨부 -->
-<!-- 												<label class="fs-4" for="upfile" style="cursor: pointer;"> -->
-<!-- 													<i class="bi bi-image"></i> -->
-<!-- 												</label> -->
-<!-- 												<input class="" type="file" id="upfile" name="upfile" accept="image/*" style="display: none"> -->
-												<input class="" type="file" id="upfile" name="upfile" accept="image/*"><br>
+												<label class="fs-3 m-0" for="upfile" style="cursor: pointer;">
+													<i class="bi bi-image"></i>
+												</label>
+												<input class="" type="file" id="upfile" name="upfile" accept="image/*" style="display: none">
+<!-- 												<input class="" type="file" id="upfile" name="upfile" accept="image/*"><br> -->
 												<input type="hidden" name="profileImage" th:value="${session.mvo.ProfileImage}" th:unless="${session.mvo.renamedProfileImage==null}"/>
 												<input type="hidden" name="renamedProfileImage" th:value="${session.mvo.renamedProfileImage}" th:unless="${session.mvo.renamedProfileImage==null}"/>
 												<!-- Button -->
-												<button type="submit" class="btn btn-primary mb-0 mt-2">리뷰 등록<i
+												<button type="submit" class="btn btn-primary mb-3">리뷰 등록<i
 														class="bi fa-fw bi-arrow-right ms-2"></i></button>
 											</form>
 											<!-- Leave review END -->
@@ -286,29 +286,30 @@
 										</th:block>
 										</div>
 										<!-- Card body END -->
-									</div>
+									
 									<!-- Customer Review END -->
-								<th:block th:if="${replyList == null}">
+									<th:block th:if="${replyList == null}">
 									<div class="travelReview col-12">
 										<div class="bg-light rounded p-3 mb-4">
 											<h5>등록된 리뷰가 없습니다.</h5>
 										</div>
 									</div>
-								</th:block>
+									</th:block>
 								<th:block th:if="${mmo != null}">
 									<th:block th:each="mmo : ${mmo}">
 									<div class="row g-4m mt-3">
 										<div class="travelReview col-12">
 											<!--답글페이지-->
 											<div class="bg-light rounded p-3 mb-4">
+												<div class="row">
+												<div class="col-11">
 												<!-- Review item START -->
 												<div class="d-sm-flex justify-content-between">
 													<!-- Avatar image -->
 													<div class="d-sm-flex align-items-center mb-3">
-															
 														<img class="avatar avatar-md rounded-circle float-start me-3"
 															th:src="|file/${mmo.renamedProfileImage}|" alt="avatar" th:unless="${mmo.renamedProfileImage==null} or ${mmo.renamedProfileImage.toString().equals('0')}">
-															<img class="avatar avatar-md rounded-circle float-start me-3"
+														<img class="avatar avatar-md rounded-circle float-start me-3"
 															src="/assets/campongimg/defaultImage.png" alt="avatar" th:if="${mmo.renamedProfileImage==null} or ${mmo.renamedProfileImage.toString().equals('0')}">
 														<!-- Title -->
 														<div>
@@ -319,7 +320,7 @@
 												</div>
 	
 												<!-- Content -->
-												<h6 class="fw-bold"><span class="text-body"></span> [[${mmo.content}]] </h6>
+												<h5 class="fw-bold mt-4 ms-2"><span class="text-body"></span> [[${mmo.content}]] </h5>
 	
 												<!-- Image -->
 												<div class="row g-4">
@@ -331,17 +332,27 @@
 													</th:block>
 													</div>
 												</div>
+												</div>
+												<div class="col-1 ps-4">
+												<th:block th:if="${session.mvo != null && 
+														(session.mvo.mNo == mmo.mNo || session.mvo.role == 'ROLE_ADMIN')}">
+													<button class="btn btn-sm btn-outline-danger" th:onclick="|deleteReply(${mmo.rNo},${content.contentId});|">삭제</button>
+												</th:block>
+												</div>
 											</div>
 											<!--댓글 끝-->
+											</div>
 											<hr class="my-2"> <!-- Divider -->
 										</div>
 									</div>
 									</th:block>
 								</th:block>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
+			</div>
 			</div>
 			<!-- Tabs Content END -->
 		</section>
@@ -471,21 +482,9 @@
 	</script>
 	
 	<script>
-	$(document).ready(() => {
-// 		$("#btnUpdate").on("click", (e) => {
-// 			location.href = "/camping/board-update?no=[[${content.contentId}]]";
-// 		});
-		
-		$("#btnDelete").on("click", (e) => {
-			if(confirm("정말로 게시글을 삭제 하시겠습니까?")) {
-				location.replace("/camping/delete?contentId=[[${content.contentId}]]");
-			}
-		});
-	});
-	
 	function deleteReply(replyNo, contentId){
 		var url = "/camping/replyDel?replyNo=";
-		var requestURL = url + replyNo +"&contentId" + contentId;
+		var requestURL = url + replyNo +"&contentId=" + contentId;
 		location.replace(requestURL);
 	}
 	</script>

@@ -126,8 +126,8 @@ public class CampingService {
 		return mapper.getCampSelectmNoMax(mNo);
 	}
 
-	public List<CampingContentsReply> getCampingRepluAll() {
-		return mapper.getCampingReplyAll();
+	public List<CampingContentsReply> getCampingRepluAll(int contentId) {
+		return mapper.getCampingReplyAll(contentId);
 	}
 
 }

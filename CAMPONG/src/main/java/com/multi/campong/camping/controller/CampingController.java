@@ -144,7 +144,7 @@ public class CampingController {
 		
 		Camping content = service.findByNo(contentId, mNo);
 
-		List<CampingContentsReply> mmo = service.getCampingRepluAll();
+		List<CampingContentsReply> mmo = service.getCampingRepluAll(contentId);
 		System.out.println(mmo);
 //		String dir = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\upload";
 //		log.info("위치 : " + dir);
@@ -202,7 +202,7 @@ public class CampingController {
 	@RequestMapping("/replyDel")
 	public String deleteReply(Model model, @SessionAttribute(name = "mvo", required = false) Member loginMember,
 			int replyNo, int contentId) {
-		log.info("댓글 삭제 요청");
+		log.info("댓글 삭제 요청, replyNo: " + replyNo + ", contentId: " + contentId);
 		int result = service.deleteReply(replyNo);
 
 		if (result > 0) {

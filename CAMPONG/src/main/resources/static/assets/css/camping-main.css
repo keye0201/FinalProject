@@ -202,7 +202,7 @@ main {
 }
 
 .review {
-	width: 80px;
+	width: 100px;
 	background-color: red;
 	color: white;
 	display: inline-block;
@@ -210,7 +210,7 @@ main {
 }
 
 .views {
-	width: 80px;
+	width: 100px;
 	background-color: black;
 	color: white;
 	display: inline-block;
@@ -232,7 +232,7 @@ main {
 }
 
 .recommend {
-	width: 80px;
+	width: 100px;
 	background-color: white;
 	color: black;
 	display: inline-block;
