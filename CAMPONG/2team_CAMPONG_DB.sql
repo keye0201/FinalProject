@@ -1394,7 +1394,7 @@ insert into `RECIPE`(`RECIPE_NO`,`CATEGORY1`,`CATEGORY2`,`TITLE`,`CONTENT`,`URL`
 insert into `RECIPE`(`RECIPE_NO`,`CATEGORY1`,`CATEGORY2`,`TITLE`,`CONTENT`,`URL`,`IMAGEURL`) values(0,'해산물','','멸치볶음','마지막 한 젓가락까지 바삭하고 고소한 간장 멸치볶음','https://www.10000recipe.com/recipe/6891816','https://recipe1.ezmember.co.kr/cache/recipe/2018/07/02/760e92406112f6a0ad98d84844cbfc7e1.jpg');
 insert into `RECIPE`(`RECIPE_NO`,`CATEGORY1`,`CATEGORY2`,`TITLE`,`CONTENT`,`URL`,`IMAGEURL`) values(0,'돼지고기','','소세지야채볶음','쏘야 맛있게만들기','https://www.10000recipe.com/recipe/6872975','https://recipe1.ezmember.co.kr/cache/recipe/2017/07/19/907c4662b413b0cdbc4e9ea088935ba21.jpg');
 
-insert into `MEMBER`(`USER_NO`,`ID`,`PASSWORD`,`ROLE`,`BIRTHYEAR`,`NICKNAME`,`PHONE`,`EMAIL1`,`EMAIL2`,`ADDRESS`,`KAKAOTOKEN`,`STATUS`,`ENROLL_DATE`,`MODIFY_DATE`,`PROFILE_IMAGE`,`RENAMED_PROFILEIMAGE`) values('1', 'admin', '$2a$10$ez/mkHzzDuxXVdFjQFnUMOtVohF2Mqe1TZ08aWEfxdF3qTsSc9HnS', 'ROLE_USER', '1970', '관리자', '01011111111', 'aaaaa', ' google.com', '서울', NULL, 'Y', '2023-02-21 10:23:17', '2023-02-21 10:23:17', '0', '0');
+insert into `MEMBER`(`USER_NO`,`ID`,`PASSWORD`,`ROLE`,`BIRTHYEAR`,`NICKNAME`,`PHONE`,`EMAIL1`,`EMAIL2`,`ADDRESS`,`KAKAOTOKEN`,`STATUS`,`ENROLL_DATE`,`MODIFY_DATE`,`PROFILE_IMAGE`,`RENAMED_PROFILEIMAGE`) values('1', 'admin', '$2a$10$ez/mkHzzDuxXVdFjQFnUMOtVohF2Mqe1TZ08aWEfxdF3qTsSc9HnS', 'ROLE_ADMIN', '1970', '관리자', '01011111111', 'aaaaa', ' google.com', '서울', NULL, 'Y', '2023-02-21 10:23:17', '2023-02-21 10:23:17', '0', '0');
 
 SELECT*FROM `MEMBER`;
 SELECT*FROM `BOARD`;
