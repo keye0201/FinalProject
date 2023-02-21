@@ -82,6 +82,10 @@ public class BoardService {
 		return board; 
 	}
 	
+	public int replyCount(int boardNo) {
+		return mapper.replyCount(boardNo);
+	}
+	
 	public void deleteFile(String filePath) {
 		File file = new File(filePath);
 		if(file.exists()) {

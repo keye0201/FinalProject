@@ -89,6 +89,14 @@
 		WHERE B.STATUS = 'Y' AND B.BOARD_NO = #{bNo}
 	</select>
 	
+	<select id="replyCount" resultType="int">
+		SELECT COUNT(DISTINCT R.REPLY_NO) as REPLYCOUNT
+		FROM BOARD B
+		JOIN BOARD_REPLY R ON R.BOARD_NO = B.BOARD_NO 
+		WHERE B.BOARD_NO = #{bNo}
+	</select>
+	
+	
 	<insert id="insertBoard" parameterType="Board">
 		INSERT INTO BOARD(
 			BOARD_NO, USER_NO, TITLE,

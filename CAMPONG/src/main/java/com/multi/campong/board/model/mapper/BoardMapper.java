@@ -13,6 +13,7 @@ public interface BoardMapper {
 	List<Board> selectBoardList(Map<String, String> map);
 	int selectBoardCount(Map<String, String> map);
 	Board selectBoardByNo(int no);
+	int replyCount(int no);
 	int insertBoard(Board board);
 	int insertReply(Reply reply);
 	int updateBoard(Board board);

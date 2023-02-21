@@ -79,8 +79,11 @@ public class BoardController {
 		if (board == null) {
 			return "redirect:error";
 		}
-
+		
+		int reply = service.replyCount(no);
+		
 		model.addAttribute("board", board);
+		model.addAttribute("replyCount", reply);
 		model.addAttribute("replyList", board.getReplyList());
 		return "board/board-view";
 	}
