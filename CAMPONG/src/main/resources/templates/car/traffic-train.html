@@ -51,8 +51,56 @@
 		
 	}
 	
+	$(function(){
+		var KindU = /*[[${param.addressKindU}]]*/;	// 지역
+		var KindU2 = /*[[${param.addressKindU2}]]*/;
+		var KindD = /*[[${param.addressKindD}]]*/;	// 터미널
+		var KindD2 = /*[[${param.addressKindD2}]]*/;	
+		var temp = {};
+		var temp2 = {};
+		
+		temp['value'] = KindU;
+		temp2['value'] = KindU2;
+		
+		addressKindChange(temp);
+		addressKindChange2(temp2);
+		
+		var target = document.getElementById("addressKindU");
+		for(var i = 0; i < target.options.length; i++){
+			if(target.options[i].value == KindU){
+				target.options[i].selected = true;
+				break;
+			}
+		}
+		
+		var target = document.getElementById("addressKindU2");
+		for(var i = 0; i < target.options.length; i++){
+			if(target.options[i].value == KindU2){
+				target.options[i].selected = true;
+				break;
+			}
+		}
+		
+		target = document.getElementById("addressKindD");
+		for(var i = 0; i < target.options.length; i++){
+			if(target.options[i].value == KindD){
+				target.options[i].selected = true;
+				break;
+			}
+		}
+		
+		target = document.getElementById("addressKindD2");
+		for(var i = 0; i < target.options.length; i++){
+			if(target.options[i].value == KindD2){
+				target.options[i].selected = true;
+				break;
+			}
+		}
+		
+	});
+	
 	$(document).ready(function(){
-		var list = /*[[${list}]]*/;
+	   	var list = /*[[${list}]]*/;
 		
 		var pt1 = 0; // KTX
 		var pt2 = 0; // ITX
@@ -389,14 +437,13 @@
 									<hr class="my-0"> <!-- Divider -->
 							</div>
 
-							<!-- Buttons -->
+						</form><!-- Form End -->
+						</div>
+						<!-- Buttons -->
 							<div class="d-flex justify-content-between p-2 p-xl-0 mt-xl-4">
-								<button class="btn btn-link p-0 mb-0">초기화</button>
+								<button class="btn btn-link p-0 mb-0" onclick="uncheck()">초기화</button>
 								<button type="submit" class="btn btn-primary mb-0">검색하기</button>
 							</div>
-						</form><!-- Form End -->
-
-						</div>
 						<!-- Responsive offcanvas body END -->
 					</aside>
 
@@ -560,6 +607,13 @@
 
 	<!--지역선택-->
 	<script th:src="@{/assets/js/addresstrain2.js}"></script>
+	
+	<!-- 사이드 필터 초기화 -->
+	<script type="text/javascript">
+	function uncheck(){
+		$(':checkbox:checked').prop('checked',false);
+	};
+	</script>
 
 </body>
 
