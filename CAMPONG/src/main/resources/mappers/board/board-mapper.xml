@@ -15,6 +15,7 @@
 		<result property="createDate" column="CREATE_DATE"/>
 		<result property="readCount" column="READCOUNT"/>
 		<result property="type" column="TYPE"/>
+		<result property="replyCount" column="REPLYCOUNT"/>
 	</resultMap>
 	
 	<resultMap type="Reply" id="boardReplyResultMap">
@@ -34,7 +35,9 @@
 	</resultMap>
 	
 	<select id="selectBoardList" resultMap="boardListResultMap" parameterType="map">
-		SELECT B.BOARD_NO, B.TITLE, M.NICKNAME, B.CREATE_DATE, B.ORIGINAL_FILENAME, B.READCOUNT, B.STATUS, B.TYPE
+		SELECT B.BOARD_NO, B.TITLE, M.NICKNAME, B.CREATE_DATE, B.ORIGINAL_FILENAME, B.READCOUNT, B.STATUS, B.TYPE, (select count(DISTINCT R.REPLY_NO) FROM BOARD B2
+		JOIN BOARD_REPLY R ON R.BOARD_NO = B.BOARD_NO 
+		WHERE B.BOARD_NO = B2.BOARD_NO) as REPLYCOUNT
 		FROM BOARD B 
 		JOIN MEMBER M ON(B.USER_NO = M.USER_NO) 
 		WHERE B.STATUS = 'Y' AND (B.TYPE = 'free' OR B.TYPE = 'question')

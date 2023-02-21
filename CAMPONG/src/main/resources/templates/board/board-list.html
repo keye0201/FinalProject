@@ -147,9 +147,17 @@ Main banner START -->
 						<td class="board_tag" th:if="${board.type} == free"><span class="badge-1 text-bg-info">잡담</span></td>
 						<td class="board_tag" th:if="${board.type} == question"><span class="badge-1 text-bg-success">질문</span></td>
 						<td class="board_title">
-							<a th:href="|/board/board-view?no=${board.bNo}|">
-								[[${board.title}]]
-							</a>
+							<th:block th:if="${board.replyCount != 0}">
+								<a th:href="|/board/board-view?no=${board.bNo}|">
+									[[${board.title}]]&nbsp;&nbsp;&#91;[[${board.replyCount}]]&#93;
+								</a>
+							</th:block>
+							<th:block th:if="${board.replyCount == 0}">
+								<a th:href="|/board/board-view?no=${board.bNo}|">
+									[[${board.title}]]
+								</a>
+							</th:block>
+							
 						</td>
 						<td th:text="${board.nickName}" class="board_write"></td>
 						<td th:text="${#dates.format(board.createDate, 'yyyy/MM/dd')}" class="board_date"/>

@@ -23,4 +23,5 @@ public class Board {
 	private int readCount;
 	private String type;
 	private List<Reply> replyList;
+	private int replyCount;
 }
