@@ -73,7 +73,7 @@ public class BagpackingController {
 			String searchGugun = paramMap.get("gugun");
 			String searchValue = paramMap.get("searchValue");
 			
-			if(searchSido != null && searchSido.length() > 0) {
+			if(searchSido != null && searchSido.length() > 0 && !searchSido.equals("전체")) {
 				searchMap.put("sido", searchSido);
 			}
 			if(searchGugun != null && searchGugun.length() > 0 && !searchGugun.equals("전체")) {
@@ -112,7 +112,7 @@ public class BagpackingController {
 			if(searchValue != null && searchValue.length() > 0) {
 				searchMap.put("title", searchValue);
 			}
-			if(searchSido != null && searchSido.length() > 0) {
+			if(searchSido != null && searchSido.length() > 0 && !searchSido.equals("전체")) {
 				searchMap.put("sido", searchSido);
 			}
 			if(searchGugun != null && searchGugun.length() > 0 && !searchGugun.equals("전체")) {
@@ -148,7 +148,7 @@ public class BagpackingController {
 			if(searchValue != null && searchValue.length() > 0) {
 				searchMap.put("fishingNm", searchValue);
 			}
-			if(searchSido != null && searchSido.length() > 0) {
+			if(searchSido != null && searchSido.length() > 0 && !searchSido.equals("전체")) {
 				searchMap.put("sido", searchSido);
 			}
 			if(searchGugun != null && searchGugun.length() > 0 && !searchGugun.equals("전체")) {
