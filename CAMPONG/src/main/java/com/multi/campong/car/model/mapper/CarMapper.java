@@ -18,8 +18,10 @@ public interface CarMapper {
 	// 버스
 	List<Bus> selectBusTicketList(int mNo);
 	int insertBookingBus(Bus bus);
+	void allBusDelete(int mNo);
 	
 	// 열차
 	List<Train> selectTrainTicketList(int mNo);
 	int insertBookingTrain(Train train);
+	void allTrainTicket(int mNo);
 }

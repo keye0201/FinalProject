@@ -23,4 +23,5 @@ public interface CampingMapper {
 	int unBookmarkCamp(Map<String, String> map);
 	List<Camping> selectBookmarkList(int mNo);
 	CampingContentsReply getCampSelectmNoMax(int mNo);
+	void allBookMarkDelete(int mNo);
 }

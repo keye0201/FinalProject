@@ -242,4 +242,8 @@
 		ORDER BY REPLY_NO DESC
 	</select>
 	
+	<delete id="allBookMarkDelete">
+		DELETE FROM BOOKMARK WHERE USER_NO=#{mNo}
+	</delete>
+	
 </mapper>

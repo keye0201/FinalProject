@@ -79,6 +79,14 @@
 		)
 	</insert>
 	
+	<delete id="allBusDelete">
+		DELETE FROM BUS_TICKET WHERE USER_NO=#{mNo}
+	</delete>
+	
+	<delete id="allTrainTicket">
+		DELETE FROM TRAIN_TICKET WHERE USER_NO=#{mNo}
+	</delete>
+	
 	<!-- 열차 -->
 	<select id="selectTrainTicketList" resultMap="TrainResultMap" parameterType="map">
 		SELECT 

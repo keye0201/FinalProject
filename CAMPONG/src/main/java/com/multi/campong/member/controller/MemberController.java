@@ -28,12 +28,15 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.multi.campong.camping.model.mapper.CampingMapper;
+import com.multi.campong.car.model.mapper.CarMapper;
 import com.multi.campong.member.model.mapper.MemberMapper;
 import com.multi.campong.member.model.service.KaKaoService;
 import com.multi.campong.member.model.service.MemberService;
 import com.multi.campong.member.model.vo.Member;
 import com.multi.campong.moim.model.mapper.MeetingMapper;
 import com.multi.campong.moim.model.mapper.MoimMapper;
+import com.multi.campong.shop.model.mapper.ShoppingMapper;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +60,17 @@ public class MemberController {
 
 	@Autowired
 	KaKaoService kakaoService;
-
+	
+	@Autowired
+	ShoppingMapper shopMapper;
+	
+	@Autowired
+	CampingMapper campMapper;
+	
+	@Autowired
+	CarMapper carMapper;
+	
+	
 	final static private String savePath = "C:\\campong";
 
 	private BCryptPasswordEncoder pwEncoder = new BCryptPasswordEncoder();
@@ -242,6 +255,13 @@ public class MemberController {
 		moimMapper.deleteMoim(mvo.getNickName());
 		// 자기가 참가한 모임을 탈퇴
 		meetMapper.MeetingAllDelete(mvo.getMNo());
+		//장바구니 비우고 탈퇴
+		shopMapper.allBasketDelete(mvo.getMNo());
+		//캠핑북마크 지우고 탈퇴
+		campMapper.allBookMarkDelete(mvo.getMNo());
+		//교통예약 지우고 탈퇴
+		carMapper.allBusDelete(mvo.getMNo());
+		carMapper.allTrainTicket(mvo.getMNo());
 		// 회원 삭제
 		mapper.deleteMember(mvo.getMNo());
 
