@@ -244,7 +244,7 @@
 												<div class="col-md-12">
 													<div class="form-fs-lg form-control-transparent">
 														<label class="form-label small">날짜</label>
-														<input th:value="${date}" id="startDay" name="startDay" type="text" class="form-control flatpickr"
+														<input th:value="${startDay}" id="startDay" name="startDay" type="text" class="form-control flatpickr"
 															placeholder="날짜를 선택하세요">
 													</div>
 												</div>
@@ -618,29 +618,6 @@
 		$(':checkbox:checked').prop('checked',false);
 	};
 	</script>
-
-
-
-	<script>
-// 	$(document).ready(function() {
-// 		var grade1Tag = document.getElementById("grade1");
-// 		alert(grade1Tag.value);
-		
-// 		var list = "[[${list}]]";
-// 		var grade1 = 0;
-		
-// 		for(bus in list) {
-// 			if(bus.gradeNm.equals("우등")) {
-// 				grade1++;
-// 			}
-// 		}
-		
-// 		grade1Tag.innerHTML = grade1;
-// 	}
-	</script>
-
-
-
 
 </body>
 

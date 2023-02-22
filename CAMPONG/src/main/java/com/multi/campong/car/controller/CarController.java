@@ -118,7 +118,7 @@ public class CarController {
 	
 	//버스
 	@GetMapping("/traffic-bus")
-	public String trafficBus(Model model, @RequestParam Map<String, String> paramMap) {
+	public String trafficBus(Model model, @RequestParam Map<String, String> paramMap, @RequestParam(required= false) String startDay) {
 		log.info("리스트 요청, param : " + paramMap);
 		
 		List<Bus> list = null;
@@ -141,13 +141,14 @@ public class CarController {
 
 		model.addAttribute("list", list);
 		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("startDay", startDay);
 		
 		return "car/traffic-bus";
 	}
 	
 	// 열차
 	@GetMapping("/traffic-train")
-	public String trafficTrain(Model model, @RequestParam Map<String, String> paramMap) {
+	public String trafficTrain(Model model, @RequestParam Map<String, String> paramMap, @RequestParam(required= false) String startDay) {
 		log.info("리스트 요청, param : " + paramMap);
 		
 		List<Train> list = null;
@@ -170,6 +171,7 @@ public class CarController {
 
 		model.addAttribute("list", list);
 		model.addAttribute("paramMap", paramMap);
+		model.addAttribute("startDay", startDay);
 		
 		return "car/traffic-train";
 	}
