@@ -257,6 +257,38 @@ public class CarController {
 		 return "car/traffic-mybook";
 	 }
 	
+	@GetMapping("/deleteBusTicket")
+	 public String deleteBusTicket(Model model, @SessionAttribute(name = "mvo", required = false) Member loginMember,
+			 int ticketNo) {
+		 
+		 int result = service.deleteBusTicket(ticketNo);
+		 
+		 if (result > 0) {
+				model.addAttribute("msg", "예약이 해제되었습니다.");
+			} else {
+				model.addAttribute("msg", "예약 해제에 실패하였습니다.");
+			}
+		 
+		model.addAttribute("location", "/car/traffic-mybook");
+		return "/common/msg";
+	 }
+	
+	@GetMapping("/deleteTrainTicket")
+	public String deleteTrainTicket(Model model, @SessionAttribute(name = "mvo", required = false) Member loginMember,
+			int ticketNo) {
+		
+		int result = service.deleteTrainTicket(ticketNo);
+		
+		if (result > 0) {
+			model.addAttribute("msg", "예약이 해제되었습니다.");
+		} else {
+			model.addAttribute("msg", "예약 해제에 실패하였습니다.");
+		}
+		
+		model.addAttribute("location", "/car/traffic-mybook");
+		return "/common/msg";
+	}
+
 	
 	
 	public static List<Bus> parsingBus(String inputDepTerminalId, String inputArrTerminalId, String inputDepPlandTime, String inputBusGradeId){

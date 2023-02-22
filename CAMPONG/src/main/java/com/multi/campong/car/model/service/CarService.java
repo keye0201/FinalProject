@@ -50,4 +50,12 @@ public class CarService {
 	public List<Train> getBookingTrainList(int mNo) {
 		return mapper.selectTrainTicketList(mNo);
 	}
+
+	public int deleteBusTicket(int ticketNo) {
+		return mapper.deleteBusTicket(ticketNo);
+	}
+
+	public int deleteTrainTicket(int ticketNo) {
+		return mapper.deleteTrainTicket(ticketNo);
+	}
 }

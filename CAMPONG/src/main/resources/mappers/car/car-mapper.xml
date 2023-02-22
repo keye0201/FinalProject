@@ -104,4 +104,11 @@
 			#{charge}, #{depPlaceNm}, #{depPlandTime}, #{gradeNm}
 		)
 	</insert>
+	
+	<delete id="deleteBusTicket" parameterType="int">
+		DELETE FROM BUS_TICKET WHERE TICKET_NO=#{ticketNo}
+	</delete>
+	<delete id="deleteTrainTicket" parameterType="int">
+		DELETE FROM TRAIN_TICKET WHERE TICKET_NO=#{ticketNo}
+	</delete>
 </mapper>
